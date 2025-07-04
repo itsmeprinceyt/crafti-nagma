@@ -13,7 +13,7 @@ export default function Navbar() {
             {isOpen && (
                 <SideBar />
             )}
-            <div className="z-10 w-screen relative flex justify-start items-center bg-amber-600/20">
+            <div className="z-10 w-screen relative flex justify-start items-center bg-gradient-to-r from-white via-amber-600/20 to-white">
                 <Hamburger
                     toggled={isOpen}
                     toggle={toggleOpen}

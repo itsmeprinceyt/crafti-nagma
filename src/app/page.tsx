@@ -71,7 +71,7 @@ export default function Home() {
       </PageWrapperMain>
 
       <PageWrapper>
-        <div className="bg-amber-600/20  text-2xl font-light text-center p-5">
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white text-2xl font-light text-center p-5">
           <span className="underline-hover text-inherit cursor-default">Shop by Category</span>
 
           <div>
@@ -121,7 +121,7 @@ export default function Home() {
         </div>
 
 
-        <div className="bg-amber-600/20  text-2xl font-light text-center p-5">
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white  text-2xl font-light text-center p-5">
           🤎 Crafted with love, cherished by you!
         </div>
 
