@@ -5,6 +5,7 @@ import "./globals.css";
 
 import Loader from './(components)/Loader';
 import Navbar from './(components)/Navbar';
+import { OpenProvider } from "./(context)/Hamburger.context";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Suspense fallback={<Loader />} >
-          <Navbar/>
-          {children}
+          <OpenProvider>
+            <Navbar />
+            {children}
+          </OpenProvider>
         </Suspense>
       </body>
     </html>

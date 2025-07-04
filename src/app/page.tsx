@@ -1,7 +1,160 @@
-export default function Home(){
-  return(
-    <div>
-      I&apos;m home
-    </div>
+"use client";
+import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect } from 'react';
+import { ProductData } from '../utility/ProductData.util';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
+import { PageWrapperMain, PageWrapper } from "./(components)/PageWrapper";
+import ButtonGold from "./(components)/Button";
+import InfoCard from "./(components)/InfoCard";
+import { CategoryWithImage } from "../types/CategoryWithImages.type";
+
+export default function Home() {
+  const [categoryData, setCategoryData] = useState<CategoryWithImage[]>([]);
+
+  useEffect(() => {
+    const allCategories = ProductData.flatMap(product => product.category);
+    const uniqueCategories = [...new Set(allCategories)];
+
+    const categoriesWithImages = uniqueCategories.map(category => {
+      const matchingProducts = ProductData.filter(product =>
+        product.category.includes(category)
+      );
+      const randomProduct = matchingProducts[Math.floor(Math.random() * matchingProducts.length)];
+
+      return {
+        category,
+        image: randomProduct?.main_image || "",
+      };
+    });
+
+    setCategoryData(categoriesWithImages);
+  }, []);
+
+  return (
+    <>
+      <PageWrapperMain>
+
+        <div className="relative flex items-center justify-center py-10">
+          <Image
+            src={"/banner/1.png"}
+            alt="Banner"
+            width={1536}
+            height={1024}
+            className="max-[500px]:w-3/4 w-1/2 h-auto object-cover rounded-lg shadow-xl shadow-amber-400/30 hover:scale-105 transition ease-in-out duration-300 border border-amber-600/10"
+          />
+        </div>
+
+        <div className="relative bg-white/90 h-[250px]">
+
+          <div className="relative z-10 flex flex-col items-center justify-center h-full px-5 gap-5 text-center">
+            <div className="w-full sm:w-3/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light flex flex-wrap justify-center gap-x-2 text-center sm:text-left cursor-default">
+              <span className="underline-hover">Handmade with Heart</span>
+              <span>—</span>
+              <span className="underline-hover">Crochet</span>
+              <span>&</span>
+              <span className="underline-hover">Embroidery Treasures</span>
+            </div>
+
+
+            <Link
+              href="/shop"
+            >
+              <ButtonGold text="Shop Now" />
+            </Link>
+          </div>
+
+        </div>
+      </PageWrapperMain>
+
+      <PageWrapper>
+        <div className="bg-amber-600/20  text-2xl font-light text-center p-5">
+          <span className="underline-hover text-inherit cursor-default">Shop by Category</span>
+
+          <div>
+            <Swiper
+              modules={[FreeMode, Autoplay]}
+              spaceBetween={10}
+              slidesPerView={2}
+              freeMode={true}
+              loop={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+              }}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1024: {
+                  slidesPerView: 5,
+                },
+              }}
+
+            >
+              {categoryData.map(({ category, image }, idx) => (
+                <SwiperSlide key={idx}>
+                  <Link href={`/shop/${category}`}>
+                    <div className="p-5 flex flex-col items-center gap-3 text-center">
+                      <Image
+                        src={image}
+                        alt={category}
+                        width={1000}
+                        height={1000}
+                        className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
+                      />
+                      <ButtonGold text={category} />
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+        </div>
+
+
+        <div className="bg-amber-600/20  text-2xl font-light text-center p-5">
+          🤎 Crafted with love, cherished by you!
+        </div>
+
+        <div className="grid gap-10 p-5 items-center justify-center">
+
+          <InfoCard
+            title="CUSTOM ORDERS"
+            description="Select your design, colors, material and personalize with embroidery."
+            buttonText="Get Started"
+            href="/shop"
+            image="/character/1.png"
+          />
+
+          <InfoCard
+            title="FLEXIBLE PRICE & DELIVERY"
+            description="Offering flexible pricing, discounts and delivering all over INDIA!"
+            buttonText="Shop Now"
+            href="/shop"
+            image="/character/3.png"
+          />
+
+          <InfoCard
+            title="ABOUT US"
+            description="Handcrafted with care, my passion is to bring warmth, color, and joy into every stitch and loop."
+            buttonText="Contact Now"
+            href="/contact"
+            image="/character/2.png"
+          />
+
+        </div>
+
+
+      </PageWrapper>
+    </>
   )
 }
