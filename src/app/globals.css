@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+.underline-hover {
+    position: relative;
+    display: inline-block;
+}
+
+.underline-hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.underline-hover:hover::after {
+    width: 100%;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+    color: #884800 !important;
+}
+
+.product-swiper .swiper-pagination-bullet {
+    background-color: #000000 !important;
+}
+
+.product-swiper .swiper-pagination-bullet-active {
+    background-color: #884800 !important;
+}
