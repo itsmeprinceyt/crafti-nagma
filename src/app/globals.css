@@ -28,3 +28,16 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+    color: #884800 !important;
+}
+
+.product-swiper .swiper-pagination-bullet {
+    background-color: #000000 !important;
+}
+
+.product-swiper .swiper-pagination-bullet-active {
+    background-color: #884800 !important;
+}

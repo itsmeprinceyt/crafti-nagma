@@ -1,8 +1,7 @@
 "use client";
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from 'react';
-import { ProductData } from '../utility/ProductData.util';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -11,33 +10,19 @@ import { PageWrapperMain, PageWrapper } from "./(components)/PageWrapper";
 import ButtonGold from "./(components)/Button";
 import InfoCard from "./(components)/InfoCard";
 import { CategoryWithImage } from "../types/CategoryWithImages.type";
+import getCategoryImages from "../utility/getCategoriesImage.util";
 
 export default function Home() {
   const [categoryData, setCategoryData] = useState<CategoryWithImage[]>([]);
 
   useEffect(() => {
-    const allCategories = ProductData.flatMap(product => product.category);
-    const uniqueCategories = [...new Set(allCategories)];
-
-    const categoriesWithImages = uniqueCategories.map(category => {
-      const matchingProducts = ProductData.filter(product =>
-        product.category.includes(category)
-      );
-      const randomProduct = matchingProducts[Math.floor(Math.random() * matchingProducts.length)];
-
-      return {
-        category,
-        image: randomProduct?.main_image || "",
-      };
-    });
-
-    setCategoryData(categoriesWithImages);
+    setCategoryData(getCategoryImages());
   }, []);
 
   return (
     <>
       <PageWrapperMain>
-
+        {/* Banner Section */}
         <div className="relative flex items-center justify-center py-10">
           <Image
             src={"/banner/1.png"}
@@ -48,8 +33,8 @@ export default function Home() {
           />
         </div>
 
+        {/* Hero Section */}
         <div className="relative bg-white/90 h-[250px]">
-
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-5 gap-5 text-center">
             <div className="w-full sm:w-3/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light flex flex-wrap justify-center gap-x-2 text-center sm:text-left cursor-default">
               <span className="underline-hover">Handmade with Heart</span>
@@ -59,19 +44,16 @@ export default function Home() {
               <span className="underline-hover">Embroidery Treasures</span>
             </div>
 
-
-            <Link
-              href="/shop"
-            >
+            <Link href="/shop">
               <ButtonGold text="Shop Now" />
             </Link>
           </div>
-
         </div>
       </PageWrapperMain>
 
       <PageWrapper>
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white text-2xl font-light text-center p-5">
+        {/* Shop by Category */}
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center p-5">
           <span className="underline-hover text-inherit cursor-default">Shop by Category</span>
 
           <div>
@@ -80,11 +62,11 @@ export default function Home() {
               spaceBetween={10}
               slidesPerView={2}
               freeMode={true}
-              loop={true}
+              loop={false}
               autoplay={{
                 delay: 3000,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true
+                pauseOnMouseEnter: true,
               }}
               breakpoints={{
                 640: {
@@ -97,36 +79,35 @@ export default function Home() {
                   slidesPerView: 5,
                 },
               }}
-
             >
               {categoryData.map(({ category, image }, idx) => (
                 <SwiperSlide key={idx}>
-                  <Link href={`/shop/${category}`}>
-                    <div className="p-5 flex flex-col items-center gap-3 text-center">
-                      <Image
-                        src={image}
-                        alt={category}
-                        width={1000}
-                        height={1000}
-                        className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
-                      />
-                      <ButtonGold text={category} />
-                    </div>
+                  <Link
+                    href={`/shop/category/${category}`}
+                    className="p-5 flex flex-col items-center gap-3 text-center"
+                  >
+                    <Image
+                      src={image}
+                      alt={category}
+                      width={700}
+                      height={700}
+                      className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
+                    />
+                    <ButtonGold text={category} />
                   </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
-
         </div>
 
-
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white  text-2xl font-light text-center p-5">
+        {/* Tagline */}
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center p-5">
           🤎 Crafted with love, cherished by you!
         </div>
 
+        {/* Info Cards */}
         <div className="grid gap-10 p-5 items-center justify-center">
-
           <InfoCard
             title="CUSTOM ORDERS"
             description="Select your design, colors, material and personalize with embroidery."
@@ -150,11 +131,8 @@ export default function Home() {
             href="/contact"
             image="/character/2.png"
           />
-
         </div>
-
-
       </PageWrapper>
     </>
-  )
+  );
 }

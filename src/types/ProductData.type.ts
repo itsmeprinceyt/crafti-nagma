@@ -6,7 +6,8 @@ export interface ProductDetails {
     description: string,
     price: number,
     main_image: string,
-    category: string[]
+    product_images?: string[],
+    category: string[],
     delivery_charges: number | string,
     discount_price?: number,
     stock: boolean,
@@ -20,7 +21,7 @@ export interface ProductDetails {
     size: string,
     material: string,
     features: string[],
-    is_featured: boolean, // to show on home page?
+    is_featured: boolean, // to show on /shop featured product list or not
     is_active: boolean, // to show on the website or not
     orders_count?: 0,
 }

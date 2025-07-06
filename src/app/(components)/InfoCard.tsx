@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonGold from "./Button";
@@ -15,7 +14,7 @@ export default function InfoCard({
         <div className="bg-amber-600/20 border border-amber-600/10 shadow-amber-600/20 shadow-xl p-5 rounded-lg flex flex-col sm:flex-row gap-5 justify-between items-center sm:items-start">
             {/* Text */}
             <div className="flex flex-col gap-3 text-center sm:text-left w-full sm:w-auto">
-                <span className="font-extralight text-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                <span className="underline-hover text-inherit cursor-default font-extralight text-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                     {title}
                 </span>
                 <div className="font-extralight text-base sm:text-lg">
