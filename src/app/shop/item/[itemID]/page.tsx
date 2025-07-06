@@ -62,7 +62,6 @@ export default function ProductPage() {
 
     return (
         <>
-
             <PageWrapper2>
                 <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center">
                     {product?.name}
@@ -103,16 +102,14 @@ export default function ProductPage() {
                             </Swiper>
                         </div>
 
-
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white">
-
                             {/* Description */}
                             <div>
                                 <p className="text-sm font-semibold text-amber-700 mb-1">Description</p>
                                 <p className="text-sm text-gray-700 whitespace-pre-line">{product.description}</p>
                             </div>
 
-                            {/* Basic Info: Size, Material */}
+                            {/* Basic Info */}
                             <div className="grid grid-cols-2 gap-2 text-sm">
                                 <div>
                                     <p className="font-medium text-gray-600">Size</p>
@@ -124,7 +121,7 @@ export default function ProductPage() {
                                 </div>
                             </div>
 
-                            {/* Additional Info: Code, Category, Stock, Processing Time */}
+                            {/* Additional Info */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                                 <div>
                                     <p className="font-medium text-gray-600">Product Code</p>
@@ -164,11 +161,11 @@ export default function ProductPage() {
                             )}
 
                             {/* Variants */}
-                            {product.variants!?.length > 0 && (
+                            {Array.isArray(product.variants) && product.variants.length > 0 && (
                                 <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
                                     <summary className="cursor-pointer font-medium text-amber-800">Variants</summary>
                                     <ul className="pl-4 mt-2 text-gray-700 space-y-1">
-                                        {product.variants!.map((v, i) => (
+                                        {product.variants.map((v, i) => (
                                             <li key={i}>
                                                 <span className="font-semibold">{v.name}</span>
                                                 {v.description && ` — ${v.description}`}
@@ -179,11 +176,11 @@ export default function ProductPage() {
                             )}
 
                             {/* Options */}
-                            {product.options!?.length > 0 && (
+                            {Array.isArray(product.options) && product.options.length > 0 && (
                                 <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
                                     <summary className="cursor-pointer font-medium text-amber-800">Options</summary>
                                     <ul className="pl-4 mt-2 text-gray-700 space-y-1">
-                                        {product.options!.map((o, i) => (
+                                        {product.options.map((o, i) => (
                                             <li key={i}>
                                                 <span className="font-semibold">{o.option_name}</span>
                                                 {o.option_description && ` — ${o.option_description}`}
@@ -194,11 +191,11 @@ export default function ProductPage() {
                             )}
 
                             {/* Care Instructions */}
-                            {product.care_instructions!?.length > 0 && (
+                            {Array.isArray(product.care_instructions) && product.care_instructions.length > 0 && (
                                 <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
                                     <summary className="cursor-pointer font-medium text-amber-800">Care Instructions</summary>
                                     <ul className="list-disc pl-4 mt-2 text-gray-700">
-                                        {product.care_instructions!.map((c, i) => <li key={i}>{c}</li>)}
+                                        {product.care_instructions.map((c, i) => <li key={i}>{c}</li>)}
                                     </ul>
                                 </details>
                             )}
@@ -241,17 +238,14 @@ export default function ProductPage() {
                                     Add to Cart
                                 </button>
                             </div>
-
                         </div>
 
-
-
-                        {isFullscreen && (
+                        {/* Fullscreen Modal */}
+                        {isFullscreen && product.product_images && (
                             <div
                                 className="fixed inset-0 z-50 bg-black/90 bg-opacity-90 flex items-center justify-center p-10"
                                 onClick={() => setIsFullscreen(false)}
                             >
-                                {/* Close button */}
                                 <button
                                     onClick={() => setIsFullscreen(false)}
                                     className="absolute top-5 right-5"
@@ -264,25 +258,24 @@ export default function ProductPage() {
                                     />
                                 </button>
 
-                                {/* Previous button */}
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         setCurrentIndex((prev) => (prev - 1 + product.product_images!.length) % product.product_images!.length);
                                     }}
-                                    className="absolute left-5 bg-black p-5 invert rounded-full">
+                                    className="absolute left-5 bg-black p-5 invert rounded-full"
+                                >
                                     <Image
                                         src={"/icons/arrow.png"}
                                         width={25}
                                         height={25}
-                                        alt="Cross"
+                                        alt="Previous"
                                         className="invert rotate-180"
                                     />
                                 </button>
 
-                                {/* Image preview */}
                                 <Image
-                                    src={product.product_images![currentIndex]}
+                                    src={product.product_images?.[currentIndex] ?? ""}
                                     alt={product.name}
                                     width={1000}
                                     height={1000}
@@ -290,7 +283,6 @@ export default function ProductPage() {
                                     onClick={(e) => e.stopPropagation()}
                                 />
 
-                                {/* Next button */}
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
@@ -302,16 +294,13 @@ export default function ProductPage() {
                                         src={"/icons/arrow.png"}
                                         width={25}
                                         height={25}
-                                        alt="Cross"
+                                        alt="Next"
                                         className="invert"
                                     />
                                 </button>
                             </div>
                         )}
-
-
                     </div>
-
                 )}
             </PageWrapper2>
         </>
