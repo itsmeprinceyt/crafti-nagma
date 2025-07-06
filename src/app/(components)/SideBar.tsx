@@ -41,7 +41,7 @@ export default function SideBar() {
                 <NavItem href="/" label="Home" />
                 <NavItem href="/shop" label="Shop" />
                 <NavItem href="/cart" label="Cart" />
-
+                
                 <li className="w-full">
                     <details className="group">
                         <summary className={`${baseItemClass} flex justify-between items-center cursor-pointer`}>
