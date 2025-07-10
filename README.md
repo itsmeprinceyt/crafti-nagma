@@ -14,6 +14,8 @@ Welcome to **Crafit Nagma**, an elegant web platform built to showcase and sell 
 - 🖼️ Image gallery with Swiper carousel and fullscreen preview
 - 💬 WhatsApp checkout integration
 - 🛒 Cart system using `React Context + localStorage`
+- 📉 Discount feature for applicable products
+- 🔍 Product search module to find items quickly
 - 📦 Product variations, features, and care instructions
 - 🔍 SEO-friendly with clean URLs and metadata
 - 🌙 Responsive design for mobile and desktop
@@ -59,7 +61,7 @@ NEXT_PUBLIC_WAB_LINK=https://api.whatsapp.com/send/?phone=<your number>&text=Hi%
 NEXT_PUBLIC_WAB_CHECKOUT_LINK=https://api.whatsapp.com/send/?phone=<your number>&type=phone_number&app_absent=0
 NEXT_PUBLIC_INSTA_LINK=https://www.instagram.com/crafti_nagma/
 ```
-Replace <your number> with your WhatsApp number in international format.
+Replace `<your number>` with your WhatsApp number in international format.
 
 ### 4. Run the development server
 
@@ -67,13 +69,11 @@ Replace <your number> with your WhatsApp number in international format.
 npm run dev
 ```
 
-## 🧠 Folder Highlights
-- `/shop/item/[itemID]`: Dynamic product page rendered with Next.js routing
-- `Cart.context.tsx`: Stores cart items, handles localStorage sync
-- `ProductData.util.ts`: All product data lives here for now (can be later connected to a CMS or database)
+## 🧠 Important Folder
+- `/src/utility/ProductData.util.ts`: All product data lives here for now (can be later connected to a CMS or database)
 
 ## 📦 Cart + WhatsApp Checkout
-Checking out redirects you to whatsapp and open that person's DM with the cart data ready to send.
+Checking out redirects you to WhatsApp and opens the chat with the cart data ready to send.
 
 ## 🤝 Contributing
 If you have suggestions, bug fixes, or want to add new features, feel free to fork this repo and submit a pull request. Feedback is always welcome!
