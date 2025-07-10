@@ -10,9 +10,9 @@ export default function CartIcon() {
         <div className="absolute top-5 right-5">
             <div className="relative">
                 <Image
-                src={'/icons/bag.png'}
-                width={20}
-                height={20}
+                src={'/icons/cart.png'}
+                width={23}
+                height={23}
                 alt="bag"
                 />
                 {cartCount > 0 && (

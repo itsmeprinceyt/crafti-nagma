@@ -5,6 +5,7 @@ import SideBar from './SideBar';
 import CartIcon from './CartIcon';
 import { Sling as Hamburger } from 'hamburger-react';
 import { useOpen } from '../(context)/Hamburger.context';
+import SearchIcon from './SearchIcon';
 
 export default function Navbar() {
     const { isOpen, toggleOpen } = useOpen();
@@ -13,6 +14,7 @@ export default function Navbar() {
             {isOpen && <SideBar />}
 
             <div className="z-10 w-screen relative flex justify-start items-center bg-gradient-to-r from-white via-amber-600/20 to-white">
+                <SearchIcon/>
                 <CartIcon/>
                 <Hamburger
                     toggled={isOpen}

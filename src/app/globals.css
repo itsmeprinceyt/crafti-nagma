@@ -31,13 +31,16 @@
 
 .product-swiper .swiper-button-next,
 .product-swiper .swiper-button-prev {
-    color: #884800 !important;
+    color: black !important;
 }
 
 .product-swiper .swiper-pagination-bullet {
-    background-color: #000000 !important;
+    background-color: white !important;
+    border: 1px solid black;
+    opacity: 1 !important;
 }
 
 .product-swiper .swiper-pagination-bullet-active {
-    background-color: #884800 !important;
+    background-color: black !important;
+    border: 1px solid white;
 }

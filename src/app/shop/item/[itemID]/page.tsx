@@ -12,15 +12,17 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
 
 export default function ProductPage() {
     const params = useParams();
     const productID = params.itemID as string;
 
     const [product, setProduct] = useState<ProductDetails | null>(null);
-    const [isValid, setIsValid] = useState(true);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isValid, setIsValid] = useState<boolean>(true);
+    const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [discount, setDiscount] = useState<number>(0);
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function ProductPage() {
             setIsValid(false);
             return;
         }
-
+        setDiscount(getDiscountPercent(foundProduct.price, foundProduct.discount_price));
         setProduct(foundProduct);
     }, [productID]);
 
@@ -39,14 +41,11 @@ export default function ProductPage() {
     const handleAddToCart = () => {
         if (!product) return;
 
-        const priceToUse = product.discount_price
-            ? Number(product.discount_price)
-            : product.price;
-
         addToCart({
-            id: product.code,
+            code: product.code,
             name: product.name,
-            price: priceToUse,
+            price: product.price,
+            discount: product.discount_price,
             quantity: 1,
             photo: product.main_image
         });
@@ -73,6 +72,7 @@ export default function ProductPage() {
                     <div className="flex flex-col items-center gap-5">
                         {/* Product Image Carousel */}
                         <div className="w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] p-2 rounded-lg">
+
                             <Swiper
                                 modules={[Navigation, Pagination]}
                                 navigation
@@ -102,7 +102,12 @@ export default function ProductPage() {
                             </Swiper>
                         </div>
 
-                        <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white">
+                        <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
+                            {/* Discount */}
+                            {discount && (
+                                <p className="absolute -top-5 -right-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md rotate-10 flex items-center justify-center font-bold">
+                                    {discount}%<br /> OFF</p>
+                            )}
                             {/* Description */}
                             <div>
                                 <p className="text-sm font-semibold text-amber-700 mb-1">Description</p>
@@ -227,8 +232,15 @@ export default function ProductPage() {
 
                             {/* Price + Add to Cart */}
                             <div className="flex gap-5 items-center">
-                                <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm">
-                                    ₹{product.discount_price ? product.discount_price : product.price}
+                                <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm relative">
+                                    {product.discount_price ? (
+                                        <>
+                                            <span className="line-through text-red-600 mr-1 font-bold">₹{product.price}</span>
+                                            <span className="font-semibold">₹{product.discount_price}</span>
+                                        </>
+                                    ) : (
+                                        <>₹{product.price}</>
+                                    )}
                                 </p>
 
                                 <button
@@ -243,37 +255,23 @@ export default function ProductPage() {
                         {/* Fullscreen Modal */}
                         {isFullscreen && product.product_images && (
                             <div
-                                className="fixed inset-0 z-50 bg-black/90 bg-opacity-90 flex items-center justify-center p-10"
+                                className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
                                 onClick={() => setIsFullscreen(false)}
                             >
+                                {/* Close Button */}
                                 <button
                                     onClick={() => setIsFullscreen(false)}
                                     className="absolute top-5 right-5"
                                 >
                                     <Image
-                                        src={"/icons/cross.png"}
+                                        src="/icons/cross.png"
                                         width={25}
                                         height={25}
-                                        alt="Cross"
+                                        alt="Close"
                                     />
                                 </button>
 
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setCurrentIndex((prev) => (prev - 1 + product.product_images!.length) % product.product_images!.length);
-                                    }}
-                                    className="absolute left-5 bg-black p-5 invert rounded-full"
-                                >
-                                    <Image
-                                        src={"/icons/arrow.png"}
-                                        width={25}
-                                        height={25}
-                                        alt="Previous"
-                                        className="invert rotate-180"
-                                    />
-                                </button>
-
+                                {/* Center Image */}
                                 <Image
                                     src={product.product_images?.[currentIndex] ?? ""}
                                     alt={product.name}
@@ -283,23 +281,49 @@ export default function ProductPage() {
                                     onClick={(e) => e.stopPropagation()}
                                 />
 
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setCurrentIndex((prev) => (prev + 1) % product.product_images!.length);
-                                    }}
-                                    className="absolute right-5 bg-black p-5 invert rounded-full"
+                                {/* Navigation - Bottom Center */}
+                                <div
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
                                 >
-                                    <Image
-                                        src={"/icons/arrow.png"}
-                                        width={25}
-                                        height={25}
-                                        alt="Next"
-                                        className="invert"
-                                    />
-                                </button>
+                                    {/* Reminder Text */}
+                                    <p className="text-xs text-white/30 mb-1">
+                                        Please wait a moment after clicking the buttons
+                                    </p>
+
+                                    {/* Rectangle Navigation Buttons */}
+                                    <div className="flex gap-2 shadow-md">
+                                        {/* Previous Button */}
+                                        <button
+                                            onClick={() =>
+                                                setCurrentIndex(
+                                                    (prev) =>
+                                                        (prev - 1 + product.product_images!.length) %
+                                                        product.product_images!.length
+                                                )
+                                            }
+                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                        >
+                                            Previous
+                                        </button>
+
+                                        {/* Next Button */}
+                                        <button
+                                            onClick={() =>
+                                                setCurrentIndex(
+                                                    (prev) =>
+                                                        (prev + 1) % product.product_images!.length
+                                                )
+                                            }
+                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )}
+
                     </div>
                 )}
             </PageWrapper2>

@@ -9,7 +9,7 @@ export interface ProductDetails {
     product_images?: string[],
     category: string[],
     delivery_charges: number | string,
-    discount_price?: number,
+    discount_price: number,
     stock: boolean,
     processing_time?: string,
     variants?: Variants[],
