@@ -104,7 +104,7 @@ export default function ProductPage() {
 
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
                             {/* Discount */}
-                            {discount && (
+                            {discount > 0 && (
                                 <p className="absolute -top-5 -right-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md rotate-10 flex items-center justify-center font-bold">
                                     {discount}%<br /> OFF</p>
                             )}
