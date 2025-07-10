@@ -19,17 +19,26 @@ export default function SideBar() {
     const NavItem = ({
         href,
         label,
+        image
     }: {
         href: string;
         label: string;
+        image: string;
     }) => (
-        <li className={baseItemClass}>
+        <li className={`${baseItemClass}`}>
             <Link
                 href={href}
-                className="block w-full h-full"
+                className="w-full h-full flex items-center justify-start gap-2 "
                 onClick={() => toggleOpen()}
                 aria-label={label}
             >
+                <Image
+                    src={image}
+                    width={20}
+                    height={20}
+                    alt={`${label} image`}
+                    className="hover:scale-105 transition-all ease-in-out duration-500"
+                />
                 {label}
             </Link>
         </li>
@@ -38,14 +47,26 @@ export default function SideBar() {
     return (
         <div className="absolute top-14 right-0 left-0 z-20 bg-white border border-amber-400/50 shadow-xl shadow-amber-400/30 rounded-lg p-1">
             <ol className="flex flex-col justify-center items-start gap-1">
-                <NavItem href="/" label="Home" />
-                <NavItem href="/shop" label="Shop" />
-                <NavItem href="/cart" label="Cart" />
-                
+                <NavItem href="/" image="/icons/home.png" label="Home" />
+
+                <NavItem href="/shop" image="/icons/shop.png" label="Shop" />
+                <NavItem href="/search" image="/icons/search.png" label="Search" />
+                <NavItem href="/cart" image="/icons/cart.png" label="Cart" />
+
                 <li className="w-full">
+
                     <details className="group">
                         <summary className={`${baseItemClass} flex justify-between items-center cursor-pointer`}>
-                            <span>Categories</span>
+                            <div className="flex items-center gap-2">
+                                <Image
+                                    src={"/icons/categories.png"}
+                                    width={20}
+                                    height={20}
+                                    alt={`category image`}
+                                    className="hover:scale-105 transition-all ease-in-out duration-500"
+                                />
+                                <span>Categories</span>
+                            </div>
                             <Image
                                 src="/icons/arrow.png"
                                 width={15}
@@ -71,7 +92,7 @@ export default function SideBar() {
                     </details>
                 </li>
 
-                <NavItem href="/contact" label="Contact" />
+                <NavItem href="/contact" image="/icons/contact.png" label="Contact" />
             </ol>
         </div>
     );

@@ -24,28 +24,28 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const addToCart = (item: CartItem) => {
         setCart((prev) => {
-            const exists = prev.find((p) => p.id === item.id);
+            const exists = prev.find((p) => p.code === item.code);
             if (exists) {
                 return prev.map((p) =>
-                    p.id === item.id ? { ...p, quantity: p.quantity + item.quantity } : p
+                    p.code === item.code ? { ...p, quantity: p.quantity + item.quantity } : p
                 );
             }
             return [...prev, item];
         });
     };
 
-    const updateQuantity = (id: string, amount: number) => {
+    const updateQuantity = (code: string, amount: number) => {
         setCart((prev) =>
             prev.map((item) =>
-                item.id === id
+                item.code === code
                     ? { ...item, quantity: Math.max(1, item.quantity + amount) }
                     : item
             )
         );
     };
 
-    const removeItem = (id: string) => {
-        setCart((prev) => prev.filter((item) => item.id !== id));
+    const removeItem = (code: string) => {
+        setCart((prev) => prev.filter((item) => item.code !== code));
     };
 
     const clearCart = () => setCart([]);

@@ -5,21 +5,38 @@ import { PageWrapper2 } from "../(components)/PageWrapper";
 
 export default function CartPage() {
     const { cart, updateQuantity, removeItem } = useCart();
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = cart.reduce((sum, item) => {
+        const effectivePrice = item.discount > 0 ? item.discount : item.price;
+        return sum + effectivePrice * item.quantity;
+    }, 0);
+    const deliveryCharge = total >= 599 ? 0 : 90;
+    const finalAmount = total + deliveryCharge;
 
     const handleCheckout = () => {
         const baseWABUrl = process.env.NEXT_PUBLIC_WAB_CHECKOUT_LINK;
 
         const message = cart
-            .map(
-                (item, i) =>
-                    `Item ${i + 1}:\nCode: ${item.id}\nName: ${item.name}\nPrice: ₹${item.price}\nQuantity: ${item.quantity}\n\n`
-            )
-            .join("");
+            .map((item, i) => {
+                const hasDiscount = item.discount > 0;
+                const originalPrice = `₹${item.price}`;
+                const discountedPrice = `₹${item.discount}`;
+                return `Item ${i + 1}:\nCode: ${item.code}\nName: ${item.name}\nPrice: ${hasDiscount
+                    ? `~${originalPrice}~ → ${discountedPrice}`
+                    : originalPrice
+                    }\nQuantity: ${item.quantity}\n`;
+            })
+            .join("\n");
 
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const finalMessage =
-            `I want to order these items from Crafti Nagma Store\n\n${message}Total Amount: ₹${total}`;
+        const total = cart.reduce((sum, item) => {
+            const priceToUse = item.discount > 0 ? item.discount : item.price;
+            return sum + priceToUse * item.quantity;
+        }, 0);
+
+        const deliveryCharge = total >= 599 ? 0 : 90;
+        const finalAmount = total + deliveryCharge;
+
+        const finalMessage = `I want to order these items from Crafti Nagma Store\n\n${message}\nSubtotal: ₹${total}\nDelivery: ${deliveryCharge === 0 ? "Free" : `₹${deliveryCharge}`}\nTotal Amount: ₹${finalAmount}${deliveryCharge === 0 ? `\n\nI'm eligible for free delivery.` : ``}`;
+
         const fullURL = `${baseWABUrl}&text=${encodeURIComponent(finalMessage)}`;
         window.open(fullURL, "_blank");
     };
@@ -40,7 +57,7 @@ export default function CartPage() {
                     ) : (
                         <div className="space-y-5">
                             {cart.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between gap-5 border border-amber-600/30 shadow-xl shadow-amber-600/10 p-3 rounded-md">
+                                <div key={item.code} className="flex items-center justify-between gap-5 border border-amber-600/30 shadow-xl shadow-amber-600/10 p-3 rounded-md">
                                     <div className="flex gap-5 items-center">
                                         <Image
                                             src={`${item.photo}`}
@@ -51,13 +68,27 @@ export default function CartPage() {
                                         />
 
                                         <div>
-                                            <p className="text-xs text-gray-400 mb-1">#{item.id}</p>
+                                            <p className="text-xs text-gray-400 mb-1">#{item.code}</p>
                                             <p className="font-medium text-gray-800">{item.name}</p>
                                             <p className="text-sm text-gray-600">
-                                                • Price: <strong className="text-green-600">₹{item.price}</strong><br />
-                                                • Quantity: <strong>{item.quantity}</strong><br />
-                                                • Total: <strong className="text-green-700">₹{item.price * item.quantity}</strong>
+                                                • Price:{" "}
+                                                {item.discount > 0 ? (
+                                                    <>
+                                                        <span className="line-through text-red-500 font-bold">₹{item.price}</span>{" "}
+                                                        <strong className="text-green-600">₹{item.discount}</strong>
+                                                    </>
+                                                ) : (
+                                                    <strong className="text-green-600">₹{item.price}</strong>
+                                                )}
+                                                <br />
+                                                • Quantity: <strong>{item.quantity}</strong>
+                                                <br />
+                                                • Total:{" "}
+                                                <strong className="text-green-700">
+                                                    ₹{item.discount > 0 ? item.discount * item.quantity : item.price * item.quantity}
+                                                </strong>
                                             </p>
+
                                         </div>
                                     </div>
 
@@ -65,21 +96,21 @@ export default function CartPage() {
                                     <div className="flex flex-col items-center gap-5 ">
                                         <div className="flex gap-2 items-center justify-center">
                                             <button
-                                                onClick={() => updateQuantity(item.id, -1)}
+                                                onClick={() => updateQuantity(item.code, -1)}
                                                 className="bg-amber-200 border border-amber-600/40 shadow-lg shadow-amber-600/40 px-2 rounded-full h-[30px] w-[30px]"
                                             >
                                                 −
                                             </button>
                                             <span>{item.quantity}</span>
                                             <button
-                                                onClick={() => updateQuantity(item.id, 1)}
+                                                onClick={() => updateQuantity(item.code, 1)}
                                                 className="bg-amber-200 border border-amber-600/40 shadow-lg shadow-amber-600/40 px-2 rounded-full h-[30px] w-[30px]"
                                             >
                                                 +
                                             </button>
                                         </div>
                                         <button
-                                            onClick={() => removeItem(item.id)}
+                                            onClick={() => removeItem(item.code)}
                                             className="bg-rose-500 border border-rose-600/40 shadow-lg shadow-rose-600/40 text-rose-200 px-3 py-1 rounded"
                                         >
                                             Remove
@@ -99,7 +130,33 @@ export default function CartPage() {
                                 </ul>
                             </div>
 
-                            <div className="mt-10 text-center font-bold text-lg text-green-700">Total: ₹{total}</div>
+                            <div className="text-center font-bold text-base text-green-700 flex flex-col items-center justify-center">
+                                <div>Subtotal: ₹{total}</div>
+
+                                <div>
+                                    Delivery Charges:{" "}
+                                    {deliveryCharge === 0 ? (
+                                        <span className="text-green-700">Free</span>
+                                    ) : (
+                                        <span className="text-red-500">₹{deliveryCharge}</span>
+                                    )}
+                                </div>
+
+                                <div className="text-2xl">Total: ₹{finalAmount}</div>
+
+                                <p
+                                    className={`text-base mt-1 font-normal px-2 py-0.5 rounded shadow-md ${deliveryCharge === 0
+                                        ? "text-green-100 bg-green-600"
+                                        : "text-red-100 bg-red-500 border-red-500"
+                                        }`}
+                                >
+                                    {deliveryCharge === 0
+                                        ? "🎉 Free delivery unlocked 🥳"
+                                        : "👉Free delivery for orders above ₹599😊"}
+                                </p>
+                            </div>
+
+
                             <button
                                 onClick={handleCheckout}
                                 className="w-full bg-green-600 hover:bg-green-700 shadow-xl shadow-green-700/40 text-white font-medium py-2 px-4 rounded transition"

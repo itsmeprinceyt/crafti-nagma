@@ -15,7 +15,7 @@ export default function CategoryPage() {
   const decodedCategory = decodeURIComponent(params.categoryID as string);
 
   const [products, setProducts] = useState<ProductDetails[]>([]);
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState<boolean>(true);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -37,12 +37,11 @@ export default function CategoryPage() {
   }
 
   const handleAddToCart = (product: ProductDetails) => {
-    const priceToUse = product.discount_price ? Number(product.discount_price) : product.price;
-
     addToCart({
-      id: product.code,
+      code: product.code,
       name: product.name,
-      price: priceToUse,
+      price: product.price,
+      discount: product.discount_price,
       quantity: 1,
       photo: product.main_image
     });
