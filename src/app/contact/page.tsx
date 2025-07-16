@@ -31,7 +31,7 @@ export default function ContactMe() {
                     Follow me on Instagram
                 </Link>
                 <Link href="https://github.com/itsmeprinceyt" target="_blank" className="text-xs hover:animate-pulse">
-                    Website Credit 🤎 @itsmeprinceyt
+                    Website Created by 🤎 @itsmeprinceyt
                 </Link>
             </div>
 

@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased select-none">
         <Suspense fallback={<Loader />} >
           <OpenProvider>
             <CartProvider>
