@@ -283,33 +283,35 @@ export default function ProductPage() {
                                 />
 
                                 {/* Navigation Buttons */}
-                                <div
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
-                                >
-                                    <p className="text-xs text-white/30 mb-1">
-                                        Please wait a moment after clicking the buttons
-                                    </p>
+                                {productImages.length > 1 && (
+                                    <div
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
+                                    >
+                                        <p className="text-xs text-white/30 mb-1">
+                                            Please wait a moment after clicking the buttons
+                                        </p>
 
-                                    <div className="flex gap-2 shadow-md">
-                                        <button
-                                            onClick={() =>
-                                                setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
-                                            }
-                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
-                                        >
-                                            Previous
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                setCurrentIndex((prev) => (prev + 1) % productImages.length)
-                                            }
-                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
-                                        >
-                                            Next
-                                        </button>
+                                        <div className="flex gap-2 shadow-md">
+                                            <button
+                                                onClick={() =>
+                                                    setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Previous
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    setCurrentIndex((prev) => (prev + 1) % productImages.length)
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         )}
 

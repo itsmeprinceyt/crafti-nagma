@@ -4,13 +4,21 @@ import { useCart } from "../(context)/Cart.context";
 import { PageWrapper2 } from "../(components)/PageWrapper";
 
 export default function CartPage() {
-    const { cart, updateQuantity, removeItem } = useCart();
-    const total = cart.reduce((sum, item) => {
+    const { cart, updateQuantity, removeItem, cartCount } = useCart();
+    const totalOriginal = cart.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+
+    const totalDiscounted = cart.reduce((sum, item) => {
         const effectivePrice = item.discount > 0 ? item.discount : item.price;
         return sum + effectivePrice * item.quantity;
     }, 0);
-    const deliveryCharge = total >= 599 ? 0 : 90;
-    const finalAmount = total + deliveryCharge;
+
+    const hasDiscount = cart.some(item => item.discount > 0);
+
+    const deliveryCharge = totalDiscounted >= 599 ? 0 : 90;
+    const finalAmount = totalDiscounted + deliveryCharge;
+
 
     const handleCheckout = () => {
         const baseWABUrl = process.env.NEXT_PUBLIC_WAB_CHECKOUT_LINK;
@@ -50,7 +58,7 @@ export default function CartPage() {
                 </div>
             </PageWrapper2>
             <PageWrapper2>
-                <div className="mb-10 mt-5">
+                <div className="mb-10 mt-5 m-2">
 
                     {cart.length === 0 ? (
                         <p className="italic text-gray-500">Your cart is empty.</p>
@@ -111,7 +119,7 @@ export default function CartPage() {
                                         </div>
                                         <button
                                             onClick={() => removeItem(item.code)}
-                                            className="bg-rose-500 border border-rose-600/40 shadow-lg shadow-rose-600/40 text-rose-200 px-3 py-1 rounded"
+                                            className="bg-rose-500 border border-rose-600/40 shadow-lg shadow-rose-600/40 text-rose-100 px-3 py-1 rounded"
                                         >
                                             Remove
                                         </button>
@@ -127,39 +135,65 @@ export default function CartPage() {
                                     <li>Kindly share your delivery address to complete the order process.</li>
                                     <li>We respect your privacy — your personal information will never be shared or leaked.</li>
                                     <li><strong>No refunds</strong> can be issued if the error or change is from your side after order confirmation.</li>
+                                    <li><strong>We will never share your address or any sensitive information with anyone.</strong></li>
                                 </ul>
                             </div>
 
-                            <div className="text-center font-bold text-base text-green-700 flex flex-col items-center justify-center">
-                                <div>Subtotal: ₹{total}</div>
 
-                                <div>
-                                    Delivery Charges:{" "}
-                                    {deliveryCharge === 0 ? (
-                                        <span className="text-green-700">Free</span>
-                                    ) : (
-                                        <span className="text-red-500">₹{deliveryCharge}</span>
+                            <div className="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-md text-gray-800">
+                                <h2 className="text-xl font-bold text-center text-green-700 mb-4">Invoice Summary</h2>
+
+                                <div className="space-y-2 text-sm">
+                                    <div className="flex justify-between">
+                                        <span className="font-medium">Total Items</span>
+                                        <span className="font-bold">{cartCount}</span>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="font-medium">Total Amount</span>
+                                        <span className="line-through text-red-500">₹{totalOriginal}</span>
+                                    </div>
+
+                                    {hasDiscount && (
+                                        <div className="flex justify-between">
+                                            <span className="font-medium">Discounted Amount</span>
+                                            <span className="text-green-600 font-semibold">₹{totalDiscounted}</span>
+                                        </div>
                                     )}
+
+                                    <div className="flex justify-between">
+                                        <span className="font-medium">Delivery Charges</span>
+                                        <span className={deliveryCharge === 0 ? "text-green-600" : "text-red-500"}>
+                                            {deliveryCharge === 0 ? "Free" : `₹${deliveryCharge}`}
+                                        </span>
+                                    </div>
+
+                                    <hr className="my-2 border-t border-dashed" />
+
+                                    <div className="flex justify-between text-lg font-bold">
+                                        <span>Final Total</span>
+                                        <span>₹{finalAmount}</span>
+                                    </div>
                                 </div>
 
-                                <div className="text-2xl">Total: ₹{finalAmount}</div>
-
                                 <p
-                                    className={`text-base mt-1 font-normal px-2 py-0.5 rounded shadow-md ${deliveryCharge === 0
+                                    className={`mt-4 text-center text-sm font-medium px-3 py-2 rounded shadow-md transition-all ${deliveryCharge === 0
                                         ? "text-green-100 bg-green-600"
                                         : "text-red-100 bg-red-500 border-red-500"
                                         }`}
                                 >
                                     {deliveryCharge === 0
                                         ? "🎉 Free delivery unlocked 🥳"
-                                        : "👉Free delivery for orders above ₹599😊"}
+                                        : "👉 Free delivery for orders above ₹599 😊"}
                                 </p>
                             </div>
 
 
+
+
                             <button
                                 onClick={handleCheckout}
-                                className="w-full bg-green-600 hover:bg-green-700 shadow-xl shadow-green-700/40 text-white font-medium py-2 px-4 rounded transition"
+                                className="w-full bg-green-600 hover:bg-green-700 shadow-xl shadow-green-700/40 text-green-100 font-medium py-2 px-4 rounded transition"
                             >
                                 Checkout
                             </button>
