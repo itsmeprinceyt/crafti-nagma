@@ -20,12 +20,29 @@ export default function Shop() {
     const [categories, setCategories] = useState<string[]>([]);
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);
     const [allProducts, setAllProducts] = useState<ProductDetails[]>([]);
+    const [productImages, setProductImages] = useState<Record<string, string[]>>({});
     const { addToCart } = useCart();
 
     useEffect(() => {
         setCategories(getSortedCategories());
         setIsFeatured(isFeaturedProduct());
-        setAllProducts(getAllProductsSorted());
+        const products = getAllProductsSorted();
+        setAllProducts(products);
+
+        Promise.all(
+            products.map((product) =>
+                fetch(`/api/getProductImages?productCode=${product.code}`)
+                    .then(res => res.json())
+                    .then(data => ({ code: product.code, images: data.images || [] }))
+                    .catch(() => ({ code: product.code, images: [] }))
+            )
+        ).then((results) => {
+            const imageMap: Record<string, string[]> = {};
+            results.forEach(({ code, images }) => {
+                imageMap[code] = images;
+            });
+            setProductImages(imageMap);
+        });
     }, []);
 
     const handleAddToCart = (product: ProductDetails) => {
@@ -35,7 +52,7 @@ export default function Shop() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: product.main_image
+            photo: productImages[product.code]?.[0] || ''
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -102,13 +119,19 @@ export default function Shop() {
                                     href={`/shop/item/${product.code}`}
                                     className="mt-5 p-5 flex flex-col items-center gap-3 text-start bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-[200px]"
                                 >
-                                    <Image
-                                        src={product.main_image}
-                                        alt={product.name}
-                                        width={700}
-                                        height={700}
-                                        className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
-                                    />
+                                    {productImages[product.code]?.[0] ? (
+                                        <Image
+                                            src={productImages[product.code][0]}
+                                            alt={product.name}
+                                            width={700}
+                                            height={700}
+                                            className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
+                                        />
+                                    ) : (
+                                        <div className="w-[150px] h-[150px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                                            No Image
+                                        </div>
+                                    )}
 
                                     <p className="text-start font-semibold text-xs text-wrap w-full line-clamp-1">
                                         {product.name}
@@ -144,13 +167,19 @@ export default function Shop() {
                                             {discountPercent}% OFF
                                         </span>
                                     )}
-                                    <Image
-                                        src={product.main_image}
-                                        width={700}
-                                        height={700}
-                                        alt={product.name}
-                                        className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
-                                    />
+                                    {productImages[product.code]?.[0] ? (
+                                        <Image
+                                            src={productImages[product.code][0]}
+                                            width={700}
+                                            height={700}
+                                            alt={product.name}
+                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                        />
+                                    ) : (
+                                        <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                                            No Image
+                                        </div>
+                                    )}
 
                                     <div className="flex flex-col items-start justify-between h-full text-start gap-2">
                                         <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">

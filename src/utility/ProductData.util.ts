@@ -1,11 +1,11 @@
 import { ProductDetails } from '../types/ProductData.type';
 
-export const CategoryList: string[] = [
-  "Handicraft",
-  "Hair Accessories",
-  "Kids",
-  "Key Chains"
-]
+export enum ProductCategory {
+  Handicraft = "Handicraft",
+  HairAccessories = "Hair Accessories",
+  Kids = "Kids",
+  KeyChains = "Key Chains"
+}
 
 export const ProductData: ProductDetails[] = [
   {
@@ -15,17 +15,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Add a personal touch to everyday elegance with our beautifully handcrafted embroidered hankies.",
     description: "Crafti Nagma’s personalized name and floral hankies are designed to be thoughtful keepsakes or charming daily accessories. Whether you're gifting someone special or treating yourself, these hankies offer both beauty and functionality in one delicate piece. Each hanky is carefully hand-embroidered on soft, high-quality cotton fabric. You can choose from elegant name embroidery, graceful floral designs—or both! They’re perfect for weddings, gifting, spiritual use, or everyday personal style.",
     price: 119,
-    main_image: "/ProductImages/CN-EHC611/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC611/1.jpg",
-      "/ProductImages/CN-EHC611/2.jpg",
-      "/ProductImages/CN-EHC611/3.jpg",
-      "/ProductImages/CN-EHC611/4.jpg",
-      "/ProductImages/CN-EHC611/5.jpg",
-      "/ProductImages/CN-EHC611/6.jpg",
-
-    ],
-    category: [CategoryList[0]],
+    category: [ProductCategory.Handicraft],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -67,12 +57,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Add a touch of handmade charm to your hairstyle with our Handmade Crochet Hair Clip, beautifully crafted using premium quality wool.",
     description: "Add a touch of handmade charm to your hairstyle with our Handmade Crochet Hair Clip, beautifully crafted using premium quality wool. Designed with care and attention to detail, this clip is perfect for both kids and adults who love unique, soft, and stylish accessories.",
     price: 59,
-    main_image: "/ProductImages/CN-EHC608/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC608/1.jpg",
-      "/ProductImages/CN-EHC608/2.png",
-    ],
-    category: [CategoryList[1]],
+    category: [ProductCategory.HairAccessories],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -113,11 +98,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "A handcrafted set of 2 floral embroidered hair bows and a crocheted sunflower headband, perfect for baby shoots, gifts, and daily wear.",
     description: "This beautiful handmade hair accessory set includes two embroidered fabric hair bows and one crocheted sunflower headband. The bows are crafted from soft white cotton and decorated with vibrant floral embroidery, each attached to an alligator clip for easy and secure wear. The crochet headband features a charming 3D sunflower and leaf, made from soft acrylic wool with a stretchable fit for comfort. Ideal for special occasions or everyday use, this eco-friendly packaged set is a delightful choice for kids.",
     price: 499,
-    main_image: "/ProductImages/CN-EHC602/1.png",
-    product_images: [
-      "/ProductImages/CN-EHC602/1.png",
-    ],
-    category: [CategoryList[1], CategoryList[2]],
+    category: [ProductCategory.HairAccessories, ProductCategory.Kids],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -161,13 +142,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Elegant handmade floral cotton ribbon bow hair clip with a strong alligator grip – perfect for everyday and festive styling.",
     description: "Add a sweet and sophisticated touch to your hair with our Handmade Floral Bow Hair Clips, crafted using soft, high-quality cotton fabric and detailed with delicate floral patterns. Each bow is securely attached to a durable alligator clip, offering a firm grip and stylish charm for both kids and adults. These clips are perfect for casual days, festive occasions, or as thoughtful handmade gifts. Every piece reflects Crafti Nagma’s signature elegance and love for handmade detailing.",
     price: 79,
-    main_image: "/ProductImages/CN-EHC610/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC610/1.jpg",
-      "/ProductImages/CN-EHC610/2.jpg",
-      "/ProductImages/CN-EHC610/3.png",
-    ],
-    category: [CategoryList[1]],
+    category: [ProductCategory.HairAccessories],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -207,16 +182,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Set of 2 handcrafted floral tic tac clips featuring red roses and delicate embroidery. A charming accessory for all ages.",
     description: "Handcrafted with love, the Bloom Bliss tic tac hair clips are a celebration of traditional embroidery and elegant styling. Designed with blooming red roses, tiny white buds, and lush green leaves, each clip adds a burst of floral beauty to any hairstyle. Made with soft felt backing and strong tic tac clips, these are ideal for daily wear, festive looks, or gifting.",
     price: 79,
-    main_image: "/ProductImages/CN-EHC606/1.png",
-    product_images: [
-      "/ProductImages/CN-EHC606/1.png",
-      "/ProductImages/CN-EHC606/2.jpg",
-      "/ProductImages/CN-EHC606/3.jpg",
-      "/ProductImages/CN-EHC606/4.jpg",
-      "/ProductImages/CN-EHC606/5.jpg",
-      "/ProductImages/CN-EHC606/6.jpg",
-    ],
-    category: [CategoryList[1]],
+    category: [ProductCategory.HairAccessories],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -256,16 +222,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Elegant embroidered tic tac hair clips with a minimal floral design on a matte black base. Ideal for daily and festive wear.",
     description: "This elegant hair clip features a soft hand-embroidered floral design in soothing shades of blush pink and green, perfectly set against a black fabric base.\nIts clean, minimal aesthetic makes it a versatile accessory for both daily wear and special occasions.\n\nGentle on hair and crafted for durability, this clip brings both comfort and charm to kids and adults alike.",
     price: 59,
-    main_image: "/ProductImages/CN-EHC600/1.png",
-    product_images: [
-      "/ProductImages/CN-EHC600/1.png",
-      "/ProductImages/CN-EHC600/2.jpg",
-      "/ProductImages/CN-EHC600/3.jpg",
-      "/ProductImages/CN-EHC600/4.jpg",
-      "/ProductImages/CN-EHC600/5.jpg",
-      "/ProductImages/CN-EHC600/6.jpg",
-    ],
-    category: [CategoryList[1]],
+    category: [ProductCategory.HairAccessories],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -305,12 +262,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Handmade crochet hair band with two matching flower clips – soft, cute, and perfect for kids.",
     description: "Elevate your little one’s hair accessory collection with this adorable handcrafted crochet hair band and clip set by Crafti Nagma. This set includes a soft and stretchy yellow crochet bow headband with delicate pink edging, paired with two charming flower clips made using premium quality yarn. Perfect for daily use, parties, or gifting!",
     price: 249,
-    main_image: "/ProductImages/CN-EHC609/1.png",
-    product_images: [
-      "/ProductImages/CN-EHC609/1.png",
-      "/ProductImages/CN-EHC609/2.jpg",
-    ],
-    category: [CategoryList[1], CategoryList[2]],
+    category: [ProductCategory.HairAccessories, ProductCategory.Kids],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -353,12 +305,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Cute handcrafted cherry-themed crochet hair clip for kids and adults.",
     description: "Add a pop of fun and color to your hairstyle with this adorable Cherry Crochet Hair Clip by Crafti Nagma. Handmade with love using soft yarn, this design features two bright red cherries and vibrant green leaves attached to a sturdy black clip. Perfect for little girls, teens, or anyone who loves playful hair accessories. Ideal for daily use, parties, and gifting.",
     price: 119,
-    main_image: "/ProductImages/CN-EHC601/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC601/1.jpg",
-      "/ProductImages/CN-EHC601/2.jpg",
-    ],
-    category: [CategoryList[0], CategoryList[2]],
+    category: [ProductCategory.Handicraft, ProductCategory.Kids],
     delivery_charges: 90,
     discount_price: 0,
     stock: true,
@@ -401,11 +348,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Handmade crochet rose keychain perfect for gifting or everyday use.",
     description: "This beautiful crochet rose keychain is carefully handcrafted using premium quality yarn. Its elegant design makes it a perfect accessory for your bag, keys, or as a charming little gift for loved ones. Each petal is shaped with precision to resemble a blooming rose, available in multiple colors. Lightweight and durable, this product is made with love and attention to detail. Ideal for birthdays, return gifts, or as a symbol of appreciation.",
     price: 59,
-    main_image: "/ProductImages/CN-EHC0010/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC0010/1.jpg",
-    ],
-    category: [CategoryList[0], CategoryList[3]],
+    category: [ProductCategory.Handicraft, ProductCategory.KeyChains],
     delivery_charges: 90,
     discount_price: 49,
     stock: true,
@@ -457,13 +400,7 @@ export const ProductData: ProductDetails[] = [
     brief_description: "Cute black-red Mickey themed crochet set with headband, clips & slippers for babies.",
     description: "This adorable handmade crochet set features a Mickey Mouse inspired theme, perfect for baby photoshoots or special occasions. The set includes a pair of soft crochet baby slippers, a headband with Mickey ears, and two pairs of mini Mickey bow clips. Crafted with care using premium quality black yarn and bright red accents, this set is gentle on baby skin and adds an adorable charm to your baby’s look.",
     price: 600,
-    main_image: "/ProductImages/CN-EHC0011/1.jpg",
-    product_images: [
-      "/ProductImages/CN-EHC0011/1.jpg",
-      "/ProductImages/CN-EHC0011/2.jpg",
-      "/ProductImages/CN-EHC0011/3.jpg",
-    ],
-    category: [CategoryList[0], CategoryList[2]],
+    category: [ProductCategory.Handicraft, ProductCategory.Kids],
     delivery_charges: 90,
     discount_price: 499,
     stock: true,
@@ -505,51 +442,4 @@ export const ProductData: ProductDetails[] = [
     is_active: true,
     orders_count: 0
   }
-
-
-
-
-
-
-  /*
-   {
-     id: "",
-     code: "",
-     name: "",
-     brief_description: "",
-     description: "",
-     price: 0,
-     main_image: "",
-     category: ["", ""],
-     delivery_charges: 0,
-     discount_price: 0,
-     stock: true,
-     processing_time: "",
-     variants: [
-       {
-         name: "",
-         description: ""
-       },
-       {
-         name: "",
-         description: ""
-       },
-     ],
-     custom_note: "",
-     optional_upgrade: "",
-     care_instructions: ["", ""],
-     options: [
-       {
-         option_name: "",
-         option_description: ""
-       }
-     ],
-     size: "",
-     material: "",
-     features: ["", ""],
-     is_featured: true,
-     is_active: true,
-     orders_count: 0,
-   },
-   */
 ];

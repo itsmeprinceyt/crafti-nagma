@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import { PageWrapper2 } from '../../../(components)/PageWrapper';
-import { CategoryList } from '../../../../utility/ProductData.util';
+import { ProductCategory } from '../../../../utility/ProductData.util';
 import { ProductDetails } from '../../../../types/ProductData.type';
 import { getProductsByCategory } from '../../../../utility/getProductByCategory.util';
 import { useCart } from '../../../(context)/Cart.context';
@@ -15,21 +15,39 @@ export default function CategoryPage() {
   const decodedCategory = decodeURIComponent(params.categoryID as string);
 
   const [products, setProducts] = useState<ProductDetails[]>([]);
+  const [productImages, setProductImages] = useState<Record<string, string[]>>({});
   const [isValid, setIsValid] = useState<boolean>(true);
   const { addToCart } = useCart();
 
   useEffect(() => {
-    const isValidCategory = CategoryList.some(
-      (cat) => cat.toLowerCase() === decodedCategory.toLowerCase()
-    );
+    const categoryEnumValues = Object.values(ProductCategory) as string[];
 
-    if (!isValidCategory) {
+    const matchedCategory = categoryEnumValues.find(
+      (cat) => cat.toLowerCase() === decodedCategory.toLowerCase()
+    ) as ProductCategory | undefined;
+
+    if (!matchedCategory) {
       setIsValid(false);
       return;
     }
 
-    const categoryProducts = getProductsByCategory(decodedCategory);
+    const categoryProducts = getProductsByCategory(matchedCategory);
     setProducts(categoryProducts);
+
+    if (matchedCategory) {
+      const categoryProducts = getProductsByCategory(matchedCategory);
+      setProducts(categoryProducts);
+      categoryProducts.forEach(async (product) => {
+        try {
+          const res = await fetch(`/api/getProductImages?productCode=${product.code}`);
+          const data = await res.json();
+          setProductImages((prev) => ({ ...prev, [product.code]: data.images }));
+        } catch (error) {
+          console.error(`Failed to fetch images for ${product.code}:`, error);
+        }
+      });
+    }
+
   }, [decodedCategory]);
 
   if (!isValid) {
@@ -43,7 +61,7 @@ export default function CategoryPage() {
       price: product.price,
       discount: product.discount_price,
       quantity: 1,
-      photo: product.main_image
+      photo: productImages[product.code]?.[0] || ''
     });
 
     toast.success(`'${product.name}' added to cart!`, {
@@ -71,13 +89,19 @@ export default function CategoryPage() {
               key={product.id}
               className="p-5 w-[350px] max-[349px]:w-full flex flex-col justify-start items-center gap-3 bg-white border border-amber-600/30 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all ease-in-out duration-300 "
             >
-              <Image
-                src={product.main_image}
-                width={700}
-                height={700}
-                alt={product.name}
-                className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
-              />
+              {productImages[product.code]?.[0] ? (
+                <Image
+                  src={productImages[product.code][0]}
+                  width={700}
+                  height={700}
+                  alt={product.name}
+                  className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                />
+              ) : (
+                <div className="max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                  No Image
+                </div>
+              )}
 
               <div className="flex flex-col items-start justify-between h-full text-start gap-2">
                 <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">

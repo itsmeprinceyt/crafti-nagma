@@ -19,6 +19,7 @@ export default function ProductPage() {
     const productID = params.itemID as string;
 
     const [product, setProduct] = useState<ProductDetails | null>(null);
+    const [productImages, setProductImages] = useState<string[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -34,6 +35,11 @@ export default function ProductPage() {
         }
         setDiscount(getDiscountPercent(foundProduct.price, foundProduct.discount_price));
         setProduct(foundProduct);
+
+        fetch(`/api/getProductImages?productCode=${foundProduct.code}`)
+            .then((res) => res.json())
+            .then((data) => setProductImages(data.images || []))
+            .catch(() => setProductImages([]));
     }, [productID]);
 
     if (!isValid) return notFound();
@@ -47,7 +53,7 @@ export default function ProductPage() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: product.main_image
+            photo: productImages[0] || ''
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -81,7 +87,7 @@ export default function ProductPage() {
                                 slidesPerView={1}
                                 className="rounded-lg product-swiper"
                             >
-                                {product.product_images?.map((img, index) => (
+                                {productImages.map((img, index) => (
                                     <SwiperSlide key={index}>
                                         <div
                                             className="w-full aspect-[4/5] md:aspect-[1/1] relative cursor-pointer"
@@ -253,7 +259,7 @@ export default function ProductPage() {
                         </div>
 
                         {/* Fullscreen Modal */}
-                        {isFullscreen && product.product_images && (
+                        {isFullscreen && productImages.length > 0 && (
                             <div
                                 className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
                                 onClick={() => setIsFullscreen(false)}
@@ -263,17 +269,12 @@ export default function ProductPage() {
                                     onClick={() => setIsFullscreen(false)}
                                     className="absolute top-5 right-5"
                                 >
-                                    <Image
-                                        src="/icons/cross.png"
-                                        width={25}
-                                        height={25}
-                                        alt="Close"
-                                    />
+                                    <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
                                 </button>
 
                                 {/* Center Image */}
                                 <Image
-                                    src={product.product_images?.[currentIndex] ?? ""}
+                                    src={productImages[currentIndex]}
                                     alt={product.name}
                                     width={1000}
                                     height={1000}
@@ -281,39 +282,27 @@ export default function ProductPage() {
                                     onClick={(e) => e.stopPropagation()}
                                 />
 
-                                {/* Navigation - Bottom Center */}
+                                {/* Navigation Buttons */}
                                 <div
                                     onClick={(e) => e.stopPropagation()}
                                     className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
                                 >
-                                    {/* Reminder Text */}
                                     <p className="text-xs text-white/30 mb-1">
                                         Please wait a moment after clicking the buttons
                                     </p>
 
-                                    {/* Rectangle Navigation Buttons */}
                                     <div className="flex gap-2 shadow-md">
-                                        {/* Previous Button */}
                                         <button
                                             onClick={() =>
-                                                setCurrentIndex(
-                                                    (prev) =>
-                                                        (prev - 1 + product.product_images!.length) %
-                                                        product.product_images!.length
-                                                )
+                                                setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
                                             }
                                             className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
                                         >
                                             Previous
                                         </button>
-
-                                        {/* Next Button */}
                                         <button
                                             onClick={() =>
-                                                setCurrentIndex(
-                                                    (prev) =>
-                                                        (prev + 1) % product.product_images!.length
-                                                )
+                                                setCurrentIndex((prev) => (prev + 1) % productImages.length)
                                             }
                                             className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
                                         >
@@ -323,6 +312,7 @@ export default function ProductPage() {
                                 </div>
                             </div>
                         )}
+
 
                     </div>
                 )}
