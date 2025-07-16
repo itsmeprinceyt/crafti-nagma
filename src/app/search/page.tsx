@@ -12,6 +12,7 @@ import { getFilteredProducts } from "../../utility/getFilteredResult.util";
 export default function SearchPage() {
     const [query, setQuery] = useState<string>("");
     const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>([]);
+    const [productImages, setProductImages] = useState<Record<string, string>>({});
     const [sortType, setSortType] = useState<string>("A-Z");
     const [onlyDiscounted, setOnlyDiscounted] = useState<boolean>(false);
     const { addToCart } = useCart();
@@ -25,6 +26,33 @@ export default function SearchPage() {
         return () => clearTimeout(delayDebounce);
     }, [query, sortType, onlyDiscounted]);
 
+    useEffect(() => {
+        const fetchImages = async () => {
+            const imagesMap: Record<string, string> = {};
+
+            await Promise.all(
+                filteredProducts.map(async (product) => {
+                    try {
+                        const res = await fetch(`/api/getProductImages?productCode=${product.code}`);
+                        const data = await res.json();
+                        if (Array.isArray(data.images) && data.images.length > 0) {
+                            imagesMap[product.code] = data.images[0]; // take first image
+                        }
+                    } catch (err) {
+                        console.error(`Error loading image for ${product.code}`, err);
+                    }
+                })
+            );
+
+            setProductImages(imagesMap);
+        };
+
+        if (filteredProducts.length > 0) {
+            fetchImages();
+        }
+    }, [filteredProducts]);
+
+
     const handleAddToCart = (product: ProductDetails) => {
         addToCart({
             code: product.code,
@@ -32,7 +60,7 @@ export default function SearchPage() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: product.main_image,
+            photo: productImages[product.code] || '',
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -97,13 +125,19 @@ export default function SearchPage() {
                                         {discountPercent}% OFF
                                     </span>
                                 )}
-                                <Image
-                                    src={product.main_image}
-                                    width={700}
-                                    height={700}
-                                    alt={product.name}
-                                    className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
-                                />
+                                {productImages[product.code] ? (
+                                    <Image
+                                        src={productImages[product.code]}
+                                        width={700}
+                                        height={700}
+                                        alt={product.name}
+                                        className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                    />
+                                ) : (
+                                    <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                                        No Image
+                                    </div>
+                                )}
 
                                 <div className="flex flex-col items-start justify-between h-full text-start gap-2">
                                     <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">
