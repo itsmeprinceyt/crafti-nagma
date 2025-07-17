@@ -19,6 +19,7 @@ export default function ProductPage() {
     const productID = params.itemID as string;
 
     const [product, setProduct] = useState<ProductDetails | null>(null);
+    const [productImages, setProductImages] = useState<string[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -34,6 +35,11 @@ export default function ProductPage() {
         }
         setDiscount(getDiscountPercent(foundProduct.price, foundProduct.discount_price));
         setProduct(foundProduct);
+
+        fetch(`/api/getProductImages?productCode=${foundProduct.code}`)
+            .then((res) => res.json())
+            .then((data) => setProductImages(data.images || []))
+            .catch(() => setProductImages([]));
     }, [productID]);
 
     if (!isValid) return notFound();
@@ -47,7 +53,7 @@ export default function ProductPage() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: product.main_image
+            photo: productImages[0] || ''
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -62,14 +68,14 @@ export default function ProductPage() {
     return (
         <>
             <PageWrapper2>
-                <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center">
+                <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center select-text">
                     {product?.name}
                 </div>
             </PageWrapper2>
 
             <PageWrapper2>
                 {product && (
-                    <div className="flex flex-col items-center gap-5">
+                    <div className="flex flex-col items-center gap-5 select-text">
                         {/* Product Image Carousel */}
                         <div className="w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] p-2 rounded-lg">
 
@@ -81,7 +87,7 @@ export default function ProductPage() {
                                 slidesPerView={1}
                                 className="rounded-lg product-swiper"
                             >
-                                {product.product_images?.map((img, index) => (
+                                {productImages.map((img, index) => (
                                     <SwiperSlide key={index}>
                                         <div
                                             className="w-full aspect-[4/5] md:aspect-[1/1] relative cursor-pointer"
@@ -108,40 +114,44 @@ export default function ProductPage() {
                                 <p className="absolute -top-5 -right-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md rotate-10 flex items-center justify-center font-bold">
                                     {discount}%<br /> OFF</p>
                             )}
-                            {/* Description */}
-                            <div>
-                                <p className="text-sm font-semibold text-amber-700 mb-1">Description</p>
-                                <p className="text-sm text-gray-700 whitespace-pre-line">{product.description}</p>
+                            {/* Product Description */}
+                            <div className="bg-amber-50 border border-amber-200 rounded p-3">
+                                <h3 className="text-base sm:text-lg font-bold text-amber-800 mb-1 underline underline-offset-4 decoration-amber-400">
+                                    Description
+                                </h3>
+                                <p className="text-sm sm:text-base text-gray-800 whitespace-pre-line leading-relaxed">
+                                    {product.description}
+                                </p>
                             </div>
 
                             {/* Basic Info */}
-                            <div className="grid grid-cols-2 gap-2 text-sm">
+                            <div className="grid grid-cols-2 gap-3 text-sm sm:text-base">
                                 <div>
-                                    <p className="font-medium text-gray-600">Size</p>
+                                    <p className="text-gray-500 font-medium">Size</p>
                                     <p className="text-gray-800">{product.size}</p>
                                 </div>
                                 <div>
-                                    <p className="font-medium text-gray-600">Material</p>
+                                    <p className="text-gray-500 font-medium">Material</p>
                                     <p className="text-gray-800">{product.material}</p>
                                 </div>
                             </div>
 
                             {/* Additional Info */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base">
                                 <div>
-                                    <p className="font-medium text-gray-600">Product Code</p>
+                                    <p className="text-gray-500 font-medium">Product Code</p>
                                     <p className="text-gray-800">{product.code}</p>
                                 </div>
 
                                 {product.category.length > 0 && (
                                     <div>
-                                        <p className="font-medium text-gray-600">Category</p>
+                                        <p className="text-gray-500 font-medium">Category</p>
                                         <p className="text-gray-800">{product.category.join(", ")}</p>
                                     </div>
                                 )}
 
                                 <div>
-                                    <p className="font-medium text-gray-600">Stock</p>
+                                    <p className="text-gray-500 font-medium">Stock</p>
                                     <p className={product.stock ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
                                         {product.stock ? "In Stock" : "Out of Stock"}
                                     </p>
@@ -149,7 +159,7 @@ export default function ProductPage() {
 
                                 {product.processing_time && (
                                     <div>
-                                        <p className="font-medium text-gray-600">Processing Time</p>
+                                        <p className="text-gray-500 font-medium">Processing Time</p>
                                         <p className="text-gray-800">{product.processing_time}</p>
                                     </div>
                                 )}
@@ -157,9 +167,9 @@ export default function ProductPage() {
 
                             {/* Features */}
                             {product.features?.length > 0 && (
-                                <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
-                                    <summary className="cursor-pointer font-medium text-amber-800">Features</summary>
-                                    <ul className="list-disc pl-4 mt-2 text-gray-700">
+                                <details className="bg-amber-50 border border-amber-300/50 rounded p-3 text-sm sm:text-base">
+                                    <summary className="cursor-pointer font-semibold text-amber-800">Features</summary>
+                                    <ul className="list-disc pl-5 mt-2 text-gray-700 leading-relaxed">
                                         {product.features.map((f, i) => <li key={i}>{f}</li>)}
                                     </ul>
                                 </details>
@@ -167,13 +177,13 @@ export default function ProductPage() {
 
                             {/* Variants */}
                             {Array.isArray(product.variants) && product.variants.length > 0 && (
-                                <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
-                                    <summary className="cursor-pointer font-medium text-amber-800">Variants</summary>
-                                    <ul className="pl-4 mt-2 text-gray-700 space-y-1">
+                                <details className="bg-amber-50 border border-amber-300/50 rounded p-3 text-sm sm:text-base">
+                                    <summary className="cursor-pointer font-semibold text-amber-800">Variants</summary>
+                                    <ul className="pl-5 mt-2 text-gray-700 space-y-1">
                                         {product.variants.map((v, i) => (
                                             <li key={i}>
                                                 <span className="font-semibold">{v.name}</span>
-                                                {v.description && ` — ${v.description}`}
+                                                {v.description && <> — {v.description}</>}
                                             </li>
                                         ))}
                                     </ul>
@@ -182,13 +192,13 @@ export default function ProductPage() {
 
                             {/* Options */}
                             {Array.isArray(product.options) && product.options.length > 0 && (
-                                <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
-                                    <summary className="cursor-pointer font-medium text-amber-800">Options</summary>
-                                    <ul className="pl-4 mt-2 text-gray-700 space-y-1">
+                                <details className="bg-amber-50 border border-amber-300/50 rounded p-3 text-sm sm:text-base">
+                                    <summary className="cursor-pointer font-semibold text-amber-800">Options</summary>
+                                    <ul className="pl-5 mt-2 text-gray-700 space-y-1">
                                         {product.options.map((o, i) => (
                                             <li key={i}>
                                                 <span className="font-semibold">{o.option_name}</span>
-                                                {o.option_description && ` — ${o.option_description}`}
+                                                {o.option_description && <> — {o.option_description}</>}
                                             </li>
                                         ))}
                                     </ul>
@@ -197,9 +207,9 @@ export default function ProductPage() {
 
                             {/* Care Instructions */}
                             {Array.isArray(product.care_instructions) && product.care_instructions.length > 0 && (
-                                <details className="bg-amber-50 border border-amber-300/50 rounded p-2 text-sm">
-                                    <summary className="cursor-pointer font-medium text-amber-800">Care Instructions</summary>
-                                    <ul className="list-disc pl-4 mt-2 text-gray-700">
+                                <details className="bg-amber-50 border border-amber-300/50 rounded p-3 text-sm sm:text-base">
+                                    <summary className="cursor-pointer font-semibold text-amber-800">Care Instructions</summary>
+                                    <ul className="list-disc pl-5 mt-2 text-gray-700 leading-relaxed">
                                         {product.care_instructions.map((c, i) => <li key={i}>{c}</li>)}
                                     </ul>
                                 </details>
@@ -214,8 +224,8 @@ export default function ProductPage() {
 
                             {/* Optional Upgrade */}
                             {product.optional_upgrade && (
-                                <div className="text-sm">
-                                    <p className="text-amber-700 font-medium">Optional Upgrade:</p>
+                                <div className="text-sm sm:text-base">
+                                    <p className="text-amber-700 font-semibold">Optional Upgrade:</p>
                                     <p className="text-gray-700">{product.optional_upgrade}</p>
                                     {product.optional_upgrade_price && (
                                         <p className="text-lime-600 font-semibold">₹{product.optional_upgrade_price}</p>
@@ -225,8 +235,8 @@ export default function ProductPage() {
 
                             {/* Delivery Charges */}
                             {product.delivery_charges !== 0 && (
-                                <p className="text-sm text-red-600">
-                                    <span className="font-medium">Delivery Charges:</span> ₹{product.delivery_charges}
+                                <p className="text-sm text-red-600 font-medium">
+                                    Delivery Charges: ₹{product.delivery_charges}
                                 </p>
                             )}
 
@@ -253,7 +263,7 @@ export default function ProductPage() {
                         </div>
 
                         {/* Fullscreen Modal */}
-                        {isFullscreen && product.product_images && (
+                        {isFullscreen && productImages.length > 0 && (
                             <div
                                 className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
                                 onClick={() => setIsFullscreen(false)}
@@ -263,17 +273,12 @@ export default function ProductPage() {
                                     onClick={() => setIsFullscreen(false)}
                                     className="absolute top-5 right-5"
                                 >
-                                    <Image
-                                        src="/icons/cross.png"
-                                        width={25}
-                                        height={25}
-                                        alt="Close"
-                                    />
+                                    <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
                                 </button>
 
                                 {/* Center Image */}
                                 <Image
-                                    src={product.product_images?.[currentIndex] ?? ""}
+                                    src={productImages[currentIndex]}
                                     alt={product.name}
                                     width={1000}
                                     height={1000}
@@ -281,48 +286,39 @@ export default function ProductPage() {
                                     onClick={(e) => e.stopPropagation()}
                                 />
 
-                                {/* Navigation - Bottom Center */}
-                                <div
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
-                                >
-                                    {/* Reminder Text */}
-                                    <p className="text-xs text-white/30 mb-1">
-                                        Please wait a moment after clicking the buttons
-                                    </p>
+                                {/* Navigation Buttons */}
+                                {productImages.length > 1 && (
+                                    <div
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
+                                    >
+                                        <p className="text-xs text-white/30 mb-1">
+                                            Please wait a moment after clicking the buttons
+                                        </p>
 
-                                    {/* Rectangle Navigation Buttons */}
-                                    <div className="flex gap-2 shadow-md">
-                                        {/* Previous Button */}
-                                        <button
-                                            onClick={() =>
-                                                setCurrentIndex(
-                                                    (prev) =>
-                                                        (prev - 1 + product.product_images!.length) %
-                                                        product.product_images!.length
-                                                )
-                                            }
-                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
-                                        >
-                                            Previous
-                                        </button>
-
-                                        {/* Next Button */}
-                                        <button
-                                            onClick={() =>
-                                                setCurrentIndex(
-                                                    (prev) =>
-                                                        (prev + 1) % product.product_images!.length
-                                                )
-                                            }
-                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
-                                        >
-                                            Next
-                                        </button>
+                                        <div className="flex gap-2 shadow-md">
+                                            <button
+                                                onClick={() =>
+                                                    setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Previous
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    setCurrentIndex((prev) => (prev + 1) % productImages.length)
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         )}
+
 
                     </div>
                 )}

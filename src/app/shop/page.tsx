@@ -20,12 +20,33 @@ export default function Shop() {
     const [categories, setCategories] = useState<string[]>([]);
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);
     const [allProducts, setAllProducts] = useState<ProductDetails[]>([]);
+    const [productImages, setProductImages] = useState<Record<string, string[]>>({});
+    const [fullscreenImage, setFullscreenImage] = useState<{
+        images: string[],
+        index: number
+    } | null>(null);
     const { addToCart } = useCart();
 
     useEffect(() => {
         setCategories(getSortedCategories());
         setIsFeatured(isFeaturedProduct());
-        setAllProducts(getAllProductsSorted());
+        const products = getAllProductsSorted();
+        setAllProducts(products);
+
+        Promise.all(
+            products.map((product) =>
+                fetch(`/api/getProductImages?productCode=${product.code}`)
+                    .then(res => res.json())
+                    .then(data => ({ code: product.code, images: data.images || [] }))
+                    .catch(() => ({ code: product.code, images: [] }))
+            )
+        ).then((results) => {
+            const imageMap: Record<string, string[]> = {};
+            results.forEach(({ code, images }) => {
+                imageMap[code] = images;
+            });
+            setProductImages(imageMap);
+        });
     }, []);
 
     const handleAddToCart = (product: ProductDetails) => {
@@ -35,7 +56,7 @@ export default function Shop() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: product.main_image
+            photo: productImages[product.code]?.[0] || ''
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -45,6 +66,11 @@ export default function Shop() {
                 padding: '12px',
             },
         });
+    };
+
+    const openFullscreen = (images: string[], index: number = 0) => {
+        if (!images || images.length === 0) return;
+        setFullscreenImage({ images, index });
     };
 
     return (
@@ -102,13 +128,19 @@ export default function Shop() {
                                     href={`/shop/item/${product.code}`}
                                     className="mt-5 p-5 flex flex-col items-center gap-3 text-start bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-[200px]"
                                 >
-                                    <Image
-                                        src={product.main_image}
-                                        alt={product.name}
-                                        width={700}
-                                        height={700}
-                                        className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
-                                    />
+                                    {productImages[product.code]?.[0] ? (
+                                        <Image
+                                            src={productImages[product.code][0]}
+                                            alt={product.name}
+                                            width={700}
+                                            height={700}
+                                            className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
+                                        />
+                                    ) : (
+                                        <div className="w-[150px] h-[150px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                                            No Image
+                                        </div>
+                                    )}
 
                                     <p className="text-start font-semibold text-xs text-wrap w-full line-clamp-1">
                                         {product.name}
@@ -144,13 +176,20 @@ export default function Shop() {
                                             {discountPercent}% OFF
                                         </span>
                                     )}
-                                    <Image
-                                        src={product.main_image}
-                                        width={700}
-                                        height={700}
-                                        alt={product.name}
-                                        className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
-                                    />
+                                    {productImages[product.code]?.[0] ? (
+                                        <Image
+                                            src={productImages[product.code][0]}
+                                            width={700}
+                                            height={700}
+                                            alt={product.name}
+                                            onClick={() => openFullscreen(productImages[product.code])}
+                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
+                                        />
+                                    ) : (
+                                        <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
+                                            No Image
+                                        </div>
+                                    )}
 
                                     <div className="flex flex-col items-start justify-between h-full text-start gap-2">
                                         <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">
@@ -186,6 +225,67 @@ export default function Shop() {
                                 </div>
                             )
                         })}
+                        {fullscreenImage && (
+                            <div
+                                className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
+                                onClick={() => setFullscreenImage(null)}
+                            >
+                                {/* Close Button */}
+                                <button
+                                    onClick={() => setFullscreenImage(null)}
+                                    className="absolute top-5 right-5"
+                                >
+                                    <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
+                                </button>
+
+                                {/* Center Image */}
+                                <img
+                                    src={fullscreenImage.images[fullscreenImage.index]}
+                                    alt="Fullscreen"
+                                    className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+
+                                {/* Navigation Buttons */}
+                                {fullscreenImage.images.length > 1 && (
+                                    <div
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
+                                    >
+                                        <p className="text-xs text-white/30 mb-1">
+                                            Please wait a moment after clicking the buttons
+                                        </p>
+
+                                        <div className="flex gap-2 shadow-md">
+                                            <button
+                                                onClick={() =>
+                                                    setFullscreenImage((prev) => ({
+                                                        ...prev!,
+                                                        index:
+                                                            (prev!.index - 1 + prev!.images.length) %
+                                                            prev!.images.length,
+                                                    }))
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Previous
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    setFullscreenImage((prev) => ({
+                                                        ...prev!,
+                                                        index: (prev!.index + 1) % prev!.images.length,
+                                                    }))
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
 

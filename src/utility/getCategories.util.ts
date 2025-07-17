@@ -1,9 +1,8 @@
-import { CategoryList } from "./ProductData.util";
+import { ProductCategory } from "./ProductData.util";
 
 export default function getSortedCategories(): string[] {
-    const flatCategories = CategoryList.flat();
-    const uniqueCategories = [...new Set(flatCategories)];
-    return uniqueCategories.sort((a, b) =>
+    const categories = Object.values(ProductCategory);
+    return categories.sort((a, b) =>
         a.toLowerCase().localeCompare(b.toLowerCase())
     );
 }

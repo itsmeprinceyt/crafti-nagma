@@ -5,8 +5,6 @@ export interface ProductDetails {
     brief_description: string,
     description: string,
     price: number,
-    main_image: string,
-    product_images?: string[],
     category: string[],
     delivery_charges: number | string,
     discount_price: number,
