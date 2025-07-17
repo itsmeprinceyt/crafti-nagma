@@ -12,9 +12,13 @@ import { getFilteredProducts } from "../../utility/getFilteredResult.util";
 export default function SearchPage() {
     const [query, setQuery] = useState<string>("");
     const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>([]);
-    const [productImages, setProductImages] = useState<Record<string, string>>({});
+    const [productImages, setProductImages] = useState<Record<string, string[]>>({});
     const [sortType, setSortType] = useState<string>("A-Z");
     const [onlyDiscounted, setOnlyDiscounted] = useState<boolean>(false);
+    const [fullscreenImage, setFullscreenImage] = useState<{
+        images: string[],
+        index: number
+    } | null>(null);
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -28,7 +32,7 @@ export default function SearchPage() {
 
     useEffect(() => {
         const fetchImages = async () => {
-            const imagesMap: Record<string, string> = {};
+            const imagesMap: Record<string, string[]> = {}; // CHANGE: store arrays
 
             await Promise.all(
                 filteredProducts.map(async (product) => {
@@ -36,7 +40,7 @@ export default function SearchPage() {
                         const res = await fetch(`/api/getProductImages?productCode=${product.code}`);
                         const data = await res.json();
                         if (Array.isArray(data.images) && data.images.length > 0) {
-                            imagesMap[product.code] = data.images[0]; // take first image
+                            imagesMap[product.code] = data.images; // SAVE all images
                         }
                     } catch (err) {
                         console.error(`Error loading image for ${product.code}`, err);
@@ -60,7 +64,7 @@ export default function SearchPage() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: productImages[product.code] || '',
+            photo: productImages[product.code]?.[0] || '',
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -70,6 +74,11 @@ export default function SearchPage() {
                 padding: "12px",
             },
         });
+    };
+
+    const openFullscreen = (images: string[], index: number = 0) => {
+        if (!images || images.length === 0) return;
+        setFullscreenImage({ images, index });
     };
 
     return (
@@ -125,12 +134,13 @@ export default function SearchPage() {
                                         {discountPercent}% OFF
                                     </span>
                                 )}
-                                {productImages[product.code] ? (
+                                {productImages[product.code]?.[0] ? (
                                     <Image
-                                        src={productImages[product.code]}
+                                        src={productImages[product.code][0]} // Use first image as thumbnail
                                         width={700}
                                         height={700}
                                         alt={product.name}
+                                        onClick={() => openFullscreen(productImages[product.code])} // Pass all images
                                         className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
                                     />
                                 ) : (
@@ -138,6 +148,7 @@ export default function SearchPage() {
                                         No Image
                                     </div>
                                 )}
+
 
                                 <div className="flex flex-col items-start justify-between h-full text-start gap-2">
                                     <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">
@@ -173,6 +184,67 @@ export default function SearchPage() {
                             </div>
                         );
                     })}
+                    {fullscreenImage && (
+                        <div
+                            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
+                            onClick={() => setFullscreenImage(null)}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setFullscreenImage(null)}
+                                className="absolute top-5 right-5"
+                            >
+                                <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
+                            </button>
+
+                            {/* Center Image */}
+                            <img
+                                src={fullscreenImage.images[fullscreenImage.index]}
+                                alt="Fullscreen"
+                                className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+
+                            {/* Navigation Buttons */}
+                            {fullscreenImage.images.length > 1 && (
+                                <div
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
+                                >
+                                    <p className="text-xs text-white/30 mb-1">
+                                        Please wait a moment after clicking the buttons
+                                    </p>
+
+                                    <div className="flex gap-2 shadow-md">
+                                        <button
+                                            onClick={() =>
+                                                setFullscreenImage((prev) => ({
+                                                    ...prev!,
+                                                    index:
+                                                        (prev!.index - 1 + prev!.images.length) %
+                                                        prev!.images.length,
+                                                }))
+                                            }
+                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                        >
+                                            Previous
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                setFullscreenImage((prev) => ({
+                                                    ...prev!,
+                                                    index: (prev!.index + 1) % prev!.images.length,
+                                                }))
+                                            }
+                                            className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 {filteredProducts.length === 0 && query === "" && (

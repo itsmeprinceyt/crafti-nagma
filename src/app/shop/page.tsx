@@ -21,6 +21,10 @@ export default function Shop() {
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);
     const [allProducts, setAllProducts] = useState<ProductDetails[]>([]);
     const [productImages, setProductImages] = useState<Record<string, string[]>>({});
+    const [fullscreenImage, setFullscreenImage] = useState<{
+        images: string[],
+        index: number
+    } | null>(null);
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -62,6 +66,11 @@ export default function Shop() {
                 padding: '12px',
             },
         });
+    };
+
+    const openFullscreen = (images: string[], index: number = 0) => {
+        if (!images || images.length === 0) return;
+        setFullscreenImage({ images, index });
     };
 
     return (
@@ -173,7 +182,8 @@ export default function Shop() {
                                             width={700}
                                             height={700}
                                             alt={product.name}
-                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                            onClick={() => openFullscreen(productImages[product.code])}
+                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
                                         />
                                     ) : (
                                         <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
@@ -215,6 +225,67 @@ export default function Shop() {
                                 </div>
                             )
                         })}
+                        {fullscreenImage && (
+                            <div
+                                className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
+                                onClick={() => setFullscreenImage(null)}
+                            >
+                                {/* Close Button */}
+                                <button
+                                    onClick={() => setFullscreenImage(null)}
+                                    className="absolute top-5 right-5"
+                                >
+                                    <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
+                                </button>
+
+                                {/* Center Image */}
+                                <img
+                                    src={fullscreenImage.images[fullscreenImage.index]}
+                                    alt="Fullscreen"
+                                    className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+
+                                {/* Navigation Buttons */}
+                                {fullscreenImage.images.length > 1 && (
+                                    <div
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="absolute bottom-5 flex flex-col items-center justify-center gap-2"
+                                    >
+                                        <p className="text-xs text-white/30 mb-1">
+                                            Please wait a moment after clicking the buttons
+                                        </p>
+
+                                        <div className="flex gap-2 shadow-md">
+                                            <button
+                                                onClick={() =>
+                                                    setFullscreenImage((prev) => ({
+                                                        ...prev!,
+                                                        index:
+                                                            (prev!.index - 1 + prev!.images.length) %
+                                                            prev!.images.length,
+                                                    }))
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Previous
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    setFullscreenImage((prev) => ({
+                                                        ...prev!,
+                                                        index: (prev!.index + 1) % prev!.images.length,
+                                                    }))
+                                                }
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
 

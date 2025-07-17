@@ -630,7 +630,7 @@ export const ProductData: ProductDetails[] = [
         description: "Light Blue rose with white base clip."
       }
     ],
-    optional_upgrade: "Gift wrap option available for rs.20.00 extra.",
+    optional_upgrade: "Gift wrap option available for Rs/- 20 extra.",
     care_instructions: [
       "Hand wash gently with cold water",
       "Do not wring or twist",
@@ -735,7 +735,7 @@ export const ProductData: ProductDetails[] = [
     optional_upgrade: "Add gift wrap box (₹55 extra)",
     care_instructions: [
       "Hand wash only.",
-      ". Use mild soap",
+      "Use mild soap",
       "Do not twist."
     ],
     options: [
