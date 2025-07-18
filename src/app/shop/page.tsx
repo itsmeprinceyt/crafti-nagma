@@ -239,7 +239,7 @@ export default function Shop() {
                                 </button>
 
                                 {/* Center Image */}
-                                <img
+                                <Image
                                     src={fullscreenImage.images[fullscreenImage.index]}
                                     alt="Fullscreen"
                                     className="max-h-full max-w-full object-contain rounded-lg shadow-xl"

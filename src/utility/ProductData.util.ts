@@ -609,7 +609,7 @@ export const ProductData: ProductDetails[] = [
     id: "14",
     code: "CN-EHC0017",
     name: "Crochet Rose Hair Clip",
-    brief_description: "Handmade elegant crochet rose clip for hair styling.",
+    brief_description: "Handmade elegant crochet rose clip for hair styling. Perfect for 🌹 Lovers!",
     description: "This beautiful crochet rose hair clip is delicately handcrafted with premium yarn, making it the perfect accessory for festive occasions, everyday wear, or gifting. It's lightweight, secure, and adds a natural floral charm to your hairstyle.",
     price: 79,
     category: [
