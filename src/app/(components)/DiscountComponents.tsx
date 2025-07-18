@@ -8,7 +8,7 @@ export function DiscountTagItem({ discount }: { discount: number }) {
 export function DiscountTagProduct({ discountPercent }: { discountPercent: number }) {
     return (
         <p className="absolute -top-5 -left-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md -rotate-10 flex items-center text-center justify-center font-bold select-none">
-            {discountPercent}<br />% OFF
+            {discountPercent}%<br />OFF
         </p>
     )
 }
