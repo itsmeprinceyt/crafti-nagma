@@ -195,8 +195,10 @@ export default function SearchPage() {
                             </button>
 
                             {/* Center Image */}
-                            <img
+                            <Image
                                 src={fullscreenImage.images[fullscreenImage.index]}
+                                width={1000}
+                                height={1000}
                                 alt="Fullscreen"
                                 className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
                                 onClick={(e) => e.stopPropagation()}

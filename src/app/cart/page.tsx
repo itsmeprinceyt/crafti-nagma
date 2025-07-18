@@ -98,7 +98,7 @@ export default function CartPage() {
                                                 • Price:{" "}
                                                 {item.discount > 0 ? (
                                                     <>
-                                                        <span className="line-through text-red-500 font-bold">₹{item.price}</span>{" "}
+                                                        <strong className="line-through text-red-500">₹{item.price}</strong>{" "}
                                                         <strong className="text-green-600">₹{item.discount}</strong>
                                                     </>
                                                 ) : (
@@ -162,26 +162,29 @@ export default function CartPage() {
                                 <div className="space-y-2 text-sm">
                                     <div className="flex justify-between">
                                         <span className="font-medium">Total Items</span>
-                                        <span className="font-bold">{cartCount}</span>
+                                        <strong>{cartCount}</strong>
                                     </div>
-
-                                    <div className="flex justify-between">
+                                    {hasDiscount ? (
+                                        <div className="flex justify-between">
+                                            <span className="font-medium">Total Amount</span>
+                                            <strong className="line-through text-red-500">₹{totalOriginal}</strong>
+                                        </div>
+                                    ) : <div className="flex justify-between">
                                         <span className="font-medium">Total Amount</span>
-                                        <span className="line-through text-red-500">₹{totalOriginal}</span>
-                                    </div>
-
+                                        <strong className="text-green-600">₹{totalOriginal}</strong>
+                                    </div>}
                                     {hasDiscount && (
                                         <div className="flex justify-between">
                                             <span className="font-medium">Discounted Amount</span>
-                                            <span className="text-green-600 font-semibold">₹{totalDiscounted}</span>
+                                            <strong className="text-green-600">₹{totalDiscounted}</strong>
                                         </div>
                                     )}
 
                                     <div className="flex justify-between">
                                         <span className="font-medium">Delivery Charges</span>
-                                        <span className={deliveryCharge === 0 ? "text-green-600" : "text-red-500"}>
+                                        <strong className={deliveryCharge === 0 ? "text-green-600" : "text-red-500"}>
                                             {deliveryCharge === 0 ? "Free" : `₹${deliveryCharge}`}
-                                        </span>
+                                        </strong>
                                     </div>
 
                                     <hr className="my-2 border-t border-dashed" />
