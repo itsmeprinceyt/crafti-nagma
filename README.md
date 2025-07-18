@@ -13,7 +13,9 @@ Welcome to **Crafit Nagma**, an elegant web platform built to showcase and sell 
 - 🛍️ Beautiful product listing & detail pages
 - 🖼️ Image gallery with Swiper carousel and fullscreen preview
 - 💬 WhatsApp checkout integration
+- 🛒 Address Form for client to enter their shipping details
 - 🛒 Cart system using `React Context + localStorage`
+- 🛒 Detailed invoice summary at checkout section in cart page
 - 📉 Discount feature for applicable products
 - 🔍 Product search module to find items quickly
 - 📦 Product variations, features, and care instructions
