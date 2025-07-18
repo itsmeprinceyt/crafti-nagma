@@ -13,6 +13,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
+import { DEFAULT_IMG } from '../../../../utility/utils';
+import { DiscountTagItem, DiscountAmountItem } from "../../../(components)/DiscountComponents";
 
 export default function ProductPage() {
     const params = useParams();
@@ -53,7 +55,7 @@ export default function ProductPage() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: productImages[0] || ''
+            photo: productImages[0] || DEFAULT_IMG
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -111,12 +113,11 @@ export default function ProductPage() {
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
                             {/* Discount */}
                             {discount > 0 && (
-                                <p className="absolute -top-5 -right-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md rotate-10 flex items-center justify-center font-bold">
-                                    {discount}%<br /> OFF</p>
+                                <DiscountTagItem discount={discount}/>
                             )}
                             {/* Product Description */}
                             <div className="bg-amber-50 border border-amber-200 rounded p-3">
-                                <h3 className="text-base sm:text-lg font-bold text-amber-800 mb-1 underline underline-offset-4 decoration-amber-400">
+                                <h3 className="text-base sm:text-lg font-bold text-amber-800 mb-1 underline underline-offset-4 decoration-amber-400 select-none">
                                     Description
                                 </h3>
                                 <p className="text-sm sm:text-base text-gray-800 whitespace-pre-line leading-relaxed">
@@ -127,11 +128,11 @@ export default function ProductPage() {
                             {/* Basic Info */}
                             <div className="grid grid-cols-2 gap-3 text-sm sm:text-base">
                                 <div>
-                                    <p className="text-gray-500 font-medium">Size</p>
+                                    <p className="text-gray-500 font-medium select-none">Size</p>
                                     <p className="text-gray-800">{product.size}</p>
                                 </div>
                                 <div>
-                                    <p className="text-gray-500 font-medium">Material</p>
+                                    <p className="text-gray-500 font-medium select-none">Material</p>
                                     <p className="text-gray-800">{product.material}</p>
                                 </div>
                             </div>
@@ -139,19 +140,19 @@ export default function ProductPage() {
                             {/* Additional Info */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base">
                                 <div>
-                                    <p className="text-gray-500 font-medium">Product Code</p>
-                                    <p className="text-gray-800">{product.code}</p>
+                                    <p className="text-gray-500 font-medium select-none">Product Code</p>
+                                    <p className="text-blue-600 font-semibold">{product.code}</p>
                                 </div>
 
                                 {product.category.length > 0 && (
                                     <div>
-                                        <p className="text-gray-500 font-medium">Category</p>
+                                        <p className="text-gray-500 font-medium select-none">Category</p>
                                         <p className="text-gray-800">{product.category.join(", ")}</p>
                                     </div>
                                 )}
 
                                 <div>
-                                    <p className="text-gray-500 font-medium">Stock</p>
+                                    <p className="text-gray-500 font-medium select-none">Stock</p>
                                     <p className={product.stock ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
                                         {product.stock ? "In Stock" : "Out of Stock"}
                                     </p>
@@ -159,7 +160,7 @@ export default function ProductPage() {
 
                                 {product.processing_time && (
                                     <div>
-                                        <p className="text-gray-500 font-medium">Processing Time</p>
+                                        <p className="text-gray-500 font-medium select-none">Processing Time</p>
                                         <p className="text-gray-800">{product.processing_time}</p>
                                     </div>
                                 )}
@@ -217,7 +218,7 @@ export default function ProductPage() {
 
                             {/* Custom Note */}
                             {product.custom_note && (
-                                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-yellow-800 rounded">
+                                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-yellow-800 rounded select-none">
                                     <p><strong>Note:</strong> {product.custom_note}</p>
                                 </div>
                             )}
@@ -225,7 +226,7 @@ export default function ProductPage() {
                             {/* Optional Upgrade */}
                             {product.optional_upgrade && (
                                 <div className="text-sm sm:text-base">
-                                    <p className="text-amber-700 font-semibold">Optional Upgrade:</p>
+                                    <p className="text-amber-700 font-semibold select-none">Optional Upgrade:</p>
                                     <p className="text-gray-700">{product.optional_upgrade}</p>
                                     {product.optional_upgrade_price && (
                                         <p className="text-lime-600 font-semibold">₹{product.optional_upgrade_price}</p>
@@ -235,24 +236,14 @@ export default function ProductPage() {
 
                             {/* Delivery Charges */}
                             {product.delivery_charges !== 0 && (
-                                <p className="text-sm text-red-600 font-medium">
+                                <p className="text-sm text-red-600 font-medium select-none">
                                     Delivery Charges: ₹{product.delivery_charges}
                                 </p>
                             )}
 
                             {/* Price + Add to Cart */}
                             <div className="flex gap-5 items-center">
-                                <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm relative">
-                                    {product.discount_price ? (
-                                        <>
-                                            <span className="line-through text-red-600 mr-1 font-bold">₹{product.price}</span>
-                                            <span className="font-semibold">₹{product.discount_price}</span>
-                                        </>
-                                    ) : (
-                                        <>₹{product.price}</>
-                                    )}
-                                </p>
-
+                                <DiscountAmountItem discount_price={product.discount_price} price={product.price}/>
                                 <button
                                     onClick={handleAddToCart}
                                     className="w-max text-center bg-gradient-to-r from-amber-600/40 to-amber-600/20 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm"

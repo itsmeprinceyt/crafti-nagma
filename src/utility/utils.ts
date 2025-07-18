@@ -1,0 +1,1 @@
+export const DEFAULT_IMG: string = "/ProductImages/default.png";

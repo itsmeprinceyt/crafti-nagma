@@ -12,7 +12,7 @@ export async function GET() {
 
     for (const category of sortedCategories) {
         const availableProducts = ProductData.filter(product =>
-            product.category.includes(category) &&
+            product.category.includes(category) && product.is_active &&
             !usedProductIds.has(product.code)
         );
 
@@ -39,7 +39,7 @@ export async function GET() {
 
         result.push({
             category,
-            image: imagePath || "/fallback-image.jpg"
+            image: imagePath || "/ProductImages/default.png"
         });
     }
 

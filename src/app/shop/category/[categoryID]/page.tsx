@@ -9,6 +9,9 @@ import { ProductDetails } from '../../../../types/ProductData.type';
 import { getProductsByCategory } from '../../../../utility/getProductByCategory.util';
 import { useCart } from '../../../(context)/Cart.context';
 import { toast } from "react-hot-toast";
+import { getDiscountPercent } from '../../../../utility/discountPercentage.util';
+import { DEFAULT_IMG } from '../../../../utility/utils';
+import { DiscountTagProduct, DiscountAmountProduct } from "../../../(components)/DiscountComponents";
 
 export default function CategoryPage() {
   const params = useParams();
@@ -65,7 +68,7 @@ export default function CategoryPage() {
       price: product.price,
       discount: product.discount_price,
       quantity: 1,
-      photo: productImages[product.code]?.[0] || ''
+      photo: productImages[product.code]?.[0] || DEFAULT_IMG
     });
 
     toast.success(`'${product.name}' added to cart!`, {
@@ -92,54 +95,64 @@ export default function CategoryPage() {
 
       <PageWrapper2>
         <div className="grid grid-cols-3 max-[1050px]:grid-cols-2 max-[700px]:grid-cols-1 gap-10 p-1 mb-10">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="p-5 w-[350px] max-[349px]:w-full flex flex-col justify-start items-center gap-3 bg-white border border-amber-600/30 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all ease-in-out duration-300 "
-            >
-              {productImages[product.code]?.[0] ? (
-                <Image
-                  src={productImages[product.code][0]}
-                  width={700}
-                  height={700}
-                  alt={product.name}
-                  onClick={() => openFullscreen(productImages[product.code])}
-                  className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
-                />
-              ) : (
-                <div className="max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
-                  No Image
-                </div>
-              )}
+          {products.map((product) => {
+            const discountPercent = getDiscountPercent(product.price, product.discount_price);
+            return (
+              <div
+                key={product.id}
+                className="p-5 w-[350px] max-[349px]:w-full flex flex-col justify-start items-center gap-3 bg-white border border-amber-600/30 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all ease-in-out duration-300 relative"
+              >
+                {discountPercent > 0 && (
+                  <DiscountTagProduct discountPercent={discountPercent} />
+                )}
+                {
+                  productImages[product.code]?.[0] ? (
+                    <Image
+                      src={productImages[product.code][0]}
+                      width={700}
+                      height={700}
+                      alt={product.name}
+                      onClick={() => openFullscreen(productImages[product.code])}
+                      className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
+                    />
+                  ) : (
+                    <Image
+                      src={DEFAULT_IMG}
+                      alt={product.name}
+                      width={700}
+                      height={700}
+                      className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                    />
+                  )
+                }
 
-              <div className="flex flex-col items-start justify-between h-full text-start gap-2">
-                <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">
-                  {product.name}
-                </p>
+                < div className="flex flex-col items-start justify-between h-full text-start gap-2" >
+                  <p className="text-start font-bold text-xs text-wrap w-full line-clamp-2 pb-2 border-b border-black/10">
+                    {product.name}
+                  </p>
 
-                <p className="text-start text-xs text-wrap w-full text-gray-600 line-clamp-3 pb-2 border-b border-black/10">
-                  {product.brief_description}
-                </p>
+                  <p className="text-start text-xs text-wrap w-full text-gray-600 line-clamp-3 pb-2 border-b border-black/10">
+                    {product.brief_description}
+                  </p>
 
-                <div className="flex justify-between items-center gap-2 w-full">
-                  <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm">₹{product.discount_price
-                    ? product.discount_price
-                    : product.price}</p>
-                  <Link href={`/shop/item/${product.code}`}>
-                    <p className="w-[90px] text-center bg-gradient-to-r from-amber-600/20 to-amber-600/40 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm">View</p>
-                  </Link>
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    className="w-[130px] text-center bg-gradient-to-r from-amber-600/40 to-amber-600/20 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm"
-                  >
-                    Add To Cart
-                  </button>
+                  <div className="flex justify-between items-center gap-2 w-full">
+                    <DiscountAmountProduct discount_price={product.discount_price} price={product.price} />
+                    <Link href={`/shop/item/${product.code}`}>
+                      <p className="w-[90px] text-center bg-gradient-to-r from-amber-600/20 to-amber-600/40 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm">View</p>
+                    </Link>
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className="w-[130px] text-center bg-gradient-to-r from-amber-600/40 to-amber-600/20 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm"
+                    >
+                      Add To Cart
+                    </button>
 
+                  </div>
                 </div>
               </div>
+            )
+          })}
 
-            </div>
-          ))}
           {fullscreenImage && (
             <div
               className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
@@ -201,10 +214,8 @@ export default function CategoryPage() {
               )}
             </div>
           )}
-        </div>
-
-
-      </PageWrapper2>
+        </div >
+      </PageWrapper2 >
     </>
   );
 }

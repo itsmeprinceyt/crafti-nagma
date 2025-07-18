@@ -19,11 +19,16 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
         }
     );
     const [errors, setErrors] = useState<Partial<Record<keyof AddressData, string>>>({});
-    const [saveAddress, setSaveAddress] = useState(false);
+    const [saveAddress, setSaveAddress] = useState<boolean>(false);
+    const [addressSaved, setAddressSaved] = useState<boolean>(true);
+
     useEffect(() => {
         const saved = localStorage.getItem("crafti_address");
         if (saved) {
             setFormData(JSON.parse(saved));
+            setAddressSaved(false);
+        } else {
+            setAddressSaved(true);
         }
     }, []);
 
@@ -60,6 +65,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
 
     const handleClearSaved = () => {
         localStorage.removeItem("crafti_address");
+        setAddressSaved(true);
     };
 
     const validateForm = () => {
@@ -117,7 +123,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                 placeholder="Email (Optional)"
                 value={formData.email}
                 onChange={handleChange}
-                className={`${input_CSS} mt-2`}
+                className={`${input_CSS} mt-4`}
             />
             <div>
                 <input
@@ -125,7 +131,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                     placeholder="Phone Number *"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`${input_CSS} mt-2`}
+                    className={`${input_CSS} mt-4`}
                 />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
@@ -134,7 +140,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                 placeholder="Alternate Phone (Optional)"
                 value={formData.altPhone}
                 onChange={handleChange}
-                className={`${input_CSS} mt-2`}
+                className={`${input_CSS} mt-4`}
             />
 
             <div>
@@ -143,7 +149,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                     placeholder="House No., Building Name *"
                     value={formData.house}
                     onChange={handleChange}
-                    className={`${input_CSS} mt-2`}
+                    className={`${input_CSS} mt-4`}
                 />
                 {errors.house && <p className="text-red-500 text-sm">{errors.house}</p>}
             </div>
@@ -152,17 +158,17 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                 placeholder="Locality / Street Name (Optional)"
                 value={formData.street}
                 onChange={handleChange}
-                className={`${input_CSS} mt-2`}
+                className={`${input_CSS} mt-4`}
             />
             <input
                 name="landmark"
                 placeholder="Landmark (Optional)"
                 value={formData.landmark}
                 onChange={handleChange}
-                className={`${input_CSS} mt-2`}
+                className={`${input_CSS} mt-4`}
             />
 
-            <div className={`${grid_CSS} mt-2`}>
+            <div className={`${grid_CSS} mt-4`}>
                 <div>
                     <input
                         name="pincode"
@@ -185,7 +191,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                 </div>
             </div>
 
-            <div className="mt-2">
+            <div className="mt-4">
                 <input
                     name="state"
                     placeholder="State *"
@@ -202,7 +208,7 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                     checked={saveAddress}
                     onChange={() => setSaveAddress(!saveAddress)}
                 />
-                <span className="text-sm">Save this address for future orders</span>
+                <span className="text-sm">Do you want to save this address for future orders?</span>
             </label>
 
             <div className="grid grid-cols-2 gap-5 justify-between mt-5">
@@ -210,27 +216,28 @@ export default function AddressForm({ onConfirm, onCancel, defaultValues }: Addr
                     onClick={onCancel}
                     className="bg-gray-600 hover:bg-gray-700 shadow-xl shadow-gray-700/40 text-gray-100 font-medium py-2 px-4 rounded transition w-full"
                 >
-                    ❌ Cancel
+                    Close
                 </button>
                 <button
                     onClick={handleSubmit}
                     className="bg-green-600 hover:bg-green-700 shadow-xl shadow-green-700/40 text-white font-medium py-2 px-4 rounded transition w-full"
                 >
-                    ✅ Continue
+                    Continue
                 </button>
 
                 <button
                     onClick={handleReset}
                     className="bg-yellow-500 hover:bg-yellow-600 shadow-xl shadow-yellow-600/40 text-white font-medium py-2 px-4 rounded transition w-full"
                 >
-                    ♻️ Reset Form
+                    Clear Address
                 </button>
 
                 <button
                     onClick={handleClearSaved}
-                    className="bg-red-600 hover:bg-red-700 shadow-xl shadow-red-700/40 text-white font-medium py-2 px-4 rounded transition w-full"
+                    disabled={addressSaved}
+                    className={`bg-red-600 shadow-xl shadow-red-700/40 text-white font-medium py-2 px-4 rounded transition w-full ${addressSaved ? 'opacity-50' : 'opacity-100 hover:bg-red-700'}`}
                 >
-                    🧹 Reset Saved
+                    Remove Saved Address
                 </button>
 
 

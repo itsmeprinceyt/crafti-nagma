@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { DEFAULT_IMG } from '../../../utility/utils';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -23,6 +24,6 @@ export async function GET(request: Request) {
         return NextResponse.json({ images });
     } catch (error) {
         console.error(`Error reading product images for ${productCode}:`, error);
-        return NextResponse.json({ images: [] });
+        return NextResponse.json({ images: [DEFAULT_IMG] });
     }
 }
