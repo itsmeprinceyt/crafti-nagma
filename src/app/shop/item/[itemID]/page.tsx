@@ -14,6 +14,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
 import { DEFAULT_IMG } from '../../../../utility/utils';
+import { DiscountTagItem, DiscountAmountItem } from "../../../(components)/DiscountComponents";
 
 export default function ProductPage() {
     const params = useParams();
@@ -112,8 +113,7 @@ export default function ProductPage() {
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
                             {/* Discount */}
                             {discount > 0 && (
-                                <p className="absolute -top-5 -right-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md rotate-10 flex items-center justify-center font-bold select-none">
-                                    {discount}%<br /> OFF</p>
+                                <DiscountTagItem discount={discount}/>
                             )}
                             {/* Product Description */}
                             <div className="bg-amber-50 border border-amber-200 rounded p-3">
@@ -243,17 +243,7 @@ export default function ProductPage() {
 
                             {/* Price + Add to Cart */}
                             <div className="flex gap-5 items-center">
-                                <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm relative select-none">
-                                    {product.discount_price ? (
-                                        <>
-                                            <span className="line-through text-red-600 mr-1 font-bold">₹{product.price}</span>
-                                            <span className="font-semibold">₹{product.discount_price}</span>
-                                        </>
-                                    ) : (
-                                        <>₹{product.price}</>
-                                    )}
-                                </p>
-
+                                <DiscountAmountItem discount_price={product.discount_price} price={product.price}/>
                                 <button
                                     onClick={handleAddToCart}
                                     className="w-max text-center bg-gradient-to-r from-amber-600/40 to-amber-600/20 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm"

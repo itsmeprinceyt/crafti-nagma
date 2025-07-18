@@ -16,6 +16,7 @@ import { useCart } from '../(context)/Cart.context';
 import toast from "react-hot-toast";
 import { getDiscountPercent } from '../../utility/discountPercentage.util';
 import { DEFAULT_IMG } from '../../utility/utils';
+import { DiscountTagProduct, DiscountAmountProduct } from "../(components)/DiscountComponents";
 
 export default function Shop() {
     const [categories, setCategories] = useState<string[]>([]);
@@ -177,9 +178,7 @@ export default function Shop() {
                                     className="p-5 w-[350px] max-[349px]:w-full flex flex-col justify-start items-center gap-3 bg-white border border-amber-600/30 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all ease-in-out duration-300 relative"
                                 >
                                     {discountPercent > 0 && (
-                                        <span className="absolute -top-5 -left-5 z-2 text-base text-red-100 bg-red-500 h-[60px] w-[60px] rounded-full shadow-md -rotate-10 flex items-center justify-center font-bold text-center">
-                                            {discountPercent}% OFF
-                                        </span>
+                                        <DiscountTagProduct discountPercent={discountPercent}/>
                                     )}
                                     {productImages[product.code]?.[0] ? (
                                         <Image
@@ -210,14 +209,7 @@ export default function Shop() {
                                         </p>
 
                                         <div className="flex justify-between items-center gap-2 w-full">
-                                            <p className="flex-1 text-center bg-gradient-to-r from-lime-400 to-lime-500 border border-lime-600/50 text-lime-900 shadow-lg shadow-lime-600/30 py-2 px-5 rounded-sm relative">{product.discount_price ? (
-                                                <>
-                                                    <span className="absolute -top-3 -left-2 -rotate-15 line-through text-red-100 bg-red-500 border border-red-600/50 p-1 rounded-full font-bold text-[12px]">₹{product.price}</span>
-                                                    <span className="font-semibold">₹{product.discount_price}</span>
-                                                </>
-                                            ) : (
-                                                <>₹{product.price}</>
-                                            )}</p>
+                                            <DiscountAmountProduct discount_price={product.discount_price} price={product.price} />
                                             <Link href={`/shop/item/${product.code}`}>
                                                 <p className="w-[90px] text-center bg-gradient-to-r from-amber-600/20 to-amber-600/40 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm">View</p>
                                             </Link>
