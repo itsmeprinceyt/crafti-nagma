@@ -15,6 +15,7 @@ import { getAllProductsSorted } from '../../utility/getAllProducts.util';
 import { useCart } from '../(context)/Cart.context';
 import toast from "react-hot-toast";
 import { getDiscountPercent } from '../../utility/discountPercentage.util';
+import { DEFAULT_IMG } from '../../utility/utils';
 
 export default function Shop() {
     const [categories, setCategories] = useState<string[]>([]);
@@ -56,7 +57,7 @@ export default function Shop() {
             price: product.price,
             discount: product.discount_price,
             quantity: 1,
-            photo: productImages[product.code]?.[0] || ''
+            photo: productImages[product.code]?.[0] || DEFAULT_IMG
         });
 
         toast.success(`'${product.name}' added to cart!`, {
@@ -137,9 +138,13 @@ export default function Shop() {
                                             className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
                                         />
                                     ) : (
-                                        <div className="w-[150px] h-[150px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
-                                            No Image
-                                        </div>
+                                        <Image
+                                            src={DEFAULT_IMG}
+                                            alt={product.name}
+                                            width={700}
+                                            height={700}
+                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                        />
                                     )}
 
                                     <p className="text-start font-semibold text-xs text-wrap w-full line-clamp-1">
@@ -186,9 +191,13 @@ export default function Shop() {
                                             className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
                                         />
                                     ) : (
-                                        <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
-                                            No Image
-                                        </div>
+                                        <Image
+                                            src={DEFAULT_IMG}
+                                            alt={product.name}
+                                            width={700}
+                                            height={700}
+                                            className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                        />
                                     )}
 
                                     <div className="flex flex-col items-start justify-between h-full text-start gap-2">
@@ -241,6 +250,8 @@ export default function Shop() {
                                 {/* Center Image */}
                                 <Image
                                     src={fullscreenImage.images[fullscreenImage.index]}
+                                    width={1000}
+                                    height={1000}
                                     alt="Fullscreen"
                                     className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
                                     onClick={(e) => e.stopPropagation()}
@@ -288,8 +299,6 @@ export default function Shop() {
                         )}
                     </div>
                 </div>
-
-
             </PageWrapper2>
         </>
     )

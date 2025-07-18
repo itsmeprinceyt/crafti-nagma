@@ -8,6 +8,7 @@ import { useCart } from "../(context)/Cart.context";
 import toast from "react-hot-toast";
 import { PageWrapper2 } from "../(components)/PageWrapper";
 import { getFilteredProducts } from "../../utility/getFilteredResult.util";
+import { DEFAULT_IMG } from "../../utility/utils";
 
 export default function SearchPage() {
     const [query, setQuery] = useState<string>("");
@@ -144,9 +145,13 @@ export default function SearchPage() {
                                         className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
                                     />
                                 ) : (
-                                    <div className="w-full max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
-                                        No Image
-                                    </div>
+                                    <Image
+                                        src={DEFAULT_IMG}
+                                        alt={product.name}
+                                        width={700}
+                                        height={700}
+                                        className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                                    />
                                 )}
 
 

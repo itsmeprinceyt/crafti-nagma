@@ -10,6 +10,7 @@ import { getProductsByCategory } from '../../../../utility/getProductByCategory.
 import { useCart } from '../../../(context)/Cart.context';
 import { toast } from "react-hot-toast";
 import { getDiscountPercent } from '../../../../utility/discountPercentage.util';
+import { DEFAULT_IMG } from '../../../../utility/utils';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -66,7 +67,7 @@ export default function CategoryPage() {
       price: product.price,
       discount: product.discount_price,
       quantity: 1,
-      photo: productImages[product.code]?.[0] || ''
+      photo: productImages[product.code]?.[0] || DEFAULT_IMG
     });
 
     toast.success(`'${product.name}' added to cart!`, {
@@ -116,9 +117,13 @@ export default function CategoryPage() {
                       className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg cursor-pointer hover:brightness-110"
                     />
                   ) : (
-                    <div className="max-w-[300px] max-h-[300px] flex items-center justify-center bg-gray-100 text-gray-400 text-sm rounded-lg">
-                      No Image
-                    </div>
+                    <Image
+                      src={DEFAULT_IMG}
+                      alt={product.name}
+                      width={700}
+                      height={700}
+                      className="max-w-[300px] max-h-[300px] object-cover object-center rounded-lg shadow-lg"
+                    />
                   )
                 }
 
@@ -152,7 +157,8 @@ export default function CategoryPage() {
 
                   </div>
                 </div>
-              </div>)
+              </div>
+            )
           })}
 
           {fullscreenImage && (

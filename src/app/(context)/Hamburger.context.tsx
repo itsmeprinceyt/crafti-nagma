@@ -19,7 +19,7 @@ export const OpenProvider = ({children}: { children: ReactNode}) => {
 export const useOpen = (): OpenContextType => {
     const context = useContext(OpenContext);
     if (!context){
-        throw new Error(`Some error occured with OpenProvider`);
+        throw new Error(`HamBurgerContext must be used within CartProvider`);
     }
     return context;
 }
