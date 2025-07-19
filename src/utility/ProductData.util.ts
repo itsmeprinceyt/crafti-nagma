@@ -3,6 +3,7 @@ import { ProductDetails } from '../types/ProductData.type';
 export enum ProductCategory {
   Handicraft = "Handicraft",
   HairAccessories = "Hair Accessories",
+  HandAccessories = "Hand Accessories",
   Kids = "Kids Accessories",
   BabyAccessories = "Baby Accessories",
   Headbands = "Headbands",
@@ -827,6 +828,98 @@ export const ProductData: ProductDetails[] = [
     orders_count: 0,
     discount_price: 149,
     custom_note: "Add a personalized tag (₹10 extra) or name initial in flower leaf"
+  },
+  {
+    id: "18",
+    code: "CN-EHC0027",
+    name: "Crochet Ganpati Rakhi for Baby (0–12 Months)",
+    brief_description: "Soft crochet Ganpati rakhi specially made for 0–12 months babies",
+    description: "This adorable crochet Ganpati rakhi is handcrafted using soft cotton yarn and decorated with tiny beads and pearls. Designed specifically for newborns and infants, it’s gentle on the skin, lightweight, and festive. Perfect for baby’s first Rakshabandhan!",
+    price: 80,
+    category: [
+      ProductCategory.HandmadeRakhi,
+      ProductCategory.BabyAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Type",
+        description: "Single Baby Rakhi"
+      },
+      {
+        name: "Colour ",
+        description: "Default Red; Custom color on request"
+      }
+    ],
+    optional_upgrade: "Matching clips for gifting for Rs..60 ",
+    care_instructions: [
+      " Store in a soft box after use. ",
+      "Keep dry",
+      " handle gently."
+    ],
+    options: [
+      {
+        option_name: "Thread colour ",
+        option_description: "Cream -Red , Yellow -Red , Yellow -orange"
+      }
+    ],
+    size: "8 inch full rakhi length | Ganpati motif: approx. 2.5 x 2 inch",
+    material: "Cotton yarn, foam, pearls, golden beads, felt sheet",
+    features: [],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 0,
+    custom_note: "You can request different thread color or add baby’s initial (A–Z) near Ganpati."
+  },
+  {
+    id: "19",
+    code: "CN-EHC0028",
+    name: "Crochet Evil Eye Rakhi",
+    brief_description: "Protective & stylish Evil Eye Rakhi made with soft yarn and beads",
+    description: "This handcrafted crochet Evil Eye Rakhi combines tradition with protection. Made using layered shades of blue, black, and white yarn — it symbolizes guarding against negativity. The rakhi is soft, skin-friendly, and beautifully accented with pearls and gold-toned beads. A meaningful and modern rakhi design for your loved ones",
+    price: 100,
+    category: [
+      ProductCategory.HandmadeRakhi,
+      ProductCategory.HandAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Blue Evil Eye (default), Custom color on request (Black/White combo available)"
+      }
+    ],
+    optional_upgrade: "",
+    care_instructions: [
+      "Avoid water. ",
+      "Wipe with dry cloth. ",
+      " Store flat to retain shape."
+    ],
+    options: [
+      {
+        option_name: "Matching Accessory ",
+        option_description: "Add matching earring or keychain in Evil Eye pattern (₹25–₹40 extra)"
+      }
+    ],
+    size: "Rakhi length approx. 9 inches | Evil Eye motif: 2 inches diameter",
+    material: "Cotton yarn, pearls, golden beads ",
+    features: [
+      "Evil Eye protection symbol",
+      "Soft and lightweight crochet work",
+      "Custom color & combo options",
+      "Trendy and meaningful festive gift",
+      "Suitable for both kids & adults"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 79,
+    custom_note: "Can request matching Lumba or bracelet style for adults. Optional Upgrade: Add matching bracelet for ₹45 extra"
   }
 
 
