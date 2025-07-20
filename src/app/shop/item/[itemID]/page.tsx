@@ -70,9 +70,14 @@ export default function ProductPage() {
     return (
         <>
             <PageWrapper2>
-                <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center select-text">
-                    {product?.name}
-                </div>
+                {product?.name ? (
+                    <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center select-text">
+                        {product!.name}
+                    </div>
+                ) :
+                    <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center select-text">
+                        Product loading...
+                    </div>}
             </PageWrapper2>
 
             <PageWrapper2>
@@ -113,7 +118,7 @@ export default function ProductPage() {
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
                             {/* Discount */}
                             {discount > 0 && (
-                                <DiscountTagItem discount={discount}/>
+                                <DiscountTagItem discount={discount} />
                             )}
                             {/* Product Description */}
                             <div className="bg-amber-50 border border-amber-200 rounded p-3">
@@ -243,7 +248,7 @@ export default function ProductPage() {
 
                             {/* Price + Add to Cart */}
                             <div className="flex gap-5 items-center">
-                                <DiscountAmountItem discount_price={product.discount_price} price={product.price}/>
+                                <DiscountAmountItem discount_price={product.discount_price} price={product.price} />
                                 <button
                                     onClick={handleAddToCart}
                                     className="w-max text-center bg-gradient-to-r from-amber-600/40 to-amber-600/20 border border-amber-600/30 text-amber-900 hover:bg-amber-600/20 transition-all ease-in-out duration-500 shadow-lg shadow-amber-600/30 py-2 px-5 rounded-sm"
