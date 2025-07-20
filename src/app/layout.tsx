@@ -6,6 +6,7 @@ import "./globals.css";
 
 import Loader from './(components)/Loader';
 import Navbar from './(components)/Navbar';
+import Chatbot from "./(components)/Chatbot/Chatbot";
 import { OpenProvider } from "./(context)/Hamburger.context";
 import { CartProvider } from "./(context)/Cart.context";
 
@@ -39,11 +40,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased select-none">
+      <body className="antialiased select-none relative">
         <Suspense fallback={<Loader />} >
           <OpenProvider>
             <CartProvider>
               <Toaster position="bottom-left" />
+              <Chatbot/>
               <Navbar />
               {children}
             </CartProvider>
