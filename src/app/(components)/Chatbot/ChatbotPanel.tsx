@@ -41,7 +41,7 @@ export default function ChatbotPanel({
                 {history.length > 1 && (
                     <button
                         type="button"
-                        className="w-full bg-amber-50 border border-amber-200 p-1 px-5 py-2 rounded-lg shadow text-xs text-amber-600 hover:bg-amber-100"
+                        className="w-full bg-amber-50 border border-amber-200 p-1 px-5 py-2 rounded-lg shadow text-xs text-amber-600 active:bg-amber-100"
                         onClick={onGoBack}
                     >
                         {language === "hi" ? "पीछे जाइए" : "Go Back"}

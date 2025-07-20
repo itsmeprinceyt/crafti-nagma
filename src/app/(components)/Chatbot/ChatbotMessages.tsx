@@ -1,4 +1,59 @@
+import Link from "next/link";
 import type { ChatbotNode } from "../../../types/Chatbot.type";
+
+function renderLineWithLinks(line: string, key?: number) {
+    const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(\/[a-zA-Z0-9-_\/]*)/g;
+    const parts = line.split(urlRegex);
+
+    return (
+        <span key={key}>
+            {parts.map((part, idx) => {
+                if (!part) return null;
+
+                if (/^(https?:\/\/)/.test(part)) {
+                    return (
+                        <Link
+                            key={idx}
+                            href={part}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-amber-700 underline break-all hover:text-amber-600"
+                        >
+                            {part}
+                        </Link>
+                    );
+                }
+                if (/^www\./.test(part)) {
+                    const url = `https://${part}`;
+                    return (
+                        <Link
+                            key={idx}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-amber-700 underline break-all hover:text-amber-600"
+                        >
+                            {part}
+                        </Link>
+                    );
+                }
+                if (/^\/[a-zA-Z0-9-_\/]+$/.test(part)) {
+                    return (
+                        <Link
+                            key={idx}
+                            href={part}
+                            className="text-amber-700 underline break-all hover:text-amber-600"
+                        >
+                            {part}
+                        </Link>
+                    );
+                }
+
+                return part;
+            })}
+        </span>
+    );
+}
 
 export default function ChatbotMessages({
     node,
@@ -10,18 +65,18 @@ export default function ChatbotMessages({
     const renderText = () => {
         if (Array.isArray(node.text)) {
             return (
-                <ol className="pl-5 list-disc space-y-1">
+                <ul className="pl-5 list-disc space-y-1">
                     {node.text.map((line, i) => (
-                        <li key={i}>{line}</li>
+                        <li key={i}>{renderLineWithLinks(line, i)}</li>
                     ))}
-                </ol>
+                </ul>
             );
         }
-        return <div>{node.text}</div>;
+        return <div>{renderLineWithLinks(node.text as string)}</div>;
     };
 
     return (
-        <div className="self-start bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 shadow text-gray-800 max-w-full text-sm select-text">
+        <div className="w-full bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 shadow text-gray-800 max-w-full text-sm select-text">
             {renderText()}
             {node.options && (
                 <div className="flex flex-col mt-3 gap-2">
