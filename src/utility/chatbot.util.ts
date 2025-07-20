@@ -45,7 +45,7 @@ export const EN_ROOT: ChatbotNode = {
                         label: "How do I find products by category?",
                         next: {
                             text: [
-                                "Go to 'Shop' using the menu.",
+                                "Go to /shop using the menu.",
                                 "At the top, you’ll see category buttons.",
                                 "Click on any category you like to see those products.",
                                 "Or you can go to shop and see all the categories at once."
@@ -199,7 +199,7 @@ export const EN_ROOT: ChatbotNode = {
                             text: [
                                 "Spotted something weird? Here’s what to do:",
                                 `Email us at nagmaparveen054321@gmail.com`,
-                                "Or use the Contact menu to get in touch.",
+                                "Or use the /contact menu to get in touch.",
                                 "Tell us the problem, and we’ll fix it as soon as we can!"
                             ]
                         }

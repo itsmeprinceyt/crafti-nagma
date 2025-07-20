@@ -12,7 +12,7 @@ function renderLineWithLinks(line: string, key?: number) {
 
                 if (/^(https?:\/\/)/.test(part)) {
                     return (
-                        <a
+                        <Link
                             key={idx}
                             href={part}
                             target="_blank"
@@ -20,13 +20,13 @@ function renderLineWithLinks(line: string, key?: number) {
                             className="text-amber-700 underline break-all hover:text-amber-600"
                         >
                             {part}
-                        </a>
+                        </Link>
                     );
                 }
                 if (/^www\./.test(part)) {
                     const url = `https://${part}`;
                     return (
-                        <a
+                        <Link
                             key={idx}
                             href={url}
                             target="_blank"
@@ -34,7 +34,7 @@ function renderLineWithLinks(line: string, key?: number) {
                             className="text-amber-700 underline break-all hover:text-amber-600"
                         >
                             {part}
-                        </a>
+                        </Link>
                     );
                 }
                 if (/^\/[a-zA-Z0-9-_\/]+$/.test(part)) {
@@ -65,11 +65,11 @@ export default function ChatbotMessages({
     const renderText = () => {
         if (Array.isArray(node.text)) {
             return (
-                <ol className="pl-5 list-decimal space-y-1">
+                <ul className="pl-5 list-disc space-y-1">
                     {node.text.map((line, i) => (
                         <li key={i}>{renderLineWithLinks(line, i)}</li>
                     ))}
-                </ol>
+                </ul>
             );
         }
         return <div>{renderLineWithLinks(node.text as string)}</div>;
