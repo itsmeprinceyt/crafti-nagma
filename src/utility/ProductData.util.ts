@@ -920,6 +920,190 @@ export const ProductData: ProductDetails[] = [
     orders_count: 0,
     discount_price: 79,
     custom_note: "Can request matching Lumba or bracelet style for adults. Optional Upgrade: Add matching bracelet for ₹45 extra"
+  },
+  {
+    id: "20",
+    code: "CN-EHC0029",
+    name: "Crochet Lion Rakhi for Baby (0–12 Months)",
+    brief_description: "Super cute and safe lion face rakhi for babies and toddlers.",
+    description: "This adorable crochet lion rakhi is specially handcrafted for babies and toddlers. With a soft round lion face made of cotton yarn and stitched features, it’s completely safe and skin-friendly. The bright colors and cute design make it a favorite among kids, while the secure tie ensures easy wear.",
+    price: 99,
+    category: [
+      ProductCategory.HandAccessories,
+      ProductCategory.BabyAccessories,
+      ProductCategory.HandmadeRakhi
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Thread colour ",
+        description: "Yellow-Orange (default), Custom available on request"
+      }
+    ],
+    optional_upgrade: "",
+    care_instructions: [
+      "Wipe gently with a dry cloth",
+      "Do not soak",
+      "Store in a soft box after use."
+    ],
+    options: [
+      {
+        option_name: "Matching Product",
+        option_description: "Add Lion Keychain or Hairclip (₹55-75))"
+      }
+    ],
+    size: "Rakhi thread approx. 8.5 inches | Lion face: 2.2 inches diameter",
+    material: "Cotton yarn, felt base, embroidery thread Feature List:",
+    features: [
+      "Baby-safe soft yarn",
+      "Cute lion face for fun & charm",
+      "Handstitched with secure knots",
+      "Customizable color and name"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 69,
+    custom_note: "Can add baby’s initials or name on the back. Optional Upgrade: Matching lion-themed keychain or wrist band"
+  },
+  {
+    id: "21",
+    code: "CN-EHC0030",
+    name: "Tiger Rakhi for Baby/Kids ",
+    brief_description: "Crochet Orange Tiger Rakhi for Baby (0–12 Months)",
+    description: "Celebrate Rakshabandhan with the fierce cuteness of this handmade crochet Orange Tiger Rakhi. Carefully designed with baby-safe yarn and handstitched features, this rakhi combines vibrant orange tones with adorable black & white tiger stripes. Ideal for babies and toddlers, it's lightweight, non-scratchy, and easy to tie. Let your little one flaunt the spirit of the jungle with this soft & playful tiger - themed rakhi! 🐯🧡",
+    price: 99,
+    category: [
+      ProductCategory.HandAccessories,
+      ProductCategory.BabyAccessories,
+      ProductCategory.HandmadeRakhi
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Type",
+        description: "Single Rakhi / Pair Rakhi (for twins)"
+      }
+    ],
+    optional_upgrade: "Add matching keychain or rakhi card or hair clip for gift to sister ",
+    care_instructions: [
+      "Wipe Gently ",
+      "Store flat to keep tiger face shape intact.",
+      "Do not soak "
+    ],
+    options: [
+      {
+        option_name: "Thread colour ",
+        option_description: "Choose from Orange, Yellow, Red"
+      }
+    ],
+    size: "Approx. 8.5 inches rakhi thread | Tiger face motif: 2 inches wide",
+    material: "Cotton yarn, felt sheet, embroidery thread",
+    features: [
+      "Vibrant tiger motif",
+      "Soft, baby-safe materials",
+      "Unique facial design options",
+      "Perfect for jungle theme lovers"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 75,
+    custom_note: "You can request name initials or tiger face expressions (smiling, sleepy, etc.)"
+  },
+  {
+    id: "22",
+    code: "CN-EHC0031",
+    name: "Crochet Cream Teddy Bear Rakhi for Baby (0–12 Months)",
+    brief_description: "Soft and cuddly teddy bear face rakhi with brown accents — baby-safe and cute",
+    description: "This handmade crochet Teddy Bear Rakhi features a cream-colored face with sweet brown ears and a tiny nose, making it perfect for your baby’s tiny wrist. It’s crafted using soft cotton yarn to keep it skin-friendly, lightweight, and comfortable. Ideal for 0–12 months babies and toddlers, this teddy rakhi brings warmth, love, and festive cuteness together in one knot. Perfect gift for baby’s first Rakshabandhan or toddlers who love soft toys 🧸💕",
+    price: 79,
+    category: [
+      ProductCategory.HandAccessories,
+      ProductCategory.BabyAccessories,
+      ProductCategory.HandmadeRakhi
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Thread colour ",
+        description: "Cream base with Red or Brown thread (Custom options available)"
+      }
+    ],
+    optional_upgrade: "Matching mini teddy keychain or hair clip",
+    care_instructions: [
+      "Do not pull ears or nose part harshly.",
+      "Wipe Gently with soft cloth ",
+      "Keep dry"
+    ],
+    options: [
+      {
+        option_name: "Matching Gift ",
+        option_description: "Matching teddy keychain, clip or badge (₹45-55 extra)"
+      }
+    ],
+    size: "Rakhi thread approx. 8.5 inches | Teddy motif: 2.2 x 2 inches",
+    material: "Cotton yarn, embroidery thread, felt",
+    features: [
+      "Perfect for first Rakhi celebration",
+      "Customizable & gift-friendly",
+      "Suitable for newborns to toddlers"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Can add name initials or small heart embroidery on the teddy’s cheek.",
+    discount_price: 0
+  },
+  {
+    id: "23",
+    code: "CN-EHC0032",
+    name: "Captain America Shield Rakhi ",
+    brief_description: "Marvel-inspired Captain America rakhi – safe, soft & perfect for baby, Toddlers or Boys ",
+    description: "Celebrate Rakshabandhan in heroic style with this handmade Captain America Shield Rakhi 🛡️. Specially designed for babies (0–12 months), it's soft, safe, and ultra-lightweight. The shield is crocheted with red, white, and blue yarn – symbolizing courage, strength, and protection, just like the bond of siblings. Perfect for baby brothers or cousins who are little Marvel fans or just your adorable superhero in the making!",
+    price: 100,
+    category: [
+      ProductCategory.HandAccessories,
+      ProductCategory.HandmadeRakhi
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2",
+    variants: [
+      {
+        name: "Thread Colour ",
+        description: "Red / Blue / White thread options"
+      }
+    ],
+    optional_upgrade: "Matching Captain America keychain or hair clip or felt badge (₹65 extra)",
+    care_instructions: [
+      "Wipe gently with dry soft cloth.",
+      "Do not soak in water.",
+      "Keep away from direct flame or sharp objects."
+    ],
+    options: [
+      {
+        option_name: "",
+        option_description: ""
+      }
+    ],
+    size: "Thread length approx. 8 inches | Shield diameter: 1.8–2.2 inches",
+    material: "Cotton yarn, felt, embroidery thread",
+    features: [
+      "Baby-safe & lightweight",
+      "Ideal for superhero fans under age 2"
+    ],
+    is_featured: true,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Can add baby’s initials at back of the shield.",
+    discount_price: 0
   }
 
 
