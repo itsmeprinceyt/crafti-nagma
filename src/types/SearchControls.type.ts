@@ -6,3 +6,5 @@ export type SearchControlsProps = {
     onlyDiscounted: boolean;
     onToggleDiscounted: () => void;
 };
+
+export type SearchControls2Props = Omit<SearchControlsProps, "query" | "onQueryChange">;

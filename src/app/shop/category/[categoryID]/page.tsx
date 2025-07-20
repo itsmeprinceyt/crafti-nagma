@@ -10,7 +10,9 @@ import { toast } from "react-hot-toast";
 import { DEFAULT_IMG } from '../../../../utility/utils';
 import ProductGrid from "../../../(components)/ProductGrid";
 import FullscreenImageModal from "../../../(components)/FullscreenImageModal";
-import Spinner from '@/app/(components)/Spinner';
+import Spinner from '../../../(components)/Spinner';
+import SortControls from "../../../(components)/SortControls";
+import { getFilteredProducts } from '../../../../utility/getFilteredResult.util';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -23,6 +25,9 @@ export default function CategoryPage() {
     images: string[],
     index: number
   } | null>(null);
+  const [sortType, setSortType] = useState<string>('A-Z');
+  const [onlyDiscounted, setOnlyDiscounted] = useState<boolean>(false);
+  const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>([]);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -63,6 +68,13 @@ export default function CategoryPage() {
     fetchCategoryData();
   }, [decodedCategory]);
 
+  useEffect(() => {
+    if (loading) return;
+    setFilteredProducts(
+      getFilteredProducts(products, '', sortType, onlyDiscounted)
+    );
+  }, [sortType, onlyDiscounted, products, loading]);
+
 
   if (!isValid) {
     notFound();
@@ -100,47 +112,58 @@ export default function CategoryPage() {
       </PageWrapper2>
 
       <PageWrapper2>
-        {loading ? (
-          <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
-            <Spinner />
-            <p className="text-lg font-extralight animate-bounce">Loading {decodedCategory} Products...</p>
-          </div>
-        ) : (
-          <ProductGrid
-            products={products}
-            productImages={productImages}
-            onImageClick={openFullscreen}
-            onAddToCart={handleAddToCart}
-          />
-        )}
+        <div className="flex flex-col">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
+              <Spinner />
+              <p className="text-lg font-extralight animate-bounce">Loading {decodedCategory} Products...</p>
+            </div>
+          ) : (<>
+            <SortControls
+              sortType={sortType}
+              onSortTypeChange={setSortType}
+              onlyDiscounted={onlyDiscounted}
+              onToggleDiscounted={() => setOnlyDiscounted(v => !v)}
+            />
 
-        {fullscreenImage && !loading && (
-          <FullscreenImageModal
-            images={fullscreenImage.images}
-            index={fullscreenImage.index}
-            onClose={() => setFullscreenImage(null)}
-            onPrev={() =>
-              setFullscreenImage((prev) =>
-                prev
-                  ? {
-                    ...prev,
-                    index: (prev.index - 1 + prev.images.length) % prev.images.length,
-                  }
-                  : prev
-              )
-            }
-            onNext={() =>
-              setFullscreenImage((prev) =>
-                prev
-                  ? {
-                    ...prev,
-                    index: (prev.index + 1) % prev.images.length,
-                  }
-                  : prev
-              )
-            }
-          />
-        )}
+            <ProductGrid
+              products={filteredProducts || products}
+              productImages={productImages}
+              onImageClick={openFullscreen}
+              onAddToCart={handleAddToCart}
+            />
+
+          </>
+          )}
+
+          {fullscreenImage && !loading && (
+            <FullscreenImageModal
+              images={fullscreenImage.images}
+              index={fullscreenImage.index}
+              onClose={() => setFullscreenImage(null)}
+              onPrev={() =>
+                setFullscreenImage((prev) =>
+                  prev
+                    ? {
+                      ...prev,
+                      index: (prev.index - 1 + prev.images.length) % prev.images.length,
+                    }
+                    : prev
+                )
+              }
+              onNext={() =>
+                setFullscreenImage((prev) =>
+                  prev
+                    ? {
+                      ...prev,
+                      index: (prev.index + 1) % prev.images.length,
+                    }
+                    : prev
+                )
+              }
+            />
+          )}
+        </div>
       </PageWrapper2>
     </>
   );

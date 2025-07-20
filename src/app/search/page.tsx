@@ -27,7 +27,7 @@ export default function SearchPage() {
 
         setLoading(true);
         const handler = setTimeout(async () => {
-            const result = getFilteredProducts(query, sortType, onlyDiscounted);
+            const result = getFilteredProducts(undefined,query, sortType, onlyDiscounted, true);
             if (canceled) return;
             setFilteredProducts(result);
 

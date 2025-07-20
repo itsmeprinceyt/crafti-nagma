@@ -13,6 +13,8 @@ import FullscreenImageModal from '../(components)/FullscreenImageModal';
 import CategoriesGrid from "../(components)/CategoryGrid";
 import FeaturedProductsCarousel from '../(components)/FeaturedProducts';
 import Spinner from '../(components)/Spinner';
+import SortControls from '../(components)/SortControls';
+import { getFilteredProducts } from '../../utility/getFilteredResult.util';
 
 export default function Shop() {
     const [categories, setCategories] = useState<string[]>([]);
@@ -26,6 +28,9 @@ export default function Shop() {
         images: string[],
         index: number
     } | null>(null);
+    const [sortType, setSortType] = useState<string>('A-Z');
+    const [onlyDiscounted, setOnlyDiscounted] = useState<boolean>(false);
+    const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>([]);
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -61,6 +66,14 @@ export default function Shop() {
             setLoadingProducts(false);
         });
     }, []);
+
+    useEffect(() => {
+        if (loadingProducts) return;
+        setFilteredProducts(
+            getFilteredProducts(allProducts, '', sortType, onlyDiscounted)
+        );
+    }, [sortType, onlyDiscounted, allProducts, loadingProducts]);
+
 
     const handleAddToCart = (product: ProductDetails) => {
         addToCart({
@@ -115,8 +128,15 @@ export default function Shop() {
                                     All Products!
                                 </span>
                             </div>
+                            <SortControls
+                                sortType={sortType}
+                                onSortTypeChange={setSortType}
+                                onlyDiscounted={onlyDiscounted}
+                                onToggleDiscounted={() => setOnlyDiscounted(v => !v)}
+                            />
+
                             <ProductGrid
-                                products={allProducts}
+                                products={filteredProducts || allProducts}
                                 productImages={productImages}
                                 onImageClick={openFullscreen}
                                 onAddToCart={handleAddToCart}

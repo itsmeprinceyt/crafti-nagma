@@ -1,4 +1,5 @@
 import { SearchControlsProps } from "../../types/SearchControls.type";
+import SortMenu from "./SortMenu";
 
 export default function SearchControls({
     query,
@@ -18,16 +19,11 @@ export default function SearchControls({
                 className="w-full sm:w-[300px] border border-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm p-2 text-sm transition-all duration-200 outline-none"
             />
             <div className="flex flex-wrap items-center justify-center gap-3">
-                <select
+                <SortMenu
                     value={sortType}
-                    onChange={(e) => onSortTypeChange(e.target.value)}
+                    onChange={onSortTypeChange}
                     className="border border-gray-300 rounded-md shadow-sm p-2 text-sm focus:border-amber-500 focus:ring-amber-500 transition-all duration-200 outline-none"
-                >
-                    <option value="A-Z">A-Z</option>
-                    <option value="Z-A">Z-A</option>
-                    <option value="Low-High">Low to High</option>
-                    <option value="High-Low">High to Low</option>
-                </select>
+                />
                 <button
                     onClick={onToggleDiscounted}
                     className={`text-sm font-semibold px-5 py-2 rounded-md border transition-all duration-300 shadow-md ${onlyDiscounted
