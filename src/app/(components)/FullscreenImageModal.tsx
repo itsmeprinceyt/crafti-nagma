@@ -1,7 +1,11 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 import type { fullscreenModal } from "../../types/ProductCardGrid.type";
+import Spinner from "../(components)/Spinner";
 
 export default function FullscreenImageModal({ images, index, onClose, onPrev, onNext }: fullscreenModal) {
+    const [loading, setLoading] = useState(true);
     return (
         <div
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-10"
@@ -10,13 +14,21 @@ export default function FullscreenImageModal({ images, index, onClose, onPrev, o
             <button onClick={onClose} className="absolute top-5 right-5">
                 <Image src="/icons/cross.png" width={25} height={25} alt="Close" />
             </button>
+            {loading && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 py-10 ">
+                    <Spinner />
+                    <p className="text-white text-lg font-extralight animate-bounce">Loading</p>
+                </div>
+            )}
             <Image
                 src={images[index]}
                 width={1000}
                 height={1000}
                 alt="Fullscreen"
-                className="max-h-full max-w-full object-contain rounded-lg shadow-xl"
+                className={`max-h-full max-w-full object-contain rounded-lg shadow-xl transition-opacity duration-300 ${loading ? "opacity-0" : "opacity-100"
+                    }`}
                 onClick={(e) => e.stopPropagation()}
+                onLoadingComplete={()=> setLoading(false)}
             />
             {images.length > 1 && (
                 <div
