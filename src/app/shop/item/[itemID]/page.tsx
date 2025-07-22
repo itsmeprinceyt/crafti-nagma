@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
 import { DEFAULT_IMG } from '../../../../utility/utils';
 import { DiscountTagItem, DiscountAmountItem } from "../../../(components)/DiscountComponents";
+import Spinner from "../../../(components)/Spinner";
 
 export default function ProductPage() {
     const params = useParams();
@@ -26,6 +27,7 @@ export default function ProductPage() {
     const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [discount, setDiscount] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -38,10 +40,12 @@ export default function ProductPage() {
         setDiscount(getDiscountPercent(foundProduct.price, foundProduct.discount_price));
         setProduct(foundProduct);
 
+        setLoading(true);
         fetch(`/api/getProductImages?productCode=${foundProduct.code}`)
             .then((res) => res.json())
             .then((data) => setProductImages(data.images || []))
-            .catch(() => setProductImages([]));
+            .catch(() => setProductImages([]))
+            .finally(() => setLoading(false));
     }, [productID]);
 
     if (!isValid) return notFound();
@@ -84,35 +88,45 @@ export default function ProductPage() {
                 {product && (
                     <div className="flex flex-col items-center gap-5 select-text">
                         {/* Product Image Carousel */}
-                        <div className="w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] p-2 rounded-lg">
-
-                            <Swiper
-                                modules={[Navigation, Pagination]}
-                                navigation
-                                pagination={{ clickable: true }}
-                                spaceBetween={10}
-                                slidesPerView={1}
-                                className="rounded-lg product-swiper"
-                            >
-                                {productImages.map((img, index) => (
-                                    <SwiperSlide key={index}>
-                                        <div
-                                            className="w-full aspect-[4/5] md:aspect-[1/1] relative cursor-pointer"
-                                            onClick={() => {
-                                                setCurrentIndex(index);
-                                                setIsFullscreen(true);
-                                            }}
-                                        >
-                                            <Image
-                                                src={img}
-                                                alt={`${product.name} ${index + 1}`}
-                                                fill
-                                                className="object-contain rounded-lg"
-                                            />
-                                        </div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
+                        <div className="w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] p-2 rounded-lg relative">
+                            {loading ? (
+                                <div className="flex flex-col items-center justify-center gap-3 py-10 z-10">
+                                    <Spinner />
+                                    <p className="text-amber-600 text-lg font-extralight animate-bounce">Loading Images ...</p>
+                                </div>
+                            ) : productImages.length > 0 ? (
+                                <Swiper
+                                    modules={[Navigation, Pagination]}
+                                    navigation
+                                    pagination={{ clickable: true }}
+                                    spaceBetween={10}
+                                    slidesPerView={1}
+                                    className="rounded-lg product-swiper"
+                                >
+                                    {productImages.map((img, index) => (
+                                        <SwiperSlide key={index}>
+                                            <div
+                                                className="w-full aspect-[4/5] md:aspect-[1/1] relative cursor-pointer"
+                                                onClick={() => {
+                                                    setCurrentIndex(index);
+                                                    setIsFullscreen(true);
+                                                }}
+                                            >
+                                                <Image
+                                                    src={img}
+                                                    alt={`${product.name} ${index + 1}`}
+                                                    fill
+                                                    className="object-contain rounded-lg"
+                                                />
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            ) : (
+                            <div className="w-full flex items-center justify-center text-gray-500 italic rounded-lg">
+                                    <span>Product image is not available</span>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-4 mb-5 w-full max-w-[320px] sm:max-w-[600px] p-4 border border-amber-400/40 rounded-lg shadow-md bg-white relative">
