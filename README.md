@@ -18,6 +18,7 @@ Welcome to **Crafit Nagma**, an elegant web platform built to showcase and sell 
 - 🛒 Detailed invoice summary at checkout section in cart page
 - 📉 Discount feature for applicable products
 - 🔍 Product search module to find items quickly
+- 🤖 Chatbot Helper which supports both Hindi & English language to support users browse and use the website properly
 - 📦 Product variations, features, and care instructions
 - 🔍 SEO-friendly with clean URLs and metadata
 - 🌙 Responsive design for mobile and desktop
