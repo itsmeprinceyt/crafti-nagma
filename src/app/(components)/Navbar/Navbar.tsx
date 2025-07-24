@@ -2,10 +2,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import SideBar from './SideBar';
-import CartIcon from './CartIcon';
+import CartIcon from '../Cart/CartIcon';
 import { Sling as Hamburger } from 'hamburger-react';
-import { useOpen } from '../(context)/Hamburger.context';
-import SearchIcon from './SearchIcon';
+import { useOpen } from '../../(context)/Hamburger.context';
+import SearchIcon from '../Search/SearchIcon';
 
 export default function Navbar() {
     const { isOpen, toggleOpen } = useOpen();

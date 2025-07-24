@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import ButtonGold from "./Button";
-import { InfoCardProps } from "../../types/InfoCard.type";
+import ButtonGold from "../Buttons/Button";
+import { InfoCardProps } from "../../../types/InfoCard.type";
 
 export default function InfoCard({
     title,

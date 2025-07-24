@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import type { fullscreenModal } from "../../types/ProductCardGrid.type";
-import Spinner from "../(components)/Spinner";
+import type { fullscreenModal } from "../../../types/ProductCardGrid.type";
+import Spinner from "../components/Spinner";
 
 export default function FullscreenImageModal({ images, index, onClose, onPrev, onNext }: fullscreenModal) {
     const [loading, setLoading] = useState(true);

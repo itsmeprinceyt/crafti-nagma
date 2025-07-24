@@ -1,4 +1,4 @@
-import { SearchControls2Props } from "../../types/SearchControls.type";
+import { SearchControls2Props } from "../../../types/SearchControls.type";
 import SortMenu from "./SortMenu";
 
 export default function SearchControls2({

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { PageWrapper2 } from '../(components)/PageWrapper';
+import { PageWrapper2 } from '../(components)/Utils/PageWrapper';
 import getSortedCategories from '../../utility/getCategories.util';
 import { isFeaturedProduct } from '../../utility/getFeaturedIProducts.util';
 import { ProductDetails } from '../../types/ProductData.type';
@@ -8,12 +8,12 @@ import { getAllProductsSorted } from '../../utility/getAllProducts.util';
 import { useCart } from '../(context)/Cart.context';
 import toast from "react-hot-toast";
 import { DEFAULT_IMG } from '../../utility/utils';
-import ProductGrid from '../(components)/ProductGrid';
-import FullscreenImageModal from '../(components)/FullscreenImageModal';
-import CategoriesGrid from "../(components)/CategoryGrid";
-import FeaturedProductsCarousel from '../(components)/FeaturedProducts';
-import Spinner from '../(components)/Spinner';
-import SortControls from '../(components)/SortControls';
+import ProductGrid from '../(components)/ProductRelated/ProductGrid';
+import FullscreenImageModal from '../(components)/ProductRelated/FullscreenImageModal';
+import CategoriesGrid from "../(components)/ProductRelated/CategoryGrid";
+import FeaturedProductsCarousel from '../(components)/ProductRelated/FeaturedProducts';
+import Spinner from '../(components)/components/Spinner';
+import SortControls from '../(components)/Search/SortControls';
 import { getFilteredProducts } from '../../utility/getFilteredResult.util';
 
 export default function Shop() {

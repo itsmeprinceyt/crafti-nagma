@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useCart } from "../(context)/Cart.context";
-import { PageWrapper2 } from "../(components)/PageWrapper";
-import AddressForm from "../(components)/AddressForm";
+import { PageWrapper2 } from "../(components)/Utils/PageWrapper";
+import AddressForm from "../(components)/Cart/AddressForm";
 import { AddressData } from "../../types/AddressData.type";
 
 export default function CartPage() {

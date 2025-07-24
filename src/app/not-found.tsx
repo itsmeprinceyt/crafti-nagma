@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import ButtonGold from "./(components)/Button";
+import ButtonGold from "./(components)/Buttons/Button";
 
 export default function NotFound() {
     return (

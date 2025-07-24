@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useParams, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PageWrapper2 } from "../../../(components)/PageWrapper";
+import { PageWrapper2 } from "../../../(components)/Utils/PageWrapper";
 import { ProductData } from "../../../../utility/ProductData.util";
 import { ProductDetails } from "../../../../types/ProductData.type";
 import { useCart } from "../../../(context)/Cart.context";
@@ -14,8 +14,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
 import { DEFAULT_IMG } from '../../../../utility/utils';
-import { DiscountTagItem, DiscountAmountItem } from "../../../(components)/DiscountComponents";
-import Spinner from "../../../(components)/Spinner";
+import { DiscountTagItem, DiscountAmountItem } from "../../../(components)/ProductRelated/DiscountComponents";
+import Spinner from "../../../(components)/components/Spinner";
 
 export default function ProductPage() {
     const params = useParams();

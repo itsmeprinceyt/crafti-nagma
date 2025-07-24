@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AddressData, AddressFormProps, AddressField } from "../../types/AddressData.type";
+import { AddressData, AddressFormProps, AddressField } from "../../../types/AddressData.type";
 
 export default function AddressForm({ onConfirm, onCancel, defaultValues }: AddressFormProps) {
     const [formData, setFormData] = useState<AddressData>(

@@ -1,4 +1,4 @@
-import type { SortMenuProps } from "../../types/SortMenu.type";
+import type { SortMenuProps } from "../../../types/SortMenu.type";
 
 export default function SortMenu({ value, onChange, className }: SortMenuProps) {
     return (
