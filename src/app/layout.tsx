@@ -4,8 +4,8 @@ import { Toaster } from "react-hot-toast";
 
 import "./globals.css";
 
-import Loader from './(components)/Loader';
-import Navbar from './(components)/Navbar';
+import Loader from './(components)/components/Loader';
+import Navbar from './(components)/Navbar/Navbar';
 import Chatbot from "./(components)/Chatbot/Chatbot";
 import { OpenProvider } from "./(context)/Hamburger.context";
 import { CartProvider } from "./(context)/Cart.context";

@@ -6,11 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { PageWrapperMain, PageWrapper } from "./(components)/PageWrapper";
-import ButtonGold from "./(components)/Button";
-import InfoCard from "./(components)/InfoCard";
+import { PageWrapperMain, PageWrapper } from "./(components)/Utils/PageWrapper";
+import ButtonGold from "./(components)/Buttons/Button";
+import InfoCard from "./(components)/Utils/InfoCard";
 import { CategoryWithImage } from "../types/CategoryWithImages.type";
-import Spinner from "./(components)/Spinner";
+import Spinner from "./(components)/components/Spinner";
 
 export default function Home() {
   const [categoryData, setCategoryData] = useState<CategoryWithImage[]>([]);

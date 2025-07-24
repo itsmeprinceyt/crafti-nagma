@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "../(context)/Cart.context";
+import { useCart } from "../../(context)/Cart.context";
 
 export default function CartIcon() {
     const { cartCount } = useCart();

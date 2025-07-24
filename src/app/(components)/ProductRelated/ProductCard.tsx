@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getDiscountPercent } from "../../utility/discountPercentage.util";
+import { getDiscountPercent } from "../../../utility/discountPercentage.util";
 import { DiscountTagProduct, DiscountAmountProduct } from "./DiscountComponents";
-import { DEFAULT_IMG } from "../../utility/utils";
-import type { ProductCard } from "../../types/ProductCardGrid.type";
+import { DEFAULT_IMG } from "../../../utility/utils";
+import type { ProductCard } from "../../../types/ProductCardGrid.type";
 
 export default function ProductCard({ product, images, onAddToCart, onImageClick }: ProductCard) {
     const discountPercent = getDiscountPercent(product.price, product.discount_price);

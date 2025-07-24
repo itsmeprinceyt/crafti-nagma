@@ -1,4 +1,4 @@
-import { ProductGridProps } from "../../types/ProductCardGrid.type";
+import { ProductGridProps } from "../../../types/ProductCardGrid.type";
 import ProductCard from "./ProductCard";
 
 export default function ProductGrid({ products, productImages, onAddToCart, onImageClick }: ProductGridProps) {

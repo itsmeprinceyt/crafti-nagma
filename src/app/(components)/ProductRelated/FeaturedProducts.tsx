@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import ButtonGold from "./Button";
-import { DEFAULT_IMG } from "../../utility/utils";
-import type { FeaturedProductsCarouselProps } from '../../types/FeaturedProducts.type';
+import ButtonGold from "../Buttons/Button";
+import { DEFAULT_IMG } from "../../../utility/utils";
+import type { FeaturedProductsCarouselProps } from '../../../types/FeaturedProducts.type';
 
 export default function FeaturedProductsCarousel({
     products,

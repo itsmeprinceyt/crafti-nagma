@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { PageWrapper } from "../(components)/PageWrapper";
+import { PageWrapper } from "../(components)/Utils/PageWrapper";
 
 export default function ContactMe() {
     return (
