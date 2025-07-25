@@ -9,6 +9,7 @@ import Navbar from './(components)/Navbar/Navbar';
 import Chatbot from "./(components)/Chatbot/Chatbot";
 import { OpenProvider } from "./(context)/Hamburger.context";
 import { CartProvider } from "./(context)/Cart.context";
+import Popup from "./(components)/Popup/Popup";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://crafti-nagma.vercel.app/'),
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Suspense fallback={<Loader />} >
           <OpenProvider>
             <CartProvider>
+              <Popup/>
               <Toaster position="bottom-left" />
               <Chatbot/>
               <Navbar />

@@ -6,6 +6,8 @@ import { useCart } from "../(context)/Cart.context";
 import { PageWrapper2 } from "../(components)/Utils/PageWrapper";
 import AddressForm from "../(components)/Cart/AddressForm";
 import { AddressData } from "../../types/AddressData.type";
+import { FreeDeliveryOffer } from "../../utility/utils";
+
 
 export default function CartPage() {
     const { cart, updateQuantity, removeItem, cartCount } = useCart();
@@ -29,7 +31,7 @@ export default function CartPage() {
     }, 0);
 
     const hasDiscount = cart.some(item => item.discount > 0);
-    const deliveryCharge = totalDiscounted >= 599 ? 0 : 90;
+    const deliveryCharge = totalDiscounted >= FreeDeliveryOffer ? 0 : 90;
     const finalAmount = totalDiscounted + deliveryCharge;
 
     const sendWhatsAppCheckout = (address: AddressData) => {
@@ -203,7 +205,7 @@ export default function CartPage() {
                                 >
                                     {deliveryCharge === 0
                                         ? "🎉 Free delivery unlocked 🥳"
-                                        : "👉 Free delivery for orders above ₹599 😊"}
+                                        : `👉 Free delivery for orders above ₹${FreeDeliveryOffer} 😊`}
                                 </p>
                             </div>
 
