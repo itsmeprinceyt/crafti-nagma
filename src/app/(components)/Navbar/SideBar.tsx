@@ -45,7 +45,26 @@ export default function SideBar() {
     );
 
     return (
-        <div className="absolute top-14 right-0 left-0 z-20 bg-white border border-amber-400/50 shadow-xl shadow-amber-400/30 rounded-lg p-1">
+        <div className="fixed top-0 min-h-screen w-[300px] left-0 z-20 bg-amber-50 border border-amber-400/50 shadow-xl shadow-amber-400/30 p-1 flex flex-col gap-1">
+            {/* Crafti Nagma */}
+            <div className={`flex items-center justify-center gap-2 pt-4 pb-5 ${baseItemClass} `}>
+                <Link href="/">
+                    <Image
+                        src="/Logo/colored-logo.png"
+                        width={56}
+                        height={56}
+                        alt="Logo"
+                        className="w-12"
+                        priority
+                    />
+                </Link>
+
+                <Link href="/"
+                    className="text-2xl font-extralight">
+                    Crafti Nagma
+                </Link>
+            </div>
+
             <ol className="flex flex-col justify-center items-start gap-1">
                 <NavItem href="/" image="/icons/home.png" label="Home" />
 
@@ -76,7 +95,7 @@ export default function SideBar() {
                             />
                         </summary>
 
-                        <ul className="pl-4 py-1 space-y-1 max-h-[500px] overflow-y-auto pr-2">
+                        <ul className="pl-4 py-1 space-y-1 max-h-[450px] overflow-y-auto pr-2">
                             {categories.map((category, idx) => (
                                 <li key={category}>
                                     <Link
@@ -93,6 +112,7 @@ export default function SideBar() {
                 </li>
 
                 <NavItem href="/contact" image="/icons/contact.png" label="Contact" />
+                <NavItem href="/settings" image="/icons/cog.png" label="Settings" />
             </ol>
         </div>
     );
