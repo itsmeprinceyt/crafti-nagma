@@ -11,11 +11,25 @@ export default function Navbar() {
     const { isOpen, toggleOpen } = useOpen();
     return (
         <div className="flex items-start justify-start">
-            {isOpen && <SideBar />}
+            {isOpen && (
+                <div className="fixed bg-black/95 min-h-screen min-w-screen z-50">
+                    <div className="absolute top-4 right-4 z-50 text-white">
+                        <Hamburger
+                            toggled={isOpen}
+                            toggle={toggleOpen}
+                            size={20}
+                            easing="ease-in"
+                            rounded
+                            label="Close menu"
+                        />
+                    </div>
+                    <SideBar />
+                </div>
+            )}
 
             <div className="z-10 w-screen relative flex justify-start items-center bg-gradient-to-r from-white via-amber-600/20 to-white">
-                <SearchIcon/>
-                <CartIcon/>
+                <SearchIcon />
+                <CartIcon />
                 <Hamburger
                     toggled={isOpen}
                     toggle={toggleOpen}

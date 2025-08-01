@@ -1,11 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GOLDEN_BUTTON_CSS, GREY_BUTTON_CSS } from "../Buttons/Button";
 
 export default function Popup() {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState<boolean>(false);
+    const [doNotShowAgain, setDoNotShowAgain] = useState<boolean>(false);
+    const LOCAL_STORAGE_KEY: string = "hidePopup";
+    useEffect(() => {
+        const shouldHide = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (!shouldHide) {
+            setVisible(true);
+        }
+    }, []);
+
+    const handleClose = () => {
+        if (doNotShowAgain) {
+            localStorage.setItem(LOCAL_STORAGE_KEY, "true");
+        }
+        setVisible(false);
+    };
 
     if (!visible) return null;
 
@@ -28,21 +43,31 @@ export default function Popup() {
             <div className="mt-6 flex gap-4">
                 <Link href="/shop">
                     <button
-                        onClick={() => setVisible(false)}
-                        className={`${GOLDEN_BUTTON_CSS}`}
+                        onClick={handleClose}
+                        className={GOLDEN_BUTTON_CSS}
                         aria-label="Shop Now"
                     >
                         Shop
                     </button>
                 </Link>
                 <button
-                    onClick={() => setVisible(false)}
-                    className={`${GREY_BUTTON_CSS}`}
+                    onClick={handleClose}
+                    className={GREY_BUTTON_CSS}
                     aria-label="Close Popup"
                 >
                     Close
                 </button>
             </div>
+
+            <label className="mt-5 text-xs text-white flex items-center gap-2 cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={doNotShowAgain}
+                    onChange={(e) => setDoNotShowAgain(e.target.checked)}
+                    className="w-4 h-4 accent-amber-500"
+                />
+                Do not show again
+            </label>
         </div>
     );
 }

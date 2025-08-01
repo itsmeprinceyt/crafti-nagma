@@ -13,10 +13,14 @@ export enum ProductCategory {
   CrochetClip = "Crochet Clip",
   CrochetFlower = "Crochet Flowers",
   EmbroideryClip = "Embroidery Clips",
+  EmbroideryAccessories = "Embroidery Accessories",
   HandmadeBookmarks = "Handmade Bookmarks",
   GiftItems = "Gift Items",
   Stationery = "Stationery",
-  HomeDecor = "Home Decoration"
+  HomeDecor = "Home Decoration",
+  Earrings = "Earrings",
+  Jewellery = "Jewellery",
+  Pouche = "Pouche",
 }
 
 export const ProductData: ProductDetails[] = [
@@ -1104,6 +1108,191 @@ export const ProductData: ProductDetails[] = [
     orders_count: 0,
     custom_note: "Can add baby’s initials at back of the shield.",
     discount_price: 0
+  },
+  {
+    id: "24",
+    code: "CN-EHC0025",
+    name: "Pink Bunny Hair Clip (Tic Tac)",
+    brief_description: "Handmade bunny-shaped crochet hair clips with tic tac base for babies and kids.",
+    description: "This adorable set of handmade crochet hair clips features soft pink bunny faces with white centers and blue bows, securely attached to standard tic tac clips. Designed with care using high-quality acrylic yarn, these clips are safe, lightweight, and ideal for kids. A perfect accessory for birthdays, Raksha Bandhan, or daily wear",
+    price: 89,
+    category: [
+      ProductCategory.HandAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2–4 working days",
+    variants: [
+      {
+        name: "Single piece ",
+        description: "One tic tac clip with pink bunny crochet head"
+      },
+      {
+        name: "Combo set",
+        description: "Set of 2 clips with mix-and-match animal characters (bunny, bear, lion, etc.)"
+      }
+    ],
+    optional_upgrade: "",
+    care_instructions: [
+      "Clean with soft dry cloth",
+      "Do not soak or wash",
+      "Store flat to avoid bending the applique"
+    ],
+    options: [
+      {
+        option_name: "Clip type ",
+        option_description: "Choose between tic tac clip or alligator clip (same price"
+      }
+    ],
+    size: "Applique: Approx. 2 x 1.5 inch | Clip: 2 inch standard tic tac",
+    material: "Acrylic wool, cotton thread, metal clip, non-toxic glue",
+    features: [
+      "100% Handmade",
+      "Lightweight & soft",
+      "Skin-friendly for babies",
+      "Reusable & long-lasting",
+      "Ideal for return gifts & festive wear"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Custom color combinations available on request for bulk orders",
+    discount_price: 0
+  },
+  {
+    id: "25",
+    code: "CN-EHC0034",
+    name: "Crochet MORPHANKHI RAKHI ",
+    brief_description: "Celebrate Rakshabandhan with a beautifully handmade crochet Rakhi in a traditional evil eye pattern.",
+    description: "Crafti Nagma presents a unique, handcrafted crochet Rakhi that blends tradition with artistic elegance. This Evil Eye Rakhi is thoughtfully crocheted using vibrant green, royal blue, and mustard yellow threads, finished with pearl and golden beads for a festive touch. Symbolizing protection and love, this rakhi is soft on the skin, eco-friendly, and a beautiful keepsake for your brother. Perfect for those who value craftsmanship and want to celebrate Rakshabandhan with a personal, heartfelt touch.",
+    price: 149,
+    category: [
+      ProductCategory.HandmadeRakhi,
+      ProductCategory.HandAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2-3 days ",
+    variants: [
+      {
+        name: "Design ",
+        description: "Green outer crochet, yellow inner ring with blue center and pearl bead"
+      }
+    ],
+    optional_upgrade: "Gift packaging with personalized message card – ₹55 extra.",
+    care_instructions: [
+      "Hand wash gently with mild soap. ",
+      "Air dry only. ",
+      "Do not bleach."
+    ],
+    options: [
+      {
+        option_name: "Beads ",
+        option_description: "Add golden/silver beads on the sides for an enhanced festive look (+ ₹15)"
+      }
+    ],
+    size: "Thread length approx. 12 inches; Center motif: 2.5 inches diameter",
+    material: "Cotton thread, pearl bead, golden plastic beads",
+    features: [
+      "100% Handmade",
+      "Soft & Skin-Friendly",
+      "Traditional with a Modern Twist",
+      "Ideal for Brothers of All Ages"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 99,
+    custom_note: "Want a name tag or message with your Rakhi? Add a custom note while ordering"
+  },
+  {
+    id: "26",
+    code: "CN-EHC0036",
+    name: "Crochet Flower Earrings – Bloom Style ",
+    brief_description: "Chic and lightweight crochet earrings in a blooming blue flower design.",
+    description: "Add a playful and handcrafted charm to your look with Crafti Nagma’s Crochet Flower Earrings in the beautiful Blue Bloom design. These lightweight earrings feature a five-petal flower crocheted from soft yarn in shades of ocean blue and black. Perfect for casual wear, festive styling, or gifting, these earrings reflect handmade elegance and contemporary fashion. Attached with a sturdy hook, they are comfortable for long wear and pair well with both ethnic and western outfits.",
+    price: 89,
+    category: [
+      ProductCategory.Earrings,
+      ProductCategory.Jewellery
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2 days ",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Customized Red,White,Blue,Pink Etc"
+      }
+    ],
+    optional_upgrade: "Get matching crochet ring or bracelet set – ₹99 extra.",
+    care_instructions: [
+      "Keep away from water and perfume",
+      "Store in a dry pouch.",
+      "Hand wash gently if needed."
+    ],
+    options: [
+      {
+        option_name: "Add",
+        option_description: "Pearl,beads (+20)"
+      }
+    ],
+    size: "Approx. 2.5 inches flower diameter",
+    material: "Cotton yarn, stainless steel hook",
+    features: [
+      "Unique Boho Look",
+      "Lightweight & Comfortable",
+      "Perfect for Casual & Festive Outfits",
+      ""
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 40,
+    custom_note: "Looking for a custom color? Add your color preference in the note while placing your order."
+  },
+  {
+    id: "27",
+    code: "CN-EHC0062",
+    name: "Embroidered Zipper Pouch",
+    brief_description: "Handmade cotton pouch with colorful floral embroidery and zipper.",
+    description: "Crafted with love and skill, this elegant off-white cotton zipper pouch features delicate multicolor floral embroidery on both sides along with the hand-stitched “Crafti Nagma” logo in black. Ideal for organizing stationery, cosmetics, or crochet supplies. Lightweight, compact, and travel-friendly.",
+    price: 199,
+    category: [
+      ProductCategory.Pouche,
+      ProductCategory.EmbroideryAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "3-4 Days",
+    variants: [
+      {
+        name: "Name ",
+        description: "Replace \"Crafti Nagma\" with your custom name\""
+      }
+    ],
+    optional_upgrade: "Inner lining or extra padding available on request at additional cost.",
+    care_instructions: [
+      "Spot clean or gentle hand wash",
+      "Dry flat in shade"
+    ],
+    options: [
+      {
+        option_name: "Colour choose ",
+        option_description: "Customized "
+      }
+    ],
+    size: "8 x 4 inches approx",
+    material: "Cotton canvas with embroidery thread Feature List:",
+    features: [
+      "Handmade with fine detailing",
+      "Multi-use (stationery, makeup, etc.)"
+    ],
+    is_featured: true,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 120,
+    custom_note: "You can request name customization or embroidery color preference in the order notes."
   }
 
 
