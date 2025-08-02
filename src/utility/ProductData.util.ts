@@ -1117,7 +1117,7 @@ export const ProductData: ProductDetails[] = [
     description: "This adorable set of handmade crochet hair clips features soft pink bunny faces with white centers and blue bows, securely attached to standard tic tac clips. Designed with care using high-quality acrylic yarn, these clips are safe, lightweight, and ideal for kids. A perfect accessory for birthdays, Raksha Bandhan, or daily wear",
     price: 89,
     category: [
-      ProductCategory.HandAccessories
+      ProductCategory.HairAccessories
     ],
     delivery_charges: 90,
     stock: true,
