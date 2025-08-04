@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { PageWrapper2 } from '../(components)/Utils/PageWrapper';
-import getSortedCategories from '../../utility/getCategories.util';
 import { isFeaturedProduct } from '../../utility/getFeaturedIProducts.util';
 import { ProductDetails } from '../../types/ProductData.type';
 import { getAllProductsSorted } from '../../utility/getAllProducts.util';
@@ -10,15 +9,12 @@ import toast from "react-hot-toast";
 import { DEFAULT_IMG } from '../../utility/utils';
 import ProductGrid from '../(components)/ProductRelated/ProductGrid';
 import FullscreenImageModal from '../(components)/ProductRelated/FullscreenImageModal';
-import CategoriesGrid from "../(components)/ProductRelated/CategoryGrid";
 import FeaturedProductsCarousel from '../(components)/ProductRelated/FeaturedProducts';
 import Spinner from '../(components)/components/Spinner';
 import SortControls from '../(components)/Search/SortControls';
 import { getFilteredProducts } from '../../utility/getFilteredResult.util';
 
 export default function Shop() {
-    const [categories, setCategories] = useState<string[]>([]);
-    const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
     const [loadingFeatured, setLoadingFeatured] = useState<boolean>(true);
     const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);
@@ -34,12 +30,6 @@ export default function Shop() {
     const { addToCart } = useCart();
 
     useEffect(() => {
-        setLoadingCategories(true);
-        Promise.resolve(getSortedCategories()).then((cats) => {
-            setCategories(cats);
-            setLoadingCategories(false);
-        });
-
         setLoadingFeatured(true);
         Promise.resolve(isFeaturedProduct()).then((featured) => {
             setIsFeatured(featured);

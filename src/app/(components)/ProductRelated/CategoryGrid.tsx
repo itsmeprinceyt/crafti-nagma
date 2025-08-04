@@ -29,7 +29,7 @@ export default function CategoriesGrid({ categories }: { categories: CategoryWit
 
                         {/* Text Section */}
                         <div className="w-full h-[60px] text-[13px] text-center text-amber-900 leading-tight break-words transition-all duration-200 underline-hover relative rounded-b-md overflow-hidden">
-                            <span className="text-[14px] font-bold absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">{category}</span>
+                            <span className="text-[14px] absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">{category}</span>
                         </div>
                     </Link>
                 ))}

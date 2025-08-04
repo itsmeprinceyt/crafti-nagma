@@ -90,7 +90,7 @@ export default function ProductPage() {
             {loading && (
                 <PageWrapperItem>
                     <div className="text-sm font-extralight text-amber-900 w-full p-5 flex items-center justify-center gap-2">
-                        <Spinner /> Loading all the details about the product!
+                        <Spinner /> {`Loading all the details about the product!`}
                     </div>
                 </PageWrapperItem>
             )}
@@ -103,7 +103,7 @@ export default function ProductPage() {
                             {loading ? (
                                 <div className="flex flex-col items-center justify-center gap-3 py-10 z-10">
                                     <Spinner />
-                                    <p className="text-amber-600 text-lg font-extralight animate-bounce">Loading Images ...</p>
+                                    <p className="text-amber-600 text-lg font-extralight animate-bounce">{`Loading Images ...`}</p>
                                 </div>
                             ) : productImages.length > 0 ? (
                                 <Swiper
@@ -135,7 +135,7 @@ export default function ProductPage() {
                                 </Swiper>
                             ) : (
                                 <div className="w-full flex items-center justify-center text-gray-500 italic rounded-lg">
-                                    <span>Product image is not available</span>
+                                    <span>{`Product image is not available`}</span>
                                 </div>
                             )}
                         </div>
@@ -165,7 +165,7 @@ export default function ProductPage() {
                             {/* Free Gift Notice */}
                             {product.gift_included && product.gift_included.length > 0 && (
                                 <div className="bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-indigo-600/20 border border-indigo-500/30 text-indigo-900 text-base sm:text-lg font-semibold px-5 py-4 rounded-md shadow-md shadow-indigo-500/30 mb-3 backdrop-blur-md">
-                                    🎁 This product is special! You'll get the following items <span className="font-bold">for free!</span>
+                                    {`🎁 This product is special! You'll get the following items `}<span className="font-bold">for free!</span>
                                 </div>
                             )}
 
