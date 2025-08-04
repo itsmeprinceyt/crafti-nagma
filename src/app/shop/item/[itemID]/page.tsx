@@ -246,9 +246,9 @@ export default function ProductPage() {
 
                                     {/* Stock */}
                                     {typeof product.stock === "boolean" && (
-                                        <div className="grid grid-cols-2 gap-2 py-2 text-xs items-center">
+                                        <div className="grid grid-cols-2 gap-2 py-2 items-center">
                                             <p className={LeftSide}>Stock</p>
-                                            <p className={StockStyle(product.stock)}>
+                                            <p className={`${StockStyle(product.stock)} text-xs`}>
                                                 {product.stock ? "In Stock" : "Out of Stock"}
                                             </p>
                                         </div>
