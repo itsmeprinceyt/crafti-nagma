@@ -100,30 +100,21 @@ export default function Shop() {
     };
 
     return (
-        <>
-            {!loadingCategories ? (
-                <CategoriesGrid categories={categories} />
-            ) : (
-                <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
-                    <Spinner />
-                    <p className="text-lg font-extralight animate-bounce">Loading Categories...</p>
-                </div>
-            )}
-
+        <div className="space-y-10 py-10">
             {!loadingFeatured ? (
                 <FeaturedProductsCarousel products={isFeatured} productImages={productImages} />
             ) : (
-                <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
+                <div className="flex flex-col items-center justify-center gap-3 text-amber-800">
                     <Spinner />
                     <p className="text-lg font-extralight animate-bounce">Loading Featured Products...</p>
                 </div>
             )}
 
             <PageWrapper2>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full items-center justify-center">
                     {!loadingProducts ? (
                         <>
-                            <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center mt-10 mb-10 p-5 w-full">
+                            <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border-t border-b border-amber-600/10 text-2xl font-light text-center mb-5 p-5 w-full">
                                 <span className="text-3xl sm:text-4xl font-light text-amber-900 underline-hover cursor-default">
                                     All Products!
                                 </span>
@@ -166,6 +157,6 @@ export default function Shop() {
                         )}
                 </div>
             </PageWrapper2>
-        </>
+        </div>
     )
 }

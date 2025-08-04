@@ -1,5 +1,4 @@
 import { ChatbotNode } from "../types/Chatbot.type";
-
 export const EN_ROOT: ChatbotNode = {
     text: "Hi, how can I help you today? Please choose an option below:",
     options: [
@@ -45,10 +44,8 @@ export const EN_ROOT: ChatbotNode = {
                         label: "How do I find products by category?",
                         next: {
                             text: [
-                                "Go to /shop using the menu.",
-                                "At the top, you’ll see category buttons.",
-                                "Click on any category you like to see those products.",
-                                "Or you can go to shop and see all the categories at once."
+                                "Go to /categories using the menu.",
+                                "Click on any category you like to see those products."
                             ]
                         }
                     },
@@ -333,10 +330,8 @@ export const HI_ROOT = {
                         label: "कैटेगरी के हिसाब से प्रोडक्ट कैसे देखें?",
                         next: {
                             text: [
-                                "/shop में मेन्यू से जाएं।",
-                                "ऊपर आपको category बटन नज़र आएंगे।",
-                                "जो भी category पसंद है, उसपे क्लिक करें, आपको उसी कैटेगरी के प्रोडक्ट्स मिलेंगे।",
-                                "या फिर /shop में जाएं और सब कैटेगरीज को एक साथ देखें।"
+                                "/categories में मेन्यू से जाएं।",
+                                "जो भी category पसंद है, उसपे क्लिक करें, आपको उसी कैटेगरी के प्रोडक्ट्स मिलेंगे।"
                             ]
                         }
                     },

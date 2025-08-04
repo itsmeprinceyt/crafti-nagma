@@ -1,29 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/free-mode";
 import { PageWrapperMain, PageWrapper } from "./(components)/Utils/PageWrapper";
-import ButtonGold from "./(components)/Buttons/Button";
+import HomeCategoryButton from "./(components)/Buttons/HomeCategoryButtons";
+import ShopNow from "./(components)/Buttons/ShopNow";
 import InfoCard from "./(components)/Utils/InfoCard";
-import { CategoryWithImage } from "../types/CategoryWithImages.type";
-import Spinner from "./(components)/components/Spinner";
 
 export default function Home() {
-  const [categoryData, setCategoryData] = useState<CategoryWithImage[]>([]);
-
-  useEffect(() => {
-    fetch("/api/categoryImages")
-      .then((res) => res.json())
-      .then((data: CategoryWithImage[]) => setCategoryData(data))
-      .catch((err) => {
-        console.error("Failed to fetch category images:", err);
-      });
-  }, []);
-
   return (
     <>
       <PageWrapperMain>
@@ -49,62 +32,19 @@ export default function Home() {
               <span className="underline-hover">Embroidery Treasures</span>
             </div>
 
-            <Link href="/shop">
-              <ButtonGold text="Shop Now" />
-            </Link>
+            <div className="flex flex-col items-center justify-center gap-5">
+              <Link href="/shop">
+                <ShopNow text="Shop Now" />
+              </Link>
+              <Link href="/categories">
+                <HomeCategoryButton text="Browse Categories" />
+              </Link>
+            </div>
           </div>
         </div>
       </PageWrapperMain>
 
       <PageWrapper>
-        {/* Shop by Category */}
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center p-5">
-          <span className="underline-hover text-inherit cursor-default">Shop by Category</span>
-
-          {categoryData.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
-              <Spinner />
-              <p className="text-lg font-extralight animate-bounce">Loading Categories...</p>
-            </div>
-          ) : (
-            <Swiper
-              modules={[FreeMode, Autoplay]}
-              spaceBetween={10}
-              slidesPerView={2}
-              freeMode={true}
-              loop={false}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
-              breakpoints={{
-                640: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 5 },
-              }}
-            >
-              {categoryData.map(({ category, image }, idx) => (
-                <SwiperSlide key={idx}>
-                  <Link
-                    href={`/shop/category/${category}`}
-                    className="p-5 flex flex-col items-center gap-3 text-center"
-                  >
-                    <Image
-                      src={image}
-                      alt={category}
-                      width={700}
-                      height={700}
-                      className="w-[150px] h-[150px] object-cover object-center rounded-lg shadow-lg"
-                    />
-                    <ButtonGold text={category} />
-                  </Link>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          )}
-        </div>
-
         {/* Tagline */}
         <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center p-5">
           🤎 Crafted with love, cherished by you!

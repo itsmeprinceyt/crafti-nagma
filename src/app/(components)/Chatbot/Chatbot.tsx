@@ -39,7 +39,7 @@ export default function Chatbot() {
     };
 
     return (
-        <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end">
+        <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end ">
             {showHelper && !open && (
                 <div className="mb-2 px-4 py-2 rounded-xl bg-amber-50 text-amber-800 border border-amber-300 shadow text-sm animate-fade-in">
                     {HELPER_MESSAGES[helperMsgIdx]}
