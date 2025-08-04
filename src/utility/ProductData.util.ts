@@ -1615,15 +1615,10 @@ export const ProductData: ProductDetails[] = [
       "Wipe gently or dry clean only.",
       "Store flat to avoid creases."
     ],
-    options: [
-      {
-        option_name: "Usage purpose ",
-        option_description: "Perfect for makeup, cash, travel, or gifting"
-      }
-    ],
     size: "Approx. 7 x 5 inches",
     material: "Cotton canvas fabric with embroidery thread and metal zipper",
     features: [
+      "Perfect for makeup, cash, travel, or gifting",
       "Elegant floral hand embroidery",
       "Perfect gifting item",
       "Compact and spacious"
