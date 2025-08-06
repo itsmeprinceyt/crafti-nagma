@@ -1628,6 +1628,52 @@ export const ProductData: ProductDetails[] = [
     orders_count: 0,
     discount_price: 99,
     custom_note: "Can be personalized with initials or name on the back."
+  },
+  {
+    id: "36",
+    code: "CN-EHC0019",
+    name: "Crochet Rose Hair Clip – Set of 3",
+    brief_description: "Set of 3 vibrant crochet rose clips for elegant everyday styling",
+    description: "This set includes three beautifully handcrafted crochet rose hair clips in vibrant red, purple, and soft pink-white color combinations. These clips are made with soft yarn and securely attached to tic-tac clips, perfect for casual wear, ethnic outfits, or gifting. Lightweight and skin-friendly, they add a playful and colorful charm to any hairstyle.",
+    price: 120,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Default set includes Red, Purple, and Pink-White. Custom color sets available."
+      }
+    ],
+    optional_upgrade: "Matching hair clip or scrunchie (+55)",
+    care_instructions: [
+      "Spot clean with damp cloth",
+      "Avoid pulling or soaking"
+    ],
+    options: [
+      {
+        option_name: "Clip ",
+        option_description: "Available in Tic-Tac clip (default). Alligator clip on request."
+      }
+    ],
+    size: "Each flower: Approx. 2.5 inches diameter",
+    material: "Acrylic wool yarn, metal clip base",
+    features: [
+      "Ideal for casual or festive look",
+      "Easy to wear and remove",
+      "Soft and child-friendly"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Can be ordered in single color or sets of 2/3 with custom combos.",
+    discount_price: 0,
+    gift_included: [
+      "Free Earrings"
+    ]
   }
 
   /*
