@@ -29,7 +29,7 @@ export default function ProductCard({ product, images, onAddToCart, onImageClick
 
                 {/* Name & Description */}
                 <div className="space-y-1">
-                    <p className="text-sm sm:text-sm max-sm:text-xs truncate w-full text-black hover:text-amber-600">{product.name}</p>
+                    <Link href={`/shop/item/${product.code}`} className="text-sm sm:text-sm max-sm:text-xs truncate w-full text-black hover:text-amber-600">{product.name}</Link>
                     <p className="text-[10px] line-clamp-2 w-full text-black/50">{product.brief_description}</p>
                 </div>
 
