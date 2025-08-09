@@ -97,7 +97,7 @@ export default function ProductPage() {
 
             <PageWrapper2>
                 {product && !loading && (
-                    <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-5 px-2 md:p-5 select-text relative">
+                    <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-5 p-5 select-text relative">
                         {/* Product Image Carousel */}
                         <div className="w-full max-w-[350px] sm:max-w-[500px] md:max-w-[500px] lg:max-w-[600px] rounded-lg relative">
                             {loading ? (
