@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { GOLDEN_BUTTON_CSS, GREY_BUTTON_CSS } from "../Buttons/Button";
+import { CANCEL_BUTTON_CSS, POPUP_BUTTON_CSS } from "../Buttons/ButtonCSS";
 
 export default function Popup() {
     const [visible, setVisible] = useState<boolean>(false);
@@ -41,22 +41,22 @@ export default function Popup() {
             />
 
             <div className="mt-6 flex gap-4">
+                <button
+                    onClick={handleClose}
+                    className={CANCEL_BUTTON_CSS}
+                    aria-label="Close Popup"
+                >
+                    Close
+                </button>
                 <Link href="/shop">
                     <button
                         onClick={handleClose}
-                        className={GOLDEN_BUTTON_CSS}
+                        className={POPUP_BUTTON_CSS}
                         aria-label="Shop Now"
                     >
                         Shop
                     </button>
                 </Link>
-                <button
-                    onClick={handleClose}
-                    className={GREY_BUTTON_CSS}
-                    aria-label="Close Popup"
-                >
-                    Close
-                </button>
             </div>
 
             <label className="mt-5 text-xs text-white flex items-center gap-2 cursor-pointer">

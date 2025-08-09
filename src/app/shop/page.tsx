@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { PageWrapper2 } from '../(components)/Utils/PageWrapper';
-import getSortedCategories from '../../utility/getCategories.util';
 import { isFeaturedProduct } from '../../utility/getFeaturedIProducts.util';
 import { ProductDetails } from '../../types/ProductData.type';
 import { getAllProductsSorted } from '../../utility/getAllProducts.util';
@@ -10,15 +9,12 @@ import toast from "react-hot-toast";
 import { DEFAULT_IMG } from '../../utility/utils';
 import ProductGrid from '../(components)/ProductRelated/ProductGrid';
 import FullscreenImageModal from '../(components)/ProductRelated/FullscreenImageModal';
-import CategoriesGrid from "../(components)/ProductRelated/CategoryGrid";
 import FeaturedProductsCarousel from '../(components)/ProductRelated/FeaturedProducts';
 import Spinner from '../(components)/components/Spinner';
 import SortControls from '../(components)/Search/SortControls';
 import { getFilteredProducts } from '../../utility/getFilteredResult.util';
 
 export default function Shop() {
-    const [categories, setCategories] = useState<string[]>([]);
-    const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
     const [loadingFeatured, setLoadingFeatured] = useState<boolean>(true);
     const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);
@@ -34,12 +30,6 @@ export default function Shop() {
     const { addToCart } = useCart();
 
     useEffect(() => {
-        setLoadingCategories(true);
-        Promise.resolve(getSortedCategories()).then((cats) => {
-            setCategories(cats);
-            setLoadingCategories(false);
-        });
-
         setLoadingFeatured(true);
         Promise.resolve(isFeaturedProduct()).then((featured) => {
             setIsFeatured(featured);
@@ -100,30 +90,21 @@ export default function Shop() {
     };
 
     return (
-        <>
-            {!loadingCategories ? (
-                <CategoriesGrid categories={categories} />
-            ) : (
-                <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
-                    <Spinner />
-                    <p className="text-lg font-extralight animate-bounce">Loading Categories...</p>
-                </div>
-            )}
-
+        <div className="space-y-10 py-10">
             {!loadingFeatured ? (
                 <FeaturedProductsCarousel products={isFeatured} productImages={productImages} />
             ) : (
-                <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
+                <div className="flex flex-col items-center justify-center gap-3 text-amber-800">
                     <Spinner />
                     <p className="text-lg font-extralight animate-bounce">Loading Featured Products...</p>
                 </div>
             )}
 
             <PageWrapper2>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full items-center justify-center">
                     {!loadingProducts ? (
                         <>
-                            <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center mt-10 mb-10 p-5 w-full">
+                            <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border-t border-b border-amber-600/10 text-2xl font-light text-center mb-5 p-5 w-full">
                                 <span className="text-3xl sm:text-4xl font-light text-amber-900 underline-hover cursor-default">
                                     All Products!
                                 </span>
@@ -166,6 +147,6 @@ export default function Shop() {
                         )}
                 </div>
             </PageWrapper2>
-        </>
+        </div>
     )
 }

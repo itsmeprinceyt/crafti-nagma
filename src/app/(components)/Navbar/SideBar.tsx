@@ -71,6 +71,7 @@ export default function SideBar() {
                 <NavItem href="/shop" image="/icons/shop.png" label="Shop" />
                 <NavItem href="/search" image="/icons/search.png" label="Search" />
                 <NavItem href="/cart" image="/icons/cart.png" label="Cart" />
+                <NavItem href="/categories" image="/icons/categories.png" label="Categories" />
 
                 <li className="w-full">
 
@@ -84,7 +85,7 @@ export default function SideBar() {
                                     alt={`category image`}
                                     className="hover:scale-105 transition-all ease-in-out duration-500"
                                 />
-                                <span>Categories</span>
+                                <span>Browse Categories</span>
                             </div>
                             <Image
                                 src="/icons/arrow.png"
@@ -111,8 +112,8 @@ export default function SideBar() {
                     </details>
                 </li>
 
-                <NavItem href="/contact" image="/icons/contact.png" label="Contact" />
                 <NavItem href="/settings" image="/icons/cog.png" label="Settings" />
+                <NavItem href="/contact" image="/icons/contact.png" label="Contact" />
             </ol>
         </div>
     );

@@ -21,6 +21,8 @@ export interface ProductDetails {
     features: string[],
     is_featured: boolean, // to show on /shop featured product list or not
     is_active: boolean, // to show on the website or not
+    main_showcase?: boolean,
+    gift_included?: string[],
     orders_count?: 0,
 }
 

@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 export default function ProductGrid({ products, productImages, onAddToCart, onImageClick }: ProductGridProps) {
     return (
-        <div className="grid grid-cols-3 max-[1050px]:grid-cols-2 max-[700px]:grid-cols-1 gap-10 p-1 mb-10">
+        <div className="w-full px-2 sm:max-w-[85%] mx-auto flex flex-wrap items-start justify-center gap-5">
             {products.map((product) => (
                 <ProductCard
                     key={product.id}

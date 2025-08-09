@@ -21,6 +21,17 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
 }
 
 /**
+ * @brief Used for /shop/item (2nd page)
+ */
+export function PageWrapperItem({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="min-h-screen flex items-center justify-start gap-5">
+            {children}
+        </div>
+    );
+}
+
+/**
  * @brief Used for /shop & categories & items
  */
 export function PageWrapper2({ children }: { children: React.ReactNode }) {

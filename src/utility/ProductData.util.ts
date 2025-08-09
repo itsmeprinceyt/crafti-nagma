@@ -572,7 +572,8 @@ export const ProductData: ProductDetails[] = [
       ProductCategory.CrochetAccessories,
       ProductCategory.CrochetAccessories,
       ProductCategory.GiftItems,
-      ProductCategory.Stationery
+      ProductCategory.Stationery,
+      ProductCategory.HandmadeBookmarks
     ],
     delivery_charges: 90,
     stock: true,
@@ -831,7 +832,7 @@ export const ProductData: ProductDetails[] = [
     is_active: true,
     orders_count: 0,
     discount_price: 149,
-    custom_note: "Add a personalized tag (₹10 extra) or name initial in flower leaf"
+    custom_note: "Add a personalized tag (₹10 extra) or name initial in flower leaf",
   },
   {
     id: "18",
@@ -976,7 +977,7 @@ export const ProductData: ProductDetails[] = [
     id: "21",
     code: "CN-EHC0030",
     name: "Tiger Rakhi for Baby/Kids ",
-    brief_description: "Crochet Orange Tiger Rakhi for Baby (0–12 Months)",
+    brief_description: "Crochet Orange Tiger Rakhi for Baby (0–12 Months). Orange Tiger Cuteness Level 100%",
     description: "Celebrate Rakshabandhan with the fierce cuteness of this handmade crochet Orange Tiger Rakhi. Carefully designed with baby-safe yarn and handstitched features, this rakhi combines vibrant orange tones with adorable black & white tiger stripes. Ideal for babies and toddlers, it's lightweight, non-scratchy, and easy to tie. Let your little one flaunt the spirit of the jungle with this soft & playful tiger - themed rakhi! 🐯🧡",
     price: 99,
     category: [
@@ -1117,7 +1118,7 @@ export const ProductData: ProductDetails[] = [
     description: "This adorable set of handmade crochet hair clips features soft pink bunny faces with white centers and blue bows, securely attached to standard tic tac clips. Designed with care using high-quality acrylic yarn, these clips are safe, lightweight, and ideal for kids. A perfect accessory for birthdays, Raksha Bandhan, or daily wear",
     price: 89,
     category: [
-      ProductCategory.HandAccessories
+      ProductCategory.HairAccessories
     ],
     delivery_charges: 90,
     stock: true,
@@ -1242,8 +1243,7 @@ export const ProductData: ProductDetails[] = [
     features: [
       "Unique Boho Look",
       "Lightweight & Comfortable",
-      "Perfect for Casual & Festive Outfits",
-      ""
+      "Perfect for Casual & Festive Outfits"
     ],
     is_featured: false,
     is_active: true,
@@ -1293,8 +1293,388 @@ export const ProductData: ProductDetails[] = [
     orders_count: 0,
     discount_price: 120,
     custom_note: "You can request name customization or embroidery color preference in the order notes."
+  },
+  {
+    id: "28",
+    code: "CN-EHC0021",
+    name: "Hand-Embroidered Floral Hair Bow – Pink Bloom",
+    brief_description: "Elegant hand-embroidered bow hair clip with blooming pink florals",
+    description: "This handcrafted bow by Crafti Nagma adds an elegant, feminine charm to your hairstyle. Made with off-white cotton fabric and adorned with detailed hand embroidery in shades of pink and green, the bow showcases beautiful floral designs with french knots and rose motifs. It’s securely attached to a high-quality clip and is perfect for everyday wear, festive occasions, or as a thoughtful gift. Lightweight, durable, and skin-friendly – this bow is a timeless accessory for all age groups.",
+    price: 89,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2-3 days",
+    variants: [
+      {
+        name: "Pink 🩷",
+        description: "Pink floral embroidery on off-white base with green leaves"
+      },
+      {
+        name: "Blue 💙",
+        description: "Blue floral embroidery on pastel background (available separately)"
+      }
+    ],
+    optional_upgrade: "Gift-ready packaging with name tag – ₹30 extra",
+    care_instructions: [
+      "Spot clean with damp cloth",
+      "Store in a dry place.",
+      "Do not machine wash or bleach. "
+    ],
+    options: [
+      {
+        option_name: "Matching ",
+        option_description: "Hair clip (+55)"
+      }
+    ],
+    size: "Approx. 4.5 inches wide x 2.5 inches height",
+    material: "Cotton fabric, embroidery thread, metal alligator clip",
+    features: [
+      "Perfect for Kids & Adults",
+      "Ideal for Festive, Casual or Party Wear",
+      "Soft & Gentle on Hair"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Want it in a custom color or name embroidery on the back? Add instructions during checkout.",
+    discount_price: 0
+  },
+  {
+    id: "29",
+    code: "CN-EHC0024",
+    name: "Crochet Keychain – Watermelon Slice",
+    brief_description: "Fun and fruity watermelon-themed keychain made from soft crochet yarn.",
+    description: "Add a splash of summer to your keys or bags with this adorable handmade crochet watermelon keychain by Crafti Nagma. Carefully crafted with vibrant red, green, and white yarn, this slice-shaped keychain features hand-stitched black seeds for a realistic and playful finish. Lightweight yet sturdy, it makes a perfect accessory for backpacks, purses, or key rings—and a lovely little gift for fruit lovers or handmade craft enthusiasts. Made with premium yarn and metal ring, it’s both durable and delightful!",
+    price: 129,
+    category: [
+      ProductCategory.KeyChains,
+      ProductCategory.CrochetAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2 day ",
+    variants: [
+      {
+        name: "Kiwi slice ",
+        description: "Green-brown-white kiwi theme"
+      }
+    ],
+    optional_upgrade: "Gift packaging or add a name bead charm – ₹20 extra",
+    care_instructions: [
+      "Do not soak or machine wash.",
+      "Keep away from sharp objects."
+    ],
+    options: [
+      {
+        option_name: "Name ",
+        option_description: "Personalized alphabet beads attached (+ ₹35)"
+      }
+    ],
+    size: "Approx. 2.5–3 inches length (excluding keyring)",
+    material: "Cotton yarn, poly fiber filling, stainless steel keyring",
+    features: [
+      "Can Be Used as Bag Charm or Key Holder",
+      "Ideal for Gifting or Personal Use",
+      "Lightweight & Durable"
+    ],
+    is_featured: true,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 59,
+    custom_note: "Want a different fruit design (like orange, lemon, or avocado)? Mention in custom notes at checkout"
+  },
+  {
+    id: "30",
+    code: "CN-EHC0023",
+    name: "Crochet Hair Band  – Sunflower Design",
+    brief_description: "Bloom like sunshine with this handcrafted crochet sunflower hair band.",
+    description: "Brighten up your hair days with this charming handmade crochet sunflower hair accessory from Crafti Nagma. Designed using vibrant golden yellow petals, a rich brown center, and a cute green leaf detail, this hair tie adds a pop of nature-inspired elegance to your everyday style. Perfect for ponytails, buns, or even wristwear, this elastic-based crochet flower is soft, lightweight, and gentle on hair. Whether you're gifting it or wearing it yourself, it brings a handcrafted touch of joy to any look!",
+    price: 120,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "1-2 days",
+    variants: [
+      {
+        name: "Sunflower ",
+        description: "Yellow petals + brown center + green leaf"
+      }
+    ],
+    optional_upgrade: "Gently hand wash only if needed. Do not machine wash or soak. Dry flat. Avoid pulling on petals.",
+    care_instructions: [
+      "Avoid pulling on petals.",
+      "Dry Flat",
+      "Do not machine wash or soak",
+      "Gently wash if needs "
+    ],
+    options: [
+      {
+        option_name: "Clip",
+        option_description: "Matching hair clip (+65)"
+      }
+    ],
+    size: "Flower approx. 2.5–3 inches diameter Elastic band: Stretchable standard size",
+    material: "Premium cotton yarn, elastic base",
+    features: [
+      "Comfortable, Non-Slip Elastic",
+      "Ideal for Daily Use or Festive Wear"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 79,
+    custom_note: "Need matching sunflower earrings or scrunchie? DM us on Instagram @Crafti_Nagma or add in checkout notes. 🌻✨"
+  },
+  {
+    id: "31",
+    code: "CN-EHC0038",
+    name: "Crochet Flower Hair Clips – Pearl Beige (Set of 2)",
+    brief_description: "Elegant pearl-centered crochet clips to bloom up your hairstyle.",
+    description: "This gorgeous set of two handmade beige crochet flower clips is perfect for adding a graceful charm to your hair. Each flower features soft yarn petals and a beautiful faux pearl cluster at the center, giving it a refined and delicate finish. Ideal for both casual and festive looks, these clips are versatile enough for kids and adults alike. Whether pinned on braids, buns, or ponytails, they offer a unique blend of comfort and sophistication.",
+    price: 69,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "",
+    variants: [
+      {
+        name: "Beige pearl bloom ",
+        description: "Beige yarn with white pearl cluster (as shown)"
+      },
+      {
+        name: "Blush pink pearl ",
+        description: "Light pink petals with pearl center"
+      }
+    ],
+    optional_upgrade: "",
+    care_instructions: [
+      "Soft dry if need "
+    ],
+    options: [],
+    size: "Each flower approx. 2 inches diameter Back clip: Metal alligator-style clip",
+    material: "Soft cotton yarn, faux pearls, metal clip",
+    features: [
+      "Suitable for all ages",
+      "Lightweight and gentle on scalp"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Want matching hair clips (+60)",
+    discount_price: 0
+  },
+  {
+    id: "32",
+    code: "CN-EHC0042",
+    name: "Embroidered Floral Bow (Hair Alligator clip)- Black Base",
+    brief_description: "Elegant black bow clip with floral embroidery for a stylish look.",
+    description: "This beautifully handcrafted black bow hair clip features intricate floral embroidery in earthy tones. Perfect for both casual and festive occasions, this accessory adds a touch of charm and tradition to any hairstyle. Mounted securely on a metal alligator clip, it ensures a firm grip without tugging hair.",
+    price: 149,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2-3 days",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Available in Black base with peach, cream, and green floral embroidery. Custom color combinations available on request."
+      }
+    ],
+    optional_upgrade: "Add matching embroidered hairband (+₹70)",
+    care_instructions: [
+      "Avoid soaking in water",
+      "Store flat to maintain shape."
+    ],
+    options: [
+      {
+        option_name: "Clip",
+        option_description: "Available in alligator clip or tic-tac clip based on hair thickness."
+      }
+    ],
+    size: "Approx. 4 inches wide × 2 inches tall",
+    material: "Cotton fabric, embroidery thread, metal clip",
+    features: [
+      "Durable embroidery",
+      "Suitable for all ages",
+      "Customizable"
+    ],
+    is_featured: true,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 79,
+    custom_note: "You can request name embroidery on the back or a different color scheme."
+  },
+  {
+    id: "33",
+    code: "CN-EHC0059",
+    name: "Handmade Red Crochet Bun Gajra",
+    brief_description: "Traditional handmade red flower bun gajra for elegant hairstyles.",
+    description: "Add a traditional charm to your hair bun with this handmade red crochet gajra. Designed with fine-quality yarn, it wraps beautifully around any bun, giving a graceful and festive look. Ideal for weddings, pujas, and cultural functions. Lightweight and comfortable for all-day wear.",
+    price: 299,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "4-5 days",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Available in Red (with green leaves). Other custom colors available on request"
+      }
+    ],
+    optional_upgrade: "Add matching crochet hair clip or finger ring (+₹60)",
+    care_instructions: [
+      "Hand wash gently if needed",
+      "Do not iron.",
+      "Store flat when not in use."
+    ],
+    options: [],
+    size: "Length: Approx. 30 cm (adjustable fit around bun)",
+    material: "Soft acrylic yarn, cotton thread",
+    features: [
+      "Completely handmade",
+      "Customizable color options",
+      "Reusable and washable"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 159,
+    custom_note: "For custom color or size, kindly mention while ordering"
+  },
+  {
+    id: "34",
+    code: "CN-EHC0057",
+    name: "Handmade Crochet Floral Latkan Rakhi",
+    brief_description: "Elegant peach and cream crochet floral latkan for festive charm.",
+    description: "This handcrafted accessory features a central peach crochet rose, paired with cream and peach flowers, green leaves, pearls, and tassels. Versatile for use as a latkan rakhi, hair accessory, or decor, it brings a festive ethnic charm with its soft yarn texture and delicate details. Lightweight, reusable, and gentle on the skin.",
+    price: 159,
+    category: [
+      ProductCategory.HandmadeRakhi,
+      ProductCategory.Handicraft
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2-3 days",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Available in peach-cream-green combination. Custom color on request."
+      }
+    ],
+    optional_upgrade: "Get a matching keychain or mini clip (+₹50)",
+    care_instructions: [
+      "Avoid pulling the threads",
+      "Hand wash gently",
+      ""
+    ],
+    options: [],
+    size: "Length: Approx. 20–25 cm | Flower diameter: 3–4 cm",
+    material: "Soft acrylic yarn, cotton thread, faux pearls",
+    features: [
+      "Lightweight and festive",
+      "Soft and skin-friendly"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 119,
+    custom_note: "Can be customized with name bead or different flower styles"
+  },
+  {
+    id: "35",
+    code: "CN-EHC0051",
+    name: "Embroidered Floral Zipper Pouch – Pink Blooms",
+    brief_description: "Handmade off-white pouch with pink floral embroidery and blue bow.",
+    description: "A charming handmade cotton zipper pouch featuring delicate pink floral embroidery tied with a bright blue bow. This elegant off-white pouch is ideal for carrying makeup, stationery, jewelry, or cash. Compact, stylish, and a perfect addition to your handmade accessory collection.",
+    price: 159,
+    category: [
+      ProductCategory.Pouche
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "2-3 days",
+    variants: [
+      {
+        name: "Thread colour ",
+        description: "Available in pink flowers with blue bow. Custom embroidery colors on request"
+      }
+    ],
+    optional_upgrade: "Add matching keychain or handkerchief (+₹70)",
+    care_instructions: [
+      "Wipe gently or dry clean only.",
+      "Store flat to avoid creases."
+    ],
+    size: "Approx. 7 x 5 inches",
+    material: "Cotton canvas fabric with embroidery thread and metal zipper",
+    features: [
+      "Perfect for makeup, cash, travel, or gifting",
+      "Elegant floral hand embroidery",
+      "Perfect gifting item",
+      "Compact and spacious"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    discount_price: 99,
+    custom_note: "Can be personalized with initials or name on the back."
+  },
+  {
+    id: "36",
+    code: "CN-EHC0019",
+    name: "Crochet Rose Hair Clip – Set of 3",
+    brief_description: "Set of 3 vibrant crochet rose clips for elegant everyday styling",
+    description: "This set includes three beautifully handcrafted crochet rose hair clips in vibrant red, purple, and soft pink-white color combinations. These clips are made with soft yarn and securely attached to tic-tac clips, perfect for casual wear, ethnic outfits, or gifting. Lightweight and skin-friendly, they add a playful and colorful charm to any hairstyle.",
+    price: 120,
+    category: [
+      ProductCategory.HairAccessories
+    ],
+    delivery_charges: 90,
+    stock: true,
+    processing_time: "",
+    variants: [
+      {
+        name: "Colour ",
+        description: "Default set includes Red, Purple, and Pink-White. Custom color sets available."
+      }
+    ],
+    optional_upgrade: "Matching hair clip or scrunchie (+55)",
+    care_instructions: [
+      "Spot clean with damp cloth",
+      "Avoid pulling or soaking"
+    ],
+    options: [
+      {
+        option_name: "Clip ",
+        option_description: "Available in Tic-Tac clip (default). Alligator clip on request."
+      }
+    ],
+    size: "Each flower: Approx. 2.5 inches diameter",
+    material: "Acrylic wool yarn, metal clip base",
+    features: [
+      "Ideal for casual or festive look",
+      "Easy to wear and remove",
+      "Soft and child-friendly"
+    ],
+    is_featured: false,
+    is_active: true,
+    orders_count: 0,
+    custom_note: "Can be ordered in single color or sets of 2/3 with custom combos.",
+    discount_price: 0,
+    gift_included: [
+      "Free Earrings"
+    ]
   }
-
 
   /*
     {

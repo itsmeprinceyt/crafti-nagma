@@ -106,13 +106,13 @@ export default function CategoryPage() {
   return (
     <>
       <PageWrapper2>
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-10 mb-10 p-5 text-center">
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-10 mb-5 p-5 text-center">
           {decodedCategory}
         </div>
       </PageWrapper2>
 
       <PageWrapper2>
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-10">
           {loading ? (
             <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
               <Spinner />

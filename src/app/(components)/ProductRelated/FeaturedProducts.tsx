@@ -13,7 +13,7 @@ export default function FeaturedProductsCarousel({
     productImages
 }: FeaturedProductsCarouselProps) {
     return (
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-2xl font-light text-center p-5">
+        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border-t border-b border-amber-600/10 text-2xl font-light text-center p-5">
             <span className="text-3xl sm:text-4xl font-light text-amber-900 underline-hover cursor-default">
                 Featured Products!
             </span>
