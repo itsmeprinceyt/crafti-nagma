@@ -9,11 +9,9 @@ export enum ProductCategory {
   Headbands = "Headbands",
   KeyChains = "Key Chains",
   HandmadeRakhi = "Handmade Rakhi",
-  CrochetAccessories = "Crochet Accessories",
-  CrochetClip = "Crochet Clip",
+  CrochetCollection = "Crochet Collection",
   CrochetFlower = "Crochet Flowers",
-  EmbroideryClip = "Embroidery Clips",
-  EmbroideryAccessories = "Embroidery Accessories",
+  EmbroideredCollection = "Embroidered Collection",
   HandmadeBookmarks = "Handmade Bookmarks",
   GiftItems = "Gift Items",
   Stationery = "Stationery",
@@ -477,7 +475,7 @@ export const ProductData: ProductDetails[] = [
     price: 250,
     category: [
       ProductCategory.HandmadeRakhi,
-      ProductCategory.CrochetAccessories],
+      ProductCategory.CrochetCollection],
     delivery_charges: 90,
     stock: true,
     processing_time: "2-4",
@@ -569,8 +567,8 @@ export const ProductData: ProductDetails[] = [
     description: "Brighten up your reading experience with these handmade garden-themed crochet bookmarks. This adorable set includes 4 different designs: a buzzing bee, a blooming daisy, a cheerful ladybug, and a sunny sunflower — all connected with a leafy green stem. Made with soft yarn, they are flexible, lightweight, and gentle on your books. Perfect for book lovers, gifting, kids, or handmade collection enthusiasts.",
     price: 99,
     category: [
-      ProductCategory.CrochetAccessories,
-      ProductCategory.CrochetAccessories,
+      ProductCategory.CrochetCollection,
+      ProductCategory.CrochetCollection,
       ProductCategory.GiftItems,
       ProductCategory.Stationery,
       ProductCategory.HandmadeBookmarks
@@ -620,8 +618,8 @@ export const ProductData: ProductDetails[] = [
     price: 79,
     category: [
       ProductCategory.HairAccessories,
-      ProductCategory.CrochetClip,
-      ProductCategory.CrochetAccessories
+      ProductCategory.HairAccessories,
+      ProductCategory.CrochetCollection
     ],
     delivery_charges: 90,
     stock: true,
@@ -672,7 +670,7 @@ export const ProductData: ProductDetails[] = [
     price: 70,
     category: [
       ProductCategory.HairAccessories,
-      ProductCategory.EmbroideryClip,
+      ProductCategory.HairAccessories,
     ],
     delivery_charges: 90,
     stock: true,
@@ -727,7 +725,7 @@ export const ProductData: ProductDetails[] = [
     category: [
       ProductCategory.BabyAccessories,
       ProductCategory.Headbands,
-      ProductCategory.CrochetAccessories
+      ProductCategory.CrochetCollection
     ],
     delivery_charges: 90,
     stock: true,
@@ -1260,7 +1258,7 @@ export const ProductData: ProductDetails[] = [
     price: 199,
     category: [
       ProductCategory.Pouche,
-      ProductCategory.EmbroideryAccessories
+      ProductCategory.EmbroideredCollection
     ],
     delivery_charges: 90,
     stock: true,
@@ -1351,7 +1349,7 @@ export const ProductData: ProductDetails[] = [
     price: 129,
     category: [
       ProductCategory.KeyChains,
-      ProductCategory.CrochetAccessories
+      ProductCategory.CrochetCollection
     ],
     delivery_charges: 90,
     stock: true,
@@ -1674,7 +1672,410 @@ export const ProductData: ProductDetails[] = [
     gift_included: [
       "Free Earrings"
     ]
-  }
+  },
+  {
+  id: "37",
+  code: "CN-EHC0018",
+  name: "Crochet Flower Baby Watch",
+  brief_description: "Soft handmade crochet flower watch designed for babies.",
+  description: "A colorful and lightweight handmade crochet flower baby watch made with premium wool yarn. The soft strap with button closure ensures comfort and safety for your little one’s delicate skin. This adorable accessory is perfect for everyday wear, photoshoots, or as a unique gift. Custom color combinations are also available on request.",
+  price: 95,
+  category: [
+    ProductCategory.HandAccessories
+  ],
+  delivery_charges: 90,
+  stock: false,
+  processing_time: "1-2 days ",
+  variants: [
+    {
+      name: "Crochet flower baby watch",
+      description: "Any two color combinations"
+    }
+  ],
+  optional_upgrade: "Gift wrapping available (+₹30)",
+  care_instructions: [
+    "Hand wash gently in cold water"
+  ],
+  options: [
+    {
+      option_name: "Colour ",
+      option_description: "Blue Strap + Red-Yellow Flower (default), Custom on request"
+    }
+  ],
+  size: "Strap length ~12 cm  Flower diameter ~4.5 cm (Adjustable with button closure)",
+  material: "Wool yarn or cotton yarn (on your choice), wooden button",
+  features: [
+    "Handmade with premium yarn",
+    "Baby-safe and lightweight ",
+    " Adjustable button closure"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [
+    "Buy 1 get 1 free"
+  ],
+  orders_count: 0,
+  custom_note: "Custom colors and strap length available on request",
+  discount_price: 0
+},
+{
+  id: "38",
+  code: "CN-EHC0061",
+  name: "Crochet Embroidered Flower Hair Clip",
+  brief_description: "Handmade crochet hair clip with floral embroidery design.",
+  description: "This elegant crochet hair clip is beautifully handcrafted with a soft cream base and vibrant floral embroidery. The clip is lightweight, durable, and comfortable to wear, making it perfect for daily use, parties, or gifting. Its unique handcrafted touch adds charm to any hairstyle",
+  price: 90,
+  category: [
+    ProductCategory.HairAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "1-2 Days",
+  variants: [
+    {
+      name: "Flower colour ",
+      description: "Pink, Red, Yellow, Blue"
+    },
+    {
+      name: "Base colour ",
+      description: "White, Off-white, Cream,"
+    }
+  ],
+  optional_upgrade: "Gift package (+30),.. matching scrunchie (+50)",
+  care_instructions: [
+    "Avoid washing; clean gently with a dry cloth.",
+    "Keep away from water and perfumes.",
+    "Set Option: Single Clip / Pair Set"
+  ],
+  options: [],
+  size: "Approx. 5.5 cm × 2.5 cm",
+  material: "Wool yarn, embroidery thread, metal clip, felt base",
+  features: [
+    "Handmade & eco-friendly",
+    "Soft crochet base with floral embroidery",
+    "Perfect for kids and adults"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [],
+  orders_count: 0,
+  discount_price: 65,
+  custom_note: "You can request custom flower or base colors as per your choice."
+},
+{
+  id: "39",
+  code: "CN-EHC0060",
+  name: "Crochet Tricolour Flower Hair Clip",
+  brief_description: "Handmade crochet hair clip in Indian flag tricolour design – perfect for Independence Day & Republic Day",
+  description: "Celebrate patriotism with this beautifully handcrafted crochet hair clip featuring the Indian flag tricolour – saffron, white, and green. Designed with a vibrant crochet flower and leafy base, this clip is lightweight, secure, and comfortable to wear. Perfect for kids, school functions, cultural events, and festive occasions on 15th August and 26th January.",
+  price: 70,
+  category: [
+    ProductCategory.HairAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "2-3 days ",
+  variants: [
+    {
+      name: "Clip type ",
+      description: "Tic-tac clip / Alligator clip"
+    }
+  ],
+  optional_upgrade: "Pair Set (2 clips) available at ₹129",
+  care_instructions: [
+    "Do not wash; clean gently with a dry cloth",
+    "Keep away from perfumes, water, and direct heat",
+    "Store safely to maintain shape."
+  ],
+  options: [],
+  size: "Approx. 6 cm × 6 cm",
+  material: "Soft wool yarn, metal clip, felt base",
+  features: [
+    "Handmade crochet design in patriotic tricolour",
+    "Comfortable & lightweight for kids and adults",
+    "Customizable clip type"
+  ],
+  is_featured: false,
+  is_active: true,
+  orders_count: 0,
+  custom_note: "Can be customized with additional embellishments like beads or pearls.",
+  discount_price: 0,
+  gift_included: []
+},
+{
+  id: "40",
+  code: "CN-EHC0058",
+  name: "Crochet Off- white  Flower Hair Clip",
+  brief_description: "Handmade crochet hair clip with a blooming yellow flower design.",
+  description: "This elegant handmade crochet hair clip features a soft cream and yellow flower with green leaves, adding a fresh and vibrant look to any hairstyle. Perfect for daily wear, parties, casual outings, or gifting. Lightweight and comfortable, this accessory is suitable for both kids and adults",
+  price: 160,
+  category: [
+    ProductCategory.HairAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "2-3 Days ",
+  variants: [
+    {
+      name: "Flower colour ",
+      description: "Yellow, Pink, Red, Blue, White"
+    },
+    {
+      name: "Clip type",
+      description: "Tic-tac clip / Alligator clip"
+    }
+  ],
+  optional_upgrade: "",
+  care_instructions: [
+    "Avoid washing; clean gently with a dry cloth",
+    "Keep away from perfumes, water, and direct heat.",
+    "Store in a dry box to maintain shape."
+  ],
+  options: [],
+  size: "Approx. 6 cm × 7 cm (with leaves)",
+  material: "Wool yarn, metal clip, felt base",
+  features: [
+    "100% handmade & eco-friendly",
+    "Soft and durable crochet yarn",
+    "Perfect for kids and adults",
+    "Lightweight & comfortable"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [
+    "Extra Hair clip Free"
+  ],
+  orders_count: 0,
+  discount_price: 0,
+  custom_note: "You can request customized flower color and leaf size"
+},
+{
+  id: "41",
+  code: "CN-EHC0050",
+  name: "Crochet Red Flower Hand Band",
+  brief_description: "Handmade crochet hand band with red flower and bead center.",
+  description: "This stylish handmade crochet hand band features a soft white crochet strap adorned with a red flower, green leaf, and bead detail at the center. Lightweight and comfortable, it is perfect for kids and adults to wear on casual outings, parties, or as a cute daily accessory. The crochet band is stretchable, easy to wear, and gives a trendy handcrafted look.",
+  price: 69,
+  category: [
+    ProductCategory.HandAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "2-3 days",
+  variants: [
+    {
+      name: "Flower colour ",
+      description: "Red, Pink, Yellow, Blue, White"
+    }
+  ],
+  optional_upgrade: "Set of 2 Bands at ₹ 100 only",
+  care_instructions: [
+    "Clean gently with a soft dry cloth."
+  ],
+  options: [],
+  size: "Free size (Stretchable, fits most wrists) 1 to 5 years old ,customized for adults too",
+  material: "Cotton crochet yarn, bead, stretchable crochet strap",
+  features: [
+    "100% handmade & eco-friendly",
+    "Stretchable crochet strap for easy fit",
+    "Perfect for kids and adults"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [],
+  orders_count: 0,
+  custom_note: "Available in customized band color, flower style, and bead type",
+  discount_price: 0
+},
+{
+  id: "42",
+  code: "CN-EHC0020",
+  name: "Crochet Angry Emoji Hair Clip",
+  brief_description: "Handmade crochet hair clip with cute angry emoji design.",
+  description: "This adorable handmade crochet hair clip features a unique angry emoji/star design that adds a playful and quirky charm to your hairstyle. Made with soft yarn and secured on a sturdy hair clip, it is lightweight, durable, and perfect for daily use or casual styling. A fun accessory to express your mood in style!",
+  price: 60,
+  category: [
+    ProductCategory.HairAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "1-2 days ",
+  variants: [
+    {
+      name: "Red Angry Emojis ",
+      description: "Crochet hair clip in red color"
+    }
+  ],
+  optional_upgrade: "",
+  care_instructions: [
+    "Handwash gently if needed",
+    "Keep away from sharp objects"
+  ],
+  options: [],
+  size: "Approx. 5 cm",
+  material: "Soft cotton yarn + metal clip",
+  features: [
+    "Cute & expressive design",
+    "Perfect for kids and adults",
+    "Durable clip base"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [],
+  orders_count: 0,
+  custom_note: "Available for custom colors on request.",
+  discount_price: 0
+},
+{
+  id: "43",
+  code: "CN-EHC0022",
+  name: "Handmade Embroidered Floral Hair bow  Aligator Clip with pair clipSet",
+  brief_description: "Elegant handmade embroidered hair clips with colorful floral design.",
+  description: "This stunning hand-embroidered hair clip set is crafted with soft cotton fabric and decorated with intricate floral embroidery in vibrant shades of red, yellow, green, and brown. Each clip is delicately hand-stitched, making it a unique piece of art to complement your hairstyle. Lightweight, durable, and versatile – perfect for everyday wear, parties, or gifting.",
+  price: 259,
+  category: [
+    ProductCategory.HairAccessories
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "",
+  variants: [
+    {
+      name: "Pastel floral set ",
+      description: "Soft pastel shades (custom option)"
+    },
+    {
+      name: "Multicolored floral set",
+      description: "Mix of vibrant shades"
+    }
+  ],
+  optional_upgrade: "Gift Wrap / Special Packaging – ₹50 extra.",
+  care_instructions: [
+    "Do not machine wash",
+    "Store in a dry place",
+    "Spot clean with damp cloth"
+  ],
+  options: [
+    {
+      option_name: "Combo Pack",
+      option_description: "Set of 4 Clips (different colors)"
+    }
+  ],
+  size: "Approx. 6 cm – 7 cm",
+  material: "Cotton fabric base + embroidery thread + metal clip",
+  features: [
+    "100% Handmade embroidery",
+    "Lightweight & comfortable",
+    "Perfect for kids and adults"
+  ],
+  is_featured: true,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [
+    "Floral hair band free"
+  ],
+  orders_count: 0,
+  discount_price: 199,
+  custom_note: "Custom embroidery colors available on request."
+},
+{
+  id: "44",
+  code: "CN-EHC0026",
+  name: "Handmade Crochet Apple Shape Coaster",
+  brief_description: "Handmade crochet coaster in cute apple slice design.",
+  description: "This charming crochet apple-shaped coaster is handmade with soft yarn, making it perfect for protecting your tables from tea, coffee, or cold drink stains. Its cute apple slice design adds a touch of fun and warmth to your kitchen or dining table. Lightweight, washable, and eco-friendly – a beautiful blend of utility and craft.",
+  price: 149,
+  category: [
+    ProductCategory.CrochetCollection,
+    ProductCategory.HomeDecor
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "5-6 days",
+  variants: [
+    {
+      name: "Apple shape ",
+      description: "Red & white coaster with green leaf"
+    },
+    {
+      name: "Orange slice ",
+      description: "Orange & white crochet coaster"
+    },
+    {
+      name: "Kiwi slice",
+      description: "Green & white crochet coaster"
+    }
+  ],
+  optional_upgrade: "",
+  care_instructions: [
+    "Gentle handwash only",
+    "Reshape and dry flat",
+    "Keep away from sharp objects",
+    "Do not bleach"
+  ],
+  options: [],
+  size: "Approx. 10–15 cm diameter",
+  material: "Soft acrylic/cotton yarn",
+  features: [
+    "Perfect for gifting & home décor",
+    "Protects surfaces from stains",
+    "Washable & reusable"
+  ],
+  is_featured: true,
+  is_active: true,
+  main_showcase: true,
+  gift_included: [],
+  orders_count: 0,
+  custom_note: "Custom fruit designs & colors available on request 🍊🥝🍎",
+  discount_price: 0
+},
+{
+  id: "45",
+  code: "CN-EHC0035",
+  name: "Handmade Crochet Sunflower Keychaine",
+  brief_description: "Bright and cheerful crochet sunflower keychain with green leaf.",
+  description: "Add a touch of sunshine to your keys, bags, or pouches with this handmade crochet sunflower keychain. Crafted from soft yarn with a detailed sunflower and green leaf design, it’s lightweight, durable, and super cute. A perfect handmade accessory for gifting or personal use, symbolizing happiness and positivity wherever you carry it.",
+  price: 89,
+  category: [
+    ProductCategory.KeyChains,
+    ProductCategory.CrochetCollection
+  ],
+  delivery_charges: 0,
+  stock: true,
+  processing_time: "1-2 days",
+  variants: [
+    {
+      name: "Sunflower keychain ",
+      description: "Yellow petals with green leaf"
+    }
+  ],
+  optional_upgrade: "",
+  care_instructions: [
+    "Spot clean only",
+    "Do not bleach",
+    "Keep away from sharp objects "
+  ],
+  options: [],
+  size: "Approx. 7–8 cm (flower with leaf)",
+  material: "Soft acrylic yarn + metal keyring",
+  features: [
+    "Multi-purpose use (keys, bags, pouches)",
+    "Lightweight and durable"
+  ],
+  is_featured: false,
+  is_active: true,
+  main_showcase: false,
+  gift_included: [],
+  orders_count: 0,
+  custom_note: "Available in custom flower designs & colors 🌸",
+  discount_price: 0
+},
+
 
   /*
     {

@@ -164,16 +164,16 @@ export default function ProductPage() {
 
                             {/* Free Gift Notice */}
                             {product.gift_included && product.gift_included.length > 0 && (
-                                <div className="bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-indigo-600/20 border border-indigo-500/30 text-indigo-900 text-base sm:text-lg  px-5 py-4 rounded-md shadow-md shadow-indigo-500/30 mb-3 backdrop-blur-md">
-                                    {`😳 This product is special! You'll get the following items `}<span className="font-bold">for free!</span>
+                                <div className="bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-indigo-600/20 border border-indigo-500/30 text-indigo-900 text-base sm:text-lg  px-5 py-4 rounded-md shadow-md shadow-indigo-500/30 backdrop-blur-md">
+                                    {`😳 There is something `}<span className="font-bold">special</span>{` with this product!`}
                                 </div>
                             )}
 
                             {/* Gift Accordion */}
                             {product.gift_included && product.gift_included.length > 0 && (
                                 <details className="group border border-indigo-400/40 rounded-md overflow-hidden bg-gradient-to-br from-purple-50 via-indigo-50 to-white shadow-lg shadow-indigo-400/20 backdrop-blur-sm">
-                                    <summary className="text-indigo-800 text-xl cursor-pointer px-5 py-4  flex justify-between items-center bg-gradient-to-r from-purple-100/50 via-indigo-100/50 to-white hover:bg-indigo-100/30 transition duration-300">
-                                        🎉 Order to get these for free!
+                                    <summary className="text-indigo-800 text-lg cursor-pointer px-5 py-4  flex justify-between items-center bg-gradient-to-r from-purple-100/50 via-indigo-100/50 to-white hover:bg-indigo-100/30 transition duration-300">
+                                        {`🎉 Click here to know special benefits!`}
                                         <span className="transform transition-transform duration-300 group-open:rotate-90 text-indigo-700 text-lg">›</span>
                                     </summary>
 
