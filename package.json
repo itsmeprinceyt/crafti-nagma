@@ -3,12 +3,14 @@
   "version": "1.91.10",
   "private": true,
   "scripts": {
-    "lint": "next lint",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.0",
     "hamburger-react": "^2.5.2",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",

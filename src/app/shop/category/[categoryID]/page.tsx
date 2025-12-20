@@ -1,33 +1,37 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { useParams, notFound } from 'next/navigation';
-import { PageWrapper2 } from '../../../(components)/Utils/PageWrapper';
-import { ProductCategory } from '../../../../utils/ProductData.util';
-import { ProductDetails } from '../../../../types/ProductData.type';
-import { getProductsByCategory } from '../../../../utils/getProductByCategory.util';
-import { useCart } from '../../../(context)/Cart.context';
+import { useEffect, useState } from "react";
+import { useParams, notFound } from "next/navigation";
+import { PageWrapper2 } from "../../../(components)/Utils/PageWrapper";
+import { ProductCategory } from "../../../../utils/ProductData.util";
+import { ProductDetails } from "../../../../types/ProductData.type";
+import { getProductsByCategory } from "../../../../utils/getProductByCategory.util";
+import { useCart } from "../../../(context)/Cart.context";
 import { toast } from "react-hot-toast";
-import { DEFAULT_IMG } from '../../../../utils/utils';
+import { DEFAULT_IMG } from "../../../../utils/utils";
 import ProductGrid from "../../../(components)/ProductRelated/ProductGrid";
 import FullscreenImageModal from "../../../(components)/ProductRelated/FullscreenImageModal";
-import Spinner from '../../../(components)/components/Spinner';
+import Spinner from "../../../(components)/components/Spinner";
 import SortControls from "../../../(components)/Search/SortControls";
-import { getFilteredProducts } from '../../../../utils/getFilteredResult.util';
+import { getFilteredProducts } from "../../../../utils/getFilteredResult.util";
 
 export default function CategoryPage() {
   const params = useParams();
   const decodedCategory = decodeURIComponent(params.categoryID as string);
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<ProductDetails[]>([]);
-  const [productImages, setProductImages] = useState<Record<string, string[]>>({});
+  const [productImages, setProductImages] = useState<Record<string, string[]>>(
+    {}
+  );
   const [isValid, setIsValid] = useState<boolean>(true);
   const [fullscreenImage, setFullscreenImage] = useState<{
-    images: string[],
-    index: number
+    images: string[];
+    index: number;
   } | null>(null);
-  const [sortType, setSortType] = useState<string>('A-Z');
+  const [sortType, setSortType] = useState<string>("A-Z");
   const [onlyDiscounted, setOnlyDiscounted] = useState<boolean>(false);
-  const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductDetails[]>(
+    []
+  );
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -49,7 +53,9 @@ export default function CategoryPage() {
       const results = await Promise.all(
         categoryProducts.map(async (product) => {
           try {
-            const res = await fetch(`/api/getProductImages?productCode=${product.code}`);
+            const res = await fetch(
+              `/api/getProductImages?productCode=${product.code}`
+            );
             const data = await res.json();
             return { code: product.code, images: data.images || [] };
           } catch {
@@ -70,11 +76,15 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (loading) return;
-    setFilteredProducts(
-      getFilteredProducts(products, '', sortType, onlyDiscounted)
-    );
-  }, [sortType, onlyDiscounted, products, loading]);
 
+    const updateFiltered = () => {
+      setFilteredProducts(
+        getFilteredProducts(products, "", sortType, onlyDiscounted)
+      );
+    };
+
+    requestAnimationFrame(updateFiltered);
+  }, [sortType, onlyDiscounted, products, loading]);
 
   if (!isValid) {
     notFound();
@@ -87,13 +97,13 @@ export default function CategoryPage() {
       price: product.price,
       discount: product.discount_price,
       quantity: 1,
-      photo: productImages[product.code]?.[0] || DEFAULT_IMG
+      photo: productImages[product.code]?.[0] || DEFAULT_IMG,
     });
     toast.success(`'${product.name}' added to cart!`, {
       duration: 3000,
       style: {
-        border: '1px solid #facc15',
-        padding: '12px',
+        border: "1px solid #facc15",
+        padding: "12px",
       },
     });
   };
@@ -106,7 +116,7 @@ export default function CategoryPage() {
   return (
     <>
       <PageWrapper2>
-        <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-10 mb-5 p-5 text-center">
+        <div className="bg-linear-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-10 mb-5 p-5 text-center">
           {decodedCategory}
         </div>
       </PageWrapper2>
@@ -116,24 +126,26 @@ export default function CategoryPage() {
           {loading ? (
             <div className="flex flex-col items-center justify-center gap-3 py-10 text-amber-800">
               <Spinner />
-              <p className="text-lg font-extralight animate-bounce">Loading {decodedCategory} Products...</p>
+              <p className="text-lg font-extralight animate-bounce">
+                Loading {decodedCategory} Products...
+              </p>
             </div>
-          ) : (<>
-            <SortControls
-              sortType={sortType}
-              onSortTypeChange={setSortType}
-              onlyDiscounted={onlyDiscounted}
-              onToggleDiscounted={() => setOnlyDiscounted(v => !v)}
-            />
+          ) : (
+            <>
+              <SortControls
+                sortType={sortType}
+                onSortTypeChange={setSortType}
+                onlyDiscounted={onlyDiscounted}
+                onToggleDiscounted={() => setOnlyDiscounted((v) => !v)}
+              />
 
-            <ProductGrid
-              products={filteredProducts || products}
-              productImages={productImages}
-              onImageClick={openFullscreen}
-              onAddToCart={handleAddToCart}
-            />
-
-          </>
+              <ProductGrid
+                products={filteredProducts || products}
+                productImages={productImages}
+                onImageClick={openFullscreen}
+                onAddToCart={handleAddToCart}
+              />
+            </>
           )}
 
           {fullscreenImage && !loading && (
@@ -145,9 +157,11 @@ export default function CategoryPage() {
                 setFullscreenImage((prev) =>
                   prev
                     ? {
-                      ...prev,
-                      index: (prev.index - 1 + prev.images.length) % prev.images.length,
-                    }
+                        ...prev,
+                        index:
+                          (prev.index - 1 + prev.images.length) %
+                          prev.images.length,
+                      }
                     : prev
                 )
               }
@@ -155,9 +169,9 @@ export default function CategoryPage() {
                 setFullscreenImage((prev) =>
                   prev
                     ? {
-                      ...prev,
-                      index: (prev.index + 1) % prev.images.length,
-                    }
+                        ...prev,
+                        index: (prev.index + 1) % prev.images.length,
+                      }
                     : prev
                 )
               }
