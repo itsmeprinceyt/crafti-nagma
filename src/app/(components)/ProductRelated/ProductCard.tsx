@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getDiscountPercent } from "../../../utility/discountPercentage.util";
-import { DEFAULT_IMG } from "../../../utility/utils";
+import { getDiscountPercent } from "../../../utils/discountPercentage.util";
+import { DEFAULT_IMG } from "../../../utils/utils";
 import type { ProductCard } from "../../../types/ProductCardGrid.type";
 import { ShoppingCart, SquareArrowOutUpLeftIcon } from "lucide-react";
 import { DiscountAmountProductCard } from "./DiscountComponents";

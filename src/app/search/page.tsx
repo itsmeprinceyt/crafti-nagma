@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ProductDetails } from "../../types/ProductData.type";
-import { getFilteredProducts } from "../../utility/getFilteredResult.util";
+import { getFilteredProducts } from "../../utils/getFilteredResult.util";
 import { useCart } from "../(context)/Cart.context";
 import toast from "react-hot-toast";
 import { PageWrapper2 } from "../(components)/Utils/PageWrapper";
@@ -9,7 +9,7 @@ import SearchControls from "../(components)/Search/SearchControls";
 import ProductGrid from "../(components)/ProductRelated/ProductGrid";
 import FullscreenImageModal from "../(components)/ProductRelated/FullscreenImageModal";
 import Spinner from "../(components)/components/Spinner";
-import { DEFAULT_IMG } from "../../utility/utils";
+import { DEFAULT_IMG } from "../../utils/utils";
 
 export default function SearchPage() {
     const [query, setQuery] = useState<string>("");

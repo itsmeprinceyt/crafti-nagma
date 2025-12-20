@@ -6,7 +6,7 @@ import { useCart } from "../(context)/Cart.context";
 import { PageWrapper2 } from "../(components)/Utils/PageWrapper";
 import AddressForm from "../(components)/Cart/AddressForm";
 import { AddressData } from "../../types/AddressData.type";
-import { FreeDeliveryOffer } from "../../utility/utils";
+import { FreeDeliveryOffer } from "../../utils/utils";
 
 
 export default function CartPage() {
@@ -69,7 +69,7 @@ export default function CartPage() {
     return (
         <>
             <PageWrapper2>
-                <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center">
+                <div className="bg-linear-to-r from-white via-amber-600/20 to-white border border-amber-600/10 text-3xl sm:text-4xl font-light text-amber-900 w-full mt-5 mb-5 p-5 text-center">
                     Your Cart
                 </div>
             </PageWrapper2>
@@ -89,7 +89,7 @@ export default function CartPage() {
                                                 width={500}
                                                 height={500}
                                                 alt={`${item.name} photo`}
-                                                className="rounded-full max-w-[50px] max-h-[50px] object-cover"
+                                                className="rounded-full max-w-12.5 max-h-12.5 object-cover"
                                             />
                                         </Link>
 
@@ -123,14 +123,14 @@ export default function CartPage() {
                                         <div className="flex gap-2 items-center justify-center">
                                             <button
                                                 onClick={() => updateQuantity(item.code, -1)}
-                                                className="bg-amber-200 border border-amber-600/30 shadow-lg shadow-amber-600/40 px-2 rounded-full h-[30px] w-[30px]"
+                                                className="bg-amber-200 border border-amber-600/30 shadow-lg shadow-amber-600/40 px-2 rounded-full h-7.5 w-7.5"
                                             >
                                                 −
                                             </button>
                                             <span>{item.quantity}</span>
                                             <button
                                                 onClick={() => updateQuantity(item.code, 1)}
-                                                className="bg-amber-200 border border-amber-600/30 shadow-lg shadow-amber-600/40 px-2 rounded-full h-[30px] w-[30px]"
+                                                className="bg-amber-200 border border-amber-600/30 shadow-lg shadow-amber-600/40 px-2 rounded-full h-7.5 w-7.5"
                                             >
                                                 +
                                             </button>

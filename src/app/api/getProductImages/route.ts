@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { DEFAULT_IMG } from '../../../utility/utils';
+import { DEFAULT_IMG } from '../../../utils/utils';
 
 /**
  * API Route: GET /api/getProductImages?productCode=PRODUCT_CODE

@@ -1,18 +1,18 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { PageWrapper2 } from '../(components)/Utils/PageWrapper';
-import { isFeaturedProduct } from '../../utility/getFeaturedIProducts.util';
+import { isFeaturedProduct } from '../../utils/getFeaturedIProducts.util';
 import { ProductDetails } from '../../types/ProductData.type';
-import { getAllProductsSorted } from '../../utility/getAllProducts.util';
+import { getAllProductsSorted } from '../../utils/getAllProducts.util';
 import { useCart } from '../(context)/Cart.context';
 import toast from "react-hot-toast";
-import { DEFAULT_IMG } from '../../utility/utils';
+import { DEFAULT_IMG } from '../../utils/utils';
 import ProductGrid from '../(components)/ProductRelated/ProductGrid';
 import FullscreenImageModal from '../(components)/ProductRelated/FullscreenImageModal';
 import FeaturedProductsCarousel from '../(components)/ProductRelated/FeaturedProducts';
 import Spinner from '../(components)/components/Spinner';
 import SortControls from '../(components)/Search/SortControls';
-import { getFilteredProducts } from '../../utility/getFilteredResult.util';
+import { getFilteredProducts } from '../../utils/getFilteredResult.util';
 
 export default function Shop() {
     const [loadingFeatured, setLoadingFeatured] = useState<boolean>(true);
@@ -104,7 +104,7 @@ export default function Shop() {
                 <div className="flex flex-col w-full items-center justify-center">
                     {!loadingProducts ? (
                         <>
-                            <div className="bg-gradient-to-r from-white via-amber-600/20 to-white border-t border-b border-amber-600/10 text-2xl font-light text-center mb-5 p-5 w-full">
+                            <div className="bg-linear-to-r from-white via-amber-600/20 to-white border-t border-b border-amber-600/10 text-2xl font-light text-center mb-5 p-5 w-full">
                                 <span className="text-3xl sm:text-4xl font-light text-amber-900 underline-hover cursor-default">
                                     All Products!
                                 </span>

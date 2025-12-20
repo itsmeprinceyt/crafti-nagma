@@ -5,7 +5,7 @@ import FeaturedProductsCarousel from "../(components)/ProductRelated/FeaturedPro
 import CategoriesGrid from "../(components)/ProductRelated/CategoryGrid";
 import { ProductDetails } from "../../types/ProductData.type";
 import { CategoryWithImage } from "../../types/CategoryWithImages.type";
-import { isFeaturedProduct } from "../../utility/getFeaturedIProducts.util";
+import { isFeaturedProduct } from "../../utils/getFeaturedIProducts.util";
 
 export default function Shop() {
     const [isFeatured, setIsFeatured] = useState<ProductDetails[]>([]);

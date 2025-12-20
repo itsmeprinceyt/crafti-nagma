@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import ChatbotButton from "./ChatbotButton";
 import ChatbotPanel from "./ChatbotPanel";
-import { BOT_FLOW, HI_ROOT } from "../../../utility/chatbot.util";
+import { BOT_FLOW, HI_ROOT } from "../../../utils/chatbot.util";
 import type { ChatbotNode } from "../../../types/Chatbot.type";
 
 const HELPER_MESSAGES = ["मदद चाहिए ?", "Need help?"];

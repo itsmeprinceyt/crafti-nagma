@@ -2,17 +2,17 @@
 import { useEffect, useState } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import { PageWrapper2 } from '../../../(components)/Utils/PageWrapper';
-import { ProductCategory } from '../../../../utility/ProductData.util';
+import { ProductCategory } from '../../../../utils/ProductData.util';
 import { ProductDetails } from '../../../../types/ProductData.type';
-import { getProductsByCategory } from '../../../../utility/getProductByCategory.util';
+import { getProductsByCategory } from '../../../../utils/getProductByCategory.util';
 import { useCart } from '../../../(context)/Cart.context';
 import { toast } from "react-hot-toast";
-import { DEFAULT_IMG } from '../../../../utility/utils';
+import { DEFAULT_IMG } from '../../../../utils/utils';
 import ProductGrid from "../../../(components)/ProductRelated/ProductGrid";
 import FullscreenImageModal from "../../../(components)/ProductRelated/FullscreenImageModal";
 import Spinner from '../../../(components)/components/Spinner';
 import SortControls from "../../../(components)/Search/SortControls";
-import { getFilteredProducts } from '../../../../utility/getFilteredResult.util';
+import { getFilteredProducts } from '../../../../utils/getFilteredResult.util';
 
 export default function CategoryPage() {
   const params = useParams();

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useOpen } from '../../(context)/Hamburger.context';
-import getSortedCategories from '../../../utility/getCategories.util';
+import getSortedCategories from '../../../utils/getCategories.util';
 
 export default function SideBar() {
     const { toggleOpen } = useOpen();

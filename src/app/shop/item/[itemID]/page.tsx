@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PageWrapperItem, PageWrapper2 } from "../../../(components)/Utils/PageWrapper";
-import { ProductData } from "../../../../utility/ProductData.util";
+import { ProductData } from "../../../../utils/ProductData.util";
 import { ProductDetails } from "../../../../types/ProductData.type";
 import { useCart } from "../../../(context)/Cart.context";
 import toast from "react-hot-toast";
@@ -13,8 +13,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { getDiscountPercent } from "../../../../utility/discountPercentage.util";
-import { DEFAULT_IMG } from '../../../../utility/utils';
+import { getDiscountPercent } from "../../../../utils/discountPercentage.util";
+import { DEFAULT_IMG } from '../../../../utils/utils';
 import { DiscountAmountItem, DiscountAmountTag } from "../../../(components)/ProductRelated/DiscountComponents";
 import Spinner from "../../../(components)/components/Spinner";
 import { ShoppingCart } from "lucide-react";
@@ -99,7 +99,7 @@ export default function ProductPage() {
                 {product && !loading && (
                     <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-5 p-5 select-text relative">
                         {/* Product Image Carousel */}
-                        <div className="w-full max-w-[350px] sm:max-w-[500px] md:max-w-[500px] lg:max-w-[600px] rounded-lg relative">
+                        <div className="w-full max-w-87.5 sm:max-w-125 md:max-w-125 lg:max-w-150 rounded-lg relative">
                             {loading ? (
                                 <div className="flex flex-col items-center justify-center gap-3 py-10 z-10">
                                     <Spinner />
@@ -117,7 +117,7 @@ export default function ProductPage() {
                                     {productImages.map((img, index) => (
                                         <SwiperSlide key={index}>
                                             <div
-                                                className="w-full aspect-[4/5] md:aspect-[1/1] relative cursor-pointer"
+                                                className="w-full aspect-4/5 md:aspect-square relative cursor-pointer"
                                                 onClick={() => {
                                                     setCurrentIndex(index);
                                                     setIsFullscreen(true);
@@ -156,7 +156,7 @@ export default function ProductPage() {
                             {/* Add to Cart */}
                             <button
                                 onClick={handleAddToCart}
-                                className="w-full text-center bg-gradient-to-r from-green-600 to-green-400 border border-green-600/30 text-green-50 font-semibold text-lg hover:text-green-900  transition-all duration-300 ease-in-out shadow-lg shadow-green-600/30 py-3 px-5 rounded-md flex items-center justify-center gap-2 ">
+                                className="w-full text-center bg-linear-to-r from-green-600 to-green-400 border border-green-600/30 text-green-50 font-semibold text-lg hover:text-green-900  transition-all duration-300 ease-in-out shadow-lg shadow-green-600/30 py-3 px-5 rounded-md flex items-center justify-center gap-2 ">
                                 <ShoppingCart className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-3" />
                                 Add to Cart
                             </button>
@@ -164,15 +164,15 @@ export default function ProductPage() {
 
                             {/* Free Gift Notice */}
                             {product.gift_included && product.gift_included.length > 0 && (
-                                <div className="bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-indigo-600/20 border border-indigo-500/30 text-indigo-900 text-base sm:text-lg  px-5 py-4 rounded-md shadow-md shadow-indigo-500/30 backdrop-blur-md">
+                                <div className="bg-linear-to-r from-purple-600/20 via-blue-500/20 to-indigo-600/20 border border-indigo-500/30 text-indigo-900 text-base sm:text-lg  px-5 py-4 rounded-md shadow-md shadow-indigo-500/30 backdrop-blur-md">
                                     {`😳 There is something `}<span className="font-bold">special</span>{` with this product!`}
                                 </div>
                             )}
 
                             {/* Gift Accordion */}
                             {product.gift_included && product.gift_included.length > 0 && (
-                                <details className="group border border-indigo-400/40 rounded-md overflow-hidden bg-gradient-to-br from-purple-50 via-indigo-50 to-white shadow-lg shadow-indigo-400/20 backdrop-blur-sm">
-                                    <summary className="text-indigo-800 text-lg cursor-pointer px-5 py-4  flex justify-between items-center bg-gradient-to-r from-purple-100/50 via-indigo-100/50 to-white hover:bg-indigo-100/30 transition duration-300">
+                                <details className="group border border-indigo-400/40 rounded-md overflow-hidden bg-linear-to-br from-purple-50 via-indigo-50 to-white shadow-lg shadow-indigo-400/20 backdrop-blur-sm">
+                                    <summary className="text-indigo-800 text-lg cursor-pointer px-5 py-4  flex justify-between items-center bg-linear-to-r from-purple-100/50 via-indigo-100/50 to-white hover:bg-indigo-100/30 transition duration-300">
                                         {`🎉 Click here to know special benefits!`}
                                         <span className="transform transition-transform duration-300 group-open:rotate-90 text-indigo-700 text-lg">›</span>
                                     </summary>
@@ -394,7 +394,7 @@ export default function ProductPage() {
                                                 onClick={() =>
                                                     setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)
                                                 }
-                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-32.5 rounded-md"
                                             >
                                                 Previous
                                             </button>
@@ -402,7 +402,7 @@ export default function ProductPage() {
                                                 onClick={() =>
                                                     setCurrentIndex((prev) => (prev + 1) % productImages.length)
                                                 }
-                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-[130px] rounded-md"
+                                                className="bg-white text-black hover:bg-white/90 px-6 py-3 transition w-32.5 rounded-md"
                                             >
                                                 Next
                                             </button>

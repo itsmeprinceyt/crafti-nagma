@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { ProductData } from '../../../utility/ProductData.util';
-import getSortedCategories from '../../../utility/getCategories.util';
+import { ProductData } from '../../../utils/ProductData.util';
+import getSortedCategories from '../../../utils/getCategories.util';
 
 /**
  * API Route: GET /api/[your-route]
